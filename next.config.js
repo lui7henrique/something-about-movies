@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-
   images: {
     domains: [
       'picsum.photos',
@@ -11,5 +10,9 @@ module.exports = {
       'images.igdb.com',
       'i.ibb.co'
     ]
+  },
+  i18n: {
+    locales: ['en-US', 'pt-BR'],
+    defaultLocale: 'en-US'
   }
 }
