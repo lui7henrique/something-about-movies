@@ -4,7 +4,15 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["next/core-web-vitals", "plugin:react/recommended", "standard"],
+  "extends": [
+    "plugin:react/recommended",
+    "standard",
+    "plugin:prettier/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:cypress/recommended",
+    "eslint:recommended",
+    "next"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -13,11 +21,11 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
+  "plugins": ["react", "react-hooks", "@typescript-eslint", "unused-imports"],
   "rules": {
     // note you must disable the base rule as it can report incorrect errors
     "no-use-before-define": "off",
-    "no-unused-vars": ["warn"],
+    "no-unused-vars": ["error"],
     "multiline-ternary": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/prop-types": "off",

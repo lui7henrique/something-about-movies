@@ -1,5 +1,7 @@
+import { Teste } from 'components/Teste'
+
 const Home = () => {
-  return <h1>oi</h1>
+  return <Teste />
 }
 
 export default Home
