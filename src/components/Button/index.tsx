@@ -1,11 +1,16 @@
 // Vendors
-import { Header } from 'components/Header'
 
 // Components
-import { Box, Button } from '@chakra-ui/react'
+import {
+  Box,
+  Button as ChakraButton,
+  ButtonProps as ChakraButtonProps
+} from '@chakra-ui/react'
 
 // Types
-export type HomeTemplateProps = {}
+export type ButtonProps = {
+  label: string
+} & ChakraButtonProps
 
 /*
 |-----------------------------------------------------------------------------
@@ -15,7 +20,7 @@ export type HomeTemplateProps = {}
 |
 */
 
-export const HomeTemplate = (props: HomeTemplateProps) => {
+export const Button = (props: ButtonProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -23,7 +28,7 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
-  const {} = props
+  const { label, ...buttonProps } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -65,8 +70,8 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   */
   return (
-    <Box>
-      <Header />
-    </Box>
+    <ChakraButton borderRadius="sm" {...buttonProps}>
+      {label}
+    </ChakraButton>
   )
 }

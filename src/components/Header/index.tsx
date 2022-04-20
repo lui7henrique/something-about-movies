@@ -1,11 +1,14 @@
 // Vendors
-import { Header } from 'components/Header'
 
 // Components
-import { Box, Button } from '@chakra-ui/react'
+import { Flex, Stack } from '@chakra-ui/react'
+import { Button } from 'components/Button'
+import { ButtonLanguage } from 'components/ButtonLanguage'
+import { Limiter } from 'components/Limiter'
+import { Logo } from 'components/Logo'
 
 // Types
-export type HomeTemplateProps = {}
+export type HeaderProps = {}
 
 /*
 |-----------------------------------------------------------------------------
@@ -15,7 +18,7 @@ export type HomeTemplateProps = {}
 |
 */
 
-export const HomeTemplate = (props: HomeTemplateProps) => {
+export const Header = (props: HeaderProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -23,7 +26,6 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
-  const {} = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -65,8 +67,17 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   */
   return (
-    <Box>
-      <Header />
-    </Box>
+    <Limiter as="header" h="4rem">
+      <Flex justifyContent="space-between" alignItems="center" h="full">
+        <Flex as="nav">
+          <Logo />
+        </Flex>
+
+        <Stack direction="row" spacing={4}>
+          <Button label="Login" variant="ghost" />
+          <ButtonLanguage />
+        </Stack>
+      </Flex>
+    </Limiter>
   )
 }

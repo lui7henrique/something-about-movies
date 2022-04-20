@@ -1,11 +1,10 @@
 // Vendors
-import { Header } from 'components/Header'
 
 // Components
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Heading, useTheme } from '@chakra-ui/react'
+import Link from 'next/link'
 
 // Types
-export type HomeTemplateProps = {}
 
 /*
 |-----------------------------------------------------------------------------
@@ -15,7 +14,7 @@ export type HomeTemplateProps = {}
 |
 */
 
-export const HomeTemplate = (props: HomeTemplateProps) => {
+export const Logo = () => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -23,7 +22,7 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
-  const {} = props
+  const theme = useTheme()
 
   /*
   |-----------------------------------------------------------------------------
@@ -65,8 +64,22 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   */
   return (
-    <Box>
-      <Header />
-    </Box>
+    <Link href="/">
+      <a>
+        <Heading
+          as="h1"
+          fontSize="3xl"
+          bg={`linear-gradient(to right, ${theme.colors.primary[500]}, ${theme.colors.secondary[500]})`}
+          sx={{
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}
+          data-aos="fade-right"
+          data-aos-duration="300"
+        >
+          cineapp
+        </Heading>
+      </a>
+    </Link>
   )
 }

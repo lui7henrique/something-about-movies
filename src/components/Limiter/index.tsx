@@ -1,11 +1,13 @@
 // Vendors
-import { Header } from 'components/Header'
 
 // Components
-import { Box, Button } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 
 // Types
-export type HomeTemplateProps = {}
+type LimiterProps = {
+  children: ReactNode
+} & BoxProps
 
 /*
 |-----------------------------------------------------------------------------
@@ -15,7 +17,7 @@ export type HomeTemplateProps = {}
 |
 */
 
-export const HomeTemplate = (props: HomeTemplateProps) => {
+export const Limiter = (props: LimiterProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -23,7 +25,7 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
-  const {} = props
+  const { children, ...rest } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -65,8 +67,8 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   */
   return (
-    <Box>
-      <Header />
+    <Box maxWidth="1280" mx="auto" px="4" {...rest}>
+      {children}
     </Box>
   )
 }
