@@ -12,7 +12,7 @@ type HomeProps = {
 const Home = (props: HomeProps) => {
   const { movies, tv } = props
 
-  return <HomeTemplate />
+  return <HomeTemplate movies={movies} tv={tv} />
 }
 
 export default Home

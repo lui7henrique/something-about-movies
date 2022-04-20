@@ -67,8 +67,24 @@ export const Header = (props: HeaderProps) => {
   |
   */
   return (
-    <Limiter as="header" h="4rem">
-      <Flex justifyContent="space-between" alignItems="center" h="full">
+    <Limiter
+      as="header"
+      h="4rem"
+      bgColor="transparent"
+      position="fixed"
+      width="100vw"
+      maxWidth="none"
+      zIndex={5}
+    >
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        h="full"
+        bgColor="transparent"
+        maxWidth="1280"
+        mx="auto"
+        px={4}
+      >
         <Flex as="nav">
           <Logo />
         </Flex>

@@ -2,14 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: [
-      'picsum.photos',
-      'loremflickr.com',
-      'm.media-amazon.com',
-      'github.com',
-      'images.igdb.com',
-      'i.ibb.co'
-    ]
+    domains: ['image.tmdb.org']
   },
   i18n: {
     locales: ['en-US', 'pt-BR'],

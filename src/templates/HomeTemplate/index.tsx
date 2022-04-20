@@ -2,10 +2,19 @@
 import { Header } from 'components/Header'
 
 // Components
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Heading, VStack } from '@chakra-ui/react'
+import { Movie } from 'types/movies/list'
+import { TV } from 'types/tv/list'
+import { Slider } from 'components/Slider'
+import { useMemo } from 'react'
+import { useRouter } from 'next/router'
+import { Limiter } from 'components/Limiter'
 
 // Types
-export type HomeTemplateProps = {}
+export type HomeTemplateProps = {
+  movies: Movie[]
+  tv: TV[]
+}
 
 /*
 |-----------------------------------------------------------------------------
@@ -23,7 +32,8 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
-  const {} = props
+  const { movies, tv } = props
+  const { locale } = useRouter()
 
   /*
   |-----------------------------------------------------------------------------
@@ -56,6 +66,20 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
+  const featuredMedia = useMemo(
+    () =>
+      [...movies, ...tv].map((item) => {
+        const title = (item as any).title || (item as any).name
+
+        return {
+          id: item.id,
+          image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+          title: title,
+          description: item.overview
+        }
+      }),
+    [locale]
+  )
 
   /*
   |-----------------------------------------------------------------------------
@@ -67,6 +91,28 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   return (
     <Box>
       <Header />
+
+      <VStack spacing={6}>
+        <Limiter h="100vh">
+          <Slider items={featuredMedia} />
+        </Limiter>
+
+        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+          <Heading>Vantagens</Heading>
+        </Limiter>
+
+        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+          <Heading>Vantagens</Heading>
+        </Limiter>
+
+        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+          <Heading>Tecnologias</Heading>
+        </Limiter>
+
+        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+          <Heading>Contribuidores</Heading>
+        </Limiter>
+      </VStack>
     </Box>
   )
 }
