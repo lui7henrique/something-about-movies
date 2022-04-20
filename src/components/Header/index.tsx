@@ -6,6 +6,7 @@ import { Button } from 'components/Button'
 import { ButtonLanguage } from 'components/ButtonLanguage'
 import { Limiter } from 'components/Limiter'
 import { Logo } from 'components/Logo'
+import { useRouter } from 'next/router'
 
 // Types
 export type HeaderProps = {}
@@ -26,6 +27,7 @@ export const Header = (props: HeaderProps) => {
   |
   |
   */
+  const { push } = useRouter()
 
   /*
   |-----------------------------------------------------------------------------
@@ -67,15 +69,7 @@ export const Header = (props: HeaderProps) => {
   |
   */
   return (
-    <Limiter
-      as="header"
-      h="4rem"
-      bgColor="transparent"
-      position="fixed"
-      width="100vw"
-      maxWidth="none"
-      zIndex={5}
-    >
+    <Limiter as="header" h="4rem">
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -90,7 +84,11 @@ export const Header = (props: HeaderProps) => {
         </Flex>
 
         <Stack direction="row" spacing={4}>
-          <Button label="Login" variant="ghost" />
+          <Button
+            label="Login"
+            variant="ghost"
+            onClick={() => push('/login')}
+          />
           <ButtonLanguage />
         </Stack>
       </Flex>

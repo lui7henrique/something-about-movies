@@ -1,28 +1,42 @@
+import { LayoutAccount } from 'layout/Account'
 import { LayoutPublic } from 'layout/Public'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import { get, Locale } from 'services/api'
-import { HomeTemplate } from 'templates/HomeTemplate'
+import { LoginTemplate } from 'templates/LoginTemplate'
+
 import { Movie } from 'types/movies/list'
 import { TV } from 'types/tv/list'
 
-type HomeProps = {
+type LoginProps = {
   movies: Movie[]
   tv: TV[]
 }
 
-const Home = (props: HomeProps) => {
+const Login = (props: LoginProps) => {
   const { movies, tv } = props
   const { locale } = useRouter()
 
-  return (
-    <LayoutPublic>
-      <HomeTemplate movies={movies} tv={tv} />
-    </LayoutPublic>
+  const featuredMedia = useMemo(
+    () =>
+      [...movies, ...tv].map((item) => {
+        const title = (item as any).title || (item as any).name
+
+        return {
+          id: item.id,
+          image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+          title: title as string,
+          description: item.overview
+        }
+      }),
+    [locale]
   )
+
+  return <LoginTemplate featuredMedia={featuredMedia} />
 }
 
-export default Home
+export default Login
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const movies = await get<Movie[]>(locale as Locale, '/movie/popular')

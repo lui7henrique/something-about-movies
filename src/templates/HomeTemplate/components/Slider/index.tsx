@@ -5,11 +5,10 @@ import { useCallback, useState } from 'react'
 
 // Components
 import { Circle, Flex, Stack, chakra } from '@chakra-ui/react'
-import { SliderItem, SliderItemProps } from 'components/SliderItem'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
-import { Limiter } from 'components/Limiter'
+import { SliderItem, SliderItemProps } from '../SliderItem'
 
 // Types
 export type SliderProps = {

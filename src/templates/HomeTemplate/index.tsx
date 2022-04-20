@@ -2,13 +2,14 @@
 import { Header } from 'components/Header'
 
 // Components
-import { Box, Button, Heading, VStack } from '@chakra-ui/react'
+import { Box, Heading, VStack } from '@chakra-ui/react'
 import { Movie } from 'types/movies/list'
 import { TV } from 'types/tv/list'
-import { Slider } from 'components/Slider'
+
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { Limiter } from 'components/Limiter'
+import { Slider } from './components/Slider'
 
 // Types
 export type HomeTemplateProps = {
@@ -90,12 +91,8 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   */
   return (
     <Box>
-      <Header />
-
       <VStack spacing={6}>
-        <Limiter h="100vh">
-          <Slider items={featuredMedia} />
-        </Limiter>
+        <Limiter h="100vh">{/* <Slider items={featuredMedia} /> */}</Limiter>
 
         <Limiter as="section" d="flex" justifyContent="center" h="100vh">
           <Heading>Vantagens</Heading>

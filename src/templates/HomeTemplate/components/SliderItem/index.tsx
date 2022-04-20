@@ -11,9 +11,9 @@ import {
 } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
+
 import { useRouter } from 'next/router'
 import { Button } from 'components/Button'
-import { Limiter } from 'components/Limiter'
 
 // Types
 export type SliderItemProps = {

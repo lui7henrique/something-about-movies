@@ -1,10 +1,20 @@
 // Vendors
 
+import { Box, Flex, Grid } from '@chakra-ui/react'
+import Image from 'next/image'
+
 // Components
-import { Box, Heading, useTheme } from '@chakra-ui/react'
-import Link from 'next/link'
 
 // Types
+export type Media = {
+  id: number
+  image: string
+}
+
+type LayoutAccountProps = {
+  children: React.ReactNode
+  featuredMedia: Media[]
+}
 
 /*
 |-----------------------------------------------------------------------------
@@ -14,7 +24,7 @@ import Link from 'next/link'
 |
 */
 
-export const Logo = () => {
+export const LayoutAccount = (props: LayoutAccountProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -22,7 +32,7 @@ export const Logo = () => {
   |
   |
   */
-  const theme = useTheme()
+  const { children, featuredMedia } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -64,22 +74,30 @@ export const Logo = () => {
   |
   */
   return (
-    <Link href="/">
-      <a>
-        <Heading
-          as="h1"
-          fontSize="3xl"
-          bg={`linear-gradient(to right, ${theme.colors.primary[500]}, ${theme.colors.secondary[500]})`}
-          sx={{
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}
-          // data-aos="fade-right"
-          // data-aos-duration="300"
-        >
-          cineapp
-        </Heading>
-      </a>
-    </Link>
+    <Grid
+      gridTemplateColumns={{
+        base: '1fr',
+        lg: '4fr 3fr'
+      }}
+      w="100vw"
+      h="100vh"
+      gap={4}
+    >
+      <Box
+        w="100%"
+        h="100%"
+        position="relative"
+        display={{
+          base: 'none',
+          lg: 'block'
+        }}
+      >
+        <Image src={featuredMedia[0].image} layout="fill" objectFit="cover" />
+      </Box>
+
+      <Flex w="100%" h="100%" justifyContent="center" alignItems="center">
+        {children}
+      </Flex>
+    </Grid>
   )
 }

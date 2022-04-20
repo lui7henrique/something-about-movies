@@ -1,10 +1,13 @@
 // Vendors
 
 // Components
-import { Box, Heading, useTheme } from '@chakra-ui/react'
-import Link from 'next/link'
+import { LayoutAccount, Media } from 'layout/Account'
+import { LoginForm } from './LoginForm'
 
 // Types
+export type LoginTemplateProps = {
+  featuredMedia: Media[]
+}
 
 /*
 |-----------------------------------------------------------------------------
@@ -14,7 +17,7 @@ import Link from 'next/link'
 |
 */
 
-export const Logo = () => {
+export const LoginTemplate = (props: LoginTemplateProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -22,7 +25,7 @@ export const Logo = () => {
   |
   |
   */
-  const theme = useTheme()
+  const { featuredMedia } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -64,22 +67,8 @@ export const Logo = () => {
   |
   */
   return (
-    <Link href="/">
-      <a>
-        <Heading
-          as="h1"
-          fontSize="3xl"
-          bg={`linear-gradient(to right, ${theme.colors.primary[500]}, ${theme.colors.secondary[500]})`}
-          sx={{
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}
-          // data-aos="fade-right"
-          // data-aos-duration="300"
-        >
-          cineapp
-        </Heading>
-      </a>
-    </Link>
+    <LayoutAccount featuredMedia={featuredMedia}>
+      <LoginForm />
+    </LayoutAccount>
   )
 }
