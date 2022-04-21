@@ -1,7 +1,7 @@
 export const translation = {
   'en-US': {
+    title: 'Login',
     text: 'Be part of the largest cinema community in the world, meet and discuss thousands of movies and TV series!',
-    login: 'Login',
     email: {
       label: 'Email',
       placeholder: 'Enter your email address',
@@ -16,11 +16,14 @@ export const translation = {
     sign_up: {
       label: "Don't have an account? Register by clicking",
       link: 'here'
+    },
+    button: {
+      label: 'Login'
     }
   },
   'pt-BR': {
+    title: 'Entrar',
     text: 'Faça parte da maior comunidade de cinema do mundo, e descubra e    discuta sobre milhares de filmes e séries de TV!',
-    login: 'Entrar',
     email: {
       label: 'Email',
       placeholder: 'Digite seu email',
@@ -35,6 +38,9 @@ export const translation = {
     sign_up: {
       label: 'Não tem uma conta? Cadastre-se clicando',
       link: 'aqui'
+    },
+    button: {
+      label: 'Entrar'
     }
   }
 }

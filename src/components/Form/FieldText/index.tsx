@@ -4,6 +4,7 @@ import { FieldError } from 'react-hook-form'
 
 // Components
 import {
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -12,8 +13,11 @@ import {
   InputLeftElement,
   InputProps,
   InputRightElement,
+  Progress,
+  transition,
   useTheme
 } from '@chakra-ui/react'
+import { ZXCVBNScore } from 'zxcvbn'
 
 // Types
 type FieldTextProps = {
@@ -23,6 +27,8 @@ type FieldTextProps = {
   inputLeftElement?: ReactElement
   inputRightElement?: ReactElement
   mask?: string
+  passwordStrength?: ZXCVBNScore
+  hasPasswordStrength?: boolean
 } & InputProps
 
 /*
@@ -51,10 +57,10 @@ const FieldTextBase: React.ForwardRefRenderFunction<
     inputLeftElement,
     inputRightElement,
     mask,
+    hasPasswordStrength,
+    passwordStrength,
     ...rest
   } = props
-
-  const theme = useTheme()
 
   /*
   |-----------------------------------------------------------------------------
@@ -97,7 +103,24 @@ const FieldTextBase: React.ForwardRefRenderFunction<
   */
   return (
     <FormControl isInvalid={!!error}>
-      {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      <Flex alignItems="center">
+        {!!label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+        {hasPasswordStrength && (
+          <Progress
+            value={passwordStrength ? passwordStrength! * 25 : 0}
+            size="xs"
+            colorScheme="primary"
+            borderRadius="full"
+            w="100%"
+            mt={-2}
+            sx={{
+              div: {
+                transition: 'all 0.2s ease-in-out'
+              }
+            }}
+          />
+        )}
+      </Flex>
 
       <InputGroup>
         {inputLeftElement && (

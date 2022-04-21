@@ -1,17 +1,11 @@
 // Vendors
-import { useRouter } from 'next/router'
 
 // Components
-import { Flex, Stack } from '@chakra-ui/react'
-import { Button } from 'components/Button'
-import { ButtonLanguage } from 'components/ButtonLanguage'
-import { Limiter } from 'components/Limiter'
-import { Logo } from 'components/Logo'
-
-import { MdPerson } from 'react-icons/md'
+import { Box, IconButton } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import { IoMdArrowBack } from 'react-icons/io'
 
 // Types
-export type HeaderProps = {}
 
 /*
 |-----------------------------------------------------------------------------
@@ -21,7 +15,7 @@ export type HeaderProps = {}
 |
 */
 
-export const Header = (props: HeaderProps) => {
+export const ButtonBack = () => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -29,7 +23,7 @@ export const Header = (props: HeaderProps) => {
   |
   |
   */
-  const { push } = useRouter()
+  const { back } = useRouter()
 
   /*
   |-----------------------------------------------------------------------------
@@ -71,30 +65,12 @@ export const Header = (props: HeaderProps) => {
   |
   */
   return (
-    <Limiter as="header" h="4rem">
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        h="full"
-        bgColor="transparent"
-        maxWidth="1280"
-        mx="auto"
-        px={4}
-      >
-        <Flex as="nav">
-          <Logo />
-        </Flex>
-
-        <Stack direction="row" spacing={4}>
-          <Button
-            label="Login"
-            variant="ghost"
-            onClick={() => push('/login')}
-            leftIcon={<MdPerson size={20} />}
-          />
-          <ButtonLanguage />
-        </Stack>
-      </Flex>
-    </Limiter>
+    <IconButton
+      aria-label="back"
+      icon={<IoMdArrowBack size={20} />}
+      onClick={back}
+      zIndex={5}
+      borderRadius="sm"
+    />
   )
 }

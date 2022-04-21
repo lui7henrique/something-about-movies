@@ -1,28 +1,41 @@
-import { LayoutPublic } from 'layout/Public'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
+import { useMemo } from 'react'
 import { get, Locale } from 'services/api'
-import { HomeTemplate } from 'templates/public/HomeTemplate'
+
+import { RegisterTemplate } from 'templates/public/RegisterTemplate'
+
 import { Movie } from 'types/movies/list'
 import { TV } from 'types/tv/list'
 
-type HomeProps = {
+type RegisterProps = {
   movies: Movie[]
   tv: TV[]
 }
 
-const Home = (props: HomeProps) => {
+const Register = (props: RegisterProps) => {
   const { movies, tv } = props
   const { locale } = useRouter()
 
-  return (
-    <LayoutPublic>
-      <HomeTemplate movies={movies} tv={tv} />
-    </LayoutPublic>
+  const featuredMedia = useMemo(
+    () =>
+      [...movies, ...tv].map((item) => {
+        const title = (item as any).title || (item as any).name
+
+        return {
+          id: item.id,
+          image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+          title: title as string,
+          description: item.overview
+        }
+      }),
+    [locale]
   )
+
+  return <RegisterTemplate featuredMedia={featuredMedia} />
 }
 
-export default Home
+export default Register
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const movies = await get<Movie[]>(locale as Locale, '/movie/popular')

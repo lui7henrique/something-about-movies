@@ -4,15 +4,7 @@ import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 
 // Components
-import {
-  Box,
-  Divider,
-  Flex,
-  Heading,
-  HStack,
-  Text,
-  VStack
-} from '@chakra-ui/react'
+import { Box, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import { Button } from 'components/Button'
 import { FieldText } from 'components/Form/FieldText'
 
@@ -58,7 +50,8 @@ export const LoginForm = (props: LoginFormProps) => {
     resolver: yupResolver(schema(locale as Locale))
   })
 
-  const { text, email, password, sign_up } = translation[locale as Locale]
+  const { title, text, email, password, sign_up, button } =
+    translation[locale as Locale]
 
   /*
   |-----------------------------------------------------------------------------
@@ -113,10 +106,10 @@ export const LoginForm = (props: LoginFormProps) => {
       w="100%"
     >
       <VStack spacing={2} alignItems="flex-start" w="100%">
-        <Heading fontSize="3xl">Login</Heading>
+        <Heading fontSize="3xl">{title}</Heading>
         <Text>{text}</Text>
         <HStack>
-          <Box h="5" w="2" bgColor="primary.500" />
+          <Box h="10" w="2" bgColor="primary.500" />
           <Text>
             {sign_up.label}{' '}
             <Link href="/register">
@@ -139,6 +132,7 @@ export const LoginForm = (props: LoginFormProps) => {
       >
         <FieldText
           label={email.label}
+          placeholder={email.placeholder}
           type="email"
           inputLeftElement={<MdEmail size={20} />}
           {...register('email')}
@@ -147,6 +141,7 @@ export const LoginForm = (props: LoginFormProps) => {
 
         <FieldText
           label={password.label}
+          placeholder={password.placeholder}
           type="password"
           inputLeftElement={<MdLock size={20} />}
           {...register('password')}
@@ -154,7 +149,7 @@ export const LoginForm = (props: LoginFormProps) => {
         />
 
         <Flex justifyContent="flex-end" w="100%" alignItems="center">
-          <Button label="Entrar" type="submit" isLoading={isSubmitting} />
+          <Button label={button.label} type="submit" isLoading={isSubmitting} />
         </Flex>
       </VStack>
     </VStack>
