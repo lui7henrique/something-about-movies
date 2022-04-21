@@ -6,10 +6,12 @@ import {
   Button as ChakraButton,
   ButtonProps as ChakraButtonProps
 } from '@chakra-ui/react'
+import Link from 'next/link'
 
 // Types
 export type ButtonProps = {
   label: string
+  href?: string
 } & ChakraButtonProps
 
 /*
@@ -28,7 +30,7 @@ export const Button = (props: ButtonProps) => {
   |
   |
   */
-  const { label, ...buttonProps } = props
+  const { label, href, ...buttonProps } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -70,8 +72,20 @@ export const Button = (props: ButtonProps) => {
   |
   */
   return (
-    <ChakraButton borderRadius="sm" {...buttonProps}>
-      {label}
-    </ChakraButton>
+    <>
+      {href ? (
+        <Link href={href}>
+          <a>
+            <ChakraButton borderRadius="sm" {...buttonProps}>
+              {label}
+            </ChakraButton>
+          </a>
+        </Link>
+      ) : (
+        <ChakraButton borderRadius="sm" {...buttonProps}>
+          {label}
+        </ChakraButton>
+      )}
+    </>
   )
 }

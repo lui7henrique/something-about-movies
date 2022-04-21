@@ -44,7 +44,7 @@ export const Header = (props: HeaderProps) => {
     lg: (
       <Button
         label="Login"
-        variant="ghost"
+        variant="outline"
         onClick={() => push('/login')}
         leftIcon={<MdPerson size={20} />}
       />

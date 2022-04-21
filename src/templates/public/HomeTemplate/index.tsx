@@ -9,6 +9,7 @@ import { TV } from 'types/tv/list'
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { Limiter } from 'components/Limiter'
+import { Hero } from './components/Hero'
 
 // Types
 export type HomeTemplateProps = {
@@ -91,10 +92,7 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   return (
     <Box>
       <VStack spacing={6}>
-        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
-          <Heading>Vantagens</Heading>
-        </Limiter>
-
+        <Hero />
         <Limiter as="section" d="flex" justifyContent="center" h="100vh">
           <Heading>Vantagens</Heading>
         </Limiter>
