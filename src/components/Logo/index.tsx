@@ -1,7 +1,7 @@
 // Vendors
 
 // Components
-import { Box, Heading, useTheme } from '@chakra-ui/react'
+import { Box, Heading, useBreakpointValue, useTheme } from '@chakra-ui/react'
 import Link from 'next/link'
 
 // Types
@@ -22,7 +22,6 @@ export const Logo = () => {
   |
   |
   */
-  const theme = useTheme()
 
   /*
   |-----------------------------------------------------------------------------
@@ -74,8 +73,6 @@ export const Logo = () => {
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
           }}
-          // data-aos="fade-right"
-          // data-aos-duration="300"
         >
           cineapp
         </Heading>

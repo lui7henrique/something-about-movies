@@ -121,6 +121,10 @@ export const RegisterForm = () => {
         base: '4',
         lg: '16'
       }}
+      pt={{
+        base: '32',
+        lg: 0
+      }}
       spacing={8}
       w="100%"
     >
@@ -153,7 +157,7 @@ export const RegisterForm = () => {
           w="100%"
           direction={{
             base: 'column',
-            lg: 'row'
+            xl: 'row'
           }}
           spacing={4}
         >
@@ -188,7 +192,7 @@ export const RegisterForm = () => {
         <Stack
           direction={{
             base: 'column',
-            lg: 'row'
+            xl: 'row'
           }}
           w="100%"
           spacing={4}

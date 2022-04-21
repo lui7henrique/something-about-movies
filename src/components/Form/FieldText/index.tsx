@@ -81,7 +81,6 @@ const FieldTextBase: React.ForwardRefRenderFunction<
   |
   |
   */
-  console.log(gradient)
 
   /*
   |-----------------------------------------------------------------------------

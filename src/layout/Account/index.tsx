@@ -89,7 +89,7 @@ export const LayoutAccount = (props: LayoutAccountProps) => {
         lg: '4fr 3fr'
       }}
       w="100vw"
-      h="100vh"
+      minH="100vh"
       gap={4}
     >
       <ChakraSwiper

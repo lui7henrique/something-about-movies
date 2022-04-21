@@ -114,8 +114,6 @@ export const Slider = (props: SliderProps) => {
         width="100%"
       >
         {items.map((item) => {
-          console.log(item)
-
           return (
             <SwiperSlide key={item.id}>
               <SliderItem {...item} />
