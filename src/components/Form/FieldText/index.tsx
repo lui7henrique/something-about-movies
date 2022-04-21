@@ -62,6 +62,10 @@ const FieldTextBase: React.ForwardRefRenderFunction<
     ...rest
   } = props
 
+  const {
+    colors: { gradient }
+  } = useTheme()
+
   /*
   |-----------------------------------------------------------------------------
   | States
@@ -77,6 +81,7 @@ const FieldTextBase: React.ForwardRefRenderFunction<
   |
   |
   */
+  console.log(gradient)
 
   /*
   |-----------------------------------------------------------------------------
@@ -109,13 +114,13 @@ const FieldTextBase: React.ForwardRefRenderFunction<
           <Progress
             value={passwordStrength ? passwordStrength! * 25 : 0}
             size="xs"
-            colorScheme="primary"
             borderRadius="full"
             w="100%"
             mt={-2}
             sx={{
-              div: {
-                transition: 'all 0.2s ease-in-out'
+              '> div': {
+                transition: 'all 0.2s ease-in-out',
+                backgroundImage: gradient.basic
               }
             }}
           />

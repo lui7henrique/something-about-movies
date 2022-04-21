@@ -30,6 +30,9 @@ export const theme = extendTheme(
         700: '#3d0a4e',
         800: '#321238',
         900: '#1f0e2c'
+      },
+      gradient: {
+        basic: 'linear-gradient(to right, #ca2b5f, #a440b8)'
       }
     },
     styles: {
@@ -48,6 +51,7 @@ export const theme = extendTheme(
     },
     fonts: {
       body: 'Space Grotesk, sans-serif'
+      //body: 'Josefin Sans, sans-serif'
     }
   },
   withDefaultColorScheme({ colorScheme: 'primary' })

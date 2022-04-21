@@ -69,7 +69,7 @@ export const Logo = () => {
         <Heading
           as="h1"
           fontSize="3xl"
-          bg={`linear-gradient(to right, ${theme.colors.primary[500]}, ${theme.colors.secondary[500]})`}
+          bg="gradient.basic"
           sx={{
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent'
