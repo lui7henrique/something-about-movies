@@ -1,7 +1,6 @@
 import { LayoutPublic } from 'layout/Public'
 import { GetStaticProps } from 'next'
-import { useRouter } from 'next/router'
-import { get, Locale } from 'services/api'
+import { list, Locale } from 'services/api'
 import { HomeTemplate } from 'templates/public/HomeTemplate'
 import { Movie } from 'types/movies/list'
 import { TV } from 'types/tv/list'
@@ -13,7 +12,6 @@ type HomeProps = {
 
 const Home = (props: HomeProps) => {
   const { movies, tv } = props
-  const { locale } = useRouter()
 
   return (
     <LayoutPublic>
@@ -25,8 +23,8 @@ const Home = (props: HomeProps) => {
 export default Home
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const movies = await get<Movie[]>(locale as Locale, '/movie/popular')
-  const tv = await get<TV[]>(locale as Locale, '/tv/popular')
+  const movies = await list<Movie[]>(locale as Locale, '/movie/popular')
+  const tv = await list<TV[]>(locale as Locale, '/tv/popular')
 
   return {
     props: {

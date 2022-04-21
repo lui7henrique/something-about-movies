@@ -13,7 +13,7 @@ export const TMDB = (language: Locale) => {
   })
 }
 
-export async function get<T>(
+export async function list<T>(
   locale: Locale,
   endpoint: string,
   query?: Query

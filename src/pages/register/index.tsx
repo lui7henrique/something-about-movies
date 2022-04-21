@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
-import { get, Locale } from 'services/api'
+import { list, Locale } from 'services/api'
 
 import { RegisterTemplate } from 'templates/public/RegisterTemplate'
 
@@ -38,8 +38,8 @@ const Register = (props: RegisterProps) => {
 export default Register
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const movies = await get<Movie[]>(locale as Locale, '/movie/popular')
-  const tv = await get<TV[]>(locale as Locale, '/tv/popular')
+  const movies = await list<Movie[]>(locale as Locale, '/movie/popular')
+  const tv = await list<TV[]>(locale as Locale, '/tv/popular')
 
   return {
     props: {

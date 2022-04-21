@@ -90,21 +90,19 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   */
   return (
-    <Box>
-      <VStack spacing={6}>
-        <Hero />
-        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
-          <Heading>Vantagens</Heading>
-        </Limiter>
+    <>
+      <Hero />
+      <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+        <Heading>Vantagens</Heading>
+      </Limiter>
 
-        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
-          <Heading>Tecnologias</Heading>
-        </Limiter>
+      <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+        <Heading>Tecnologias</Heading>
+      </Limiter>
 
-        <Limiter as="section" d="flex" justifyContent="center" h="100vh">
-          <Heading>Contribuidores</Heading>
-        </Limiter>
-      </VStack>
-    </Box>
+      <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+        <Heading>Contribuidores</Heading>
+      </Limiter>
+    </>
   )
 }

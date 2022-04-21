@@ -73,7 +73,7 @@ export const Hero = () => {
       as="section"
       d="flex"
       w="100%"
-      h="calc(100vh - 64px)"
+      minH="calc(100vh - 64px)"
       alignItems="Center"
       id="hero"
     >
