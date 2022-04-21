@@ -141,7 +141,10 @@ const FieldTextBase: React.ForwardRefRenderFunction<
             opacity: 0.7,
             cursor: 'not-allowed'
           }}
-          borderColor="white"
+          borderColor="gray.800"
+          _hover={{
+            borderColor: 'gray.600'
+          }}
           {...rest}
         />
 
