@@ -103,6 +103,7 @@ export const GenreList = (props: GenreListProps) => {
       }}
       py={{ base: 4, lg: 0 }}
       as="section"
+      id={localeTitle.toLowerCase()}
     >
       <Heading mb={4} data-aos="fade-right" data-aos-delay="100">
         {localeTitle}

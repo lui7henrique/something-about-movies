@@ -22,6 +22,7 @@ import ReactCountryFlag from 'react-country-flag'
 import { BiWorld } from 'react-icons/bi'
 import { Locale } from 'services/api'
 import { languages } from 'utils/languages'
+import { translation } from './translation'
 
 // Types
 
@@ -42,6 +43,7 @@ export const ButtonLanguage = () => {
   |
   */
   const { asPath, push, locale } = useRouter()
+  const { label, changeLanguage } = translation[locale as Locale]
 
   /*
   |-----------------------------------------------------------------------------
@@ -90,20 +92,20 @@ export const ButtonLanguage = () => {
     <Popover>
       <PopoverTrigger>
         <Box>
-          <Button label="Language" leftIcon={<BiWorld size={20} />} />
+          <Button label={label} leftIcon={<BiWorld size={20} />} />
         </Box>
       </PopoverTrigger>
 
       <PopoverContent bgColor="gray.800" borderWidth="0">
         <PopoverCloseButton />
-        <PopoverHeader borderWidth="0" p={3}>
+        {/* <PopoverHeader borderWidth="0" p={3}>
           <Stack direction="row" alignItems="center">
-            {/* <BiWorld size={20} /> */}
+
             <Heading as="h6" fontSize="lg">
-              Select a language
+              {changeLanguage}
             </Heading>
           </Stack>
-        </PopoverHeader>
+        </PopoverHeader> */}
 
         <PopoverBody p={0}>
           <Stack direction="column" spacing={0}>

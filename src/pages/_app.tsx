@@ -23,7 +23,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       <NextProgress
         delay={300}
         options={{ showSpinner: true }}
-        color="#04BF8A"
+        color="#ca2b5f"
       />
 
       <Component {...pageProps} />

@@ -42,6 +42,9 @@ export const theme = extendTheme(
           color: '#9ca5ad'
           // color: '#ededed',
         },
+        html: {
+          scrollBehavior: 'smooth'
+        },
         'h1, h2, h3, h4, h5, h6': {
           color: '#ffff'
         },

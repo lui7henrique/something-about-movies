@@ -9,10 +9,16 @@ export const translation = {
       2: 'about movies and TV series, with information',
       3: 'such as synopsis, cast, budget, and more..'
     },
-    buttons: {
-      1: 'Get started',
-      2: 'Read more'
-    }
+    buttons: [
+      {
+        label: 'Get started',
+        href: '/login'
+      },
+      {
+        label: 'Leia mais',
+        href: '#movies'
+      }
+    ]
   },
   'pt-BR': {
     title: {
@@ -24,9 +30,15 @@ export const translation = {
       2: 'milhões de filmes e séries, com informações',
       3: 'como sinopse, elenco, orçamento e muito mais..'
     },
-    buttons: {
-      1: 'Comece agora',
-      2: 'Leia mais'
-    }
+    buttons: [
+      {
+        label: 'Começar',
+        href: '/login'
+      },
+      {
+        label: 'Leia mais',
+        href: '#filmes'
+      }
+    ]
   }
 }

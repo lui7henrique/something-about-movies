@@ -118,13 +118,14 @@ export const Hero = () => {
 
         <Stack direction="row">
           <Button
-            label={buttons[1]}
-            href="/login"
+            label={buttons[0].label}
+            href={buttons[0].href}
             data-aos="fade-right"
             data-aos-delay="500"
           />
           <Button
-            label={buttons[2]}
+            label={buttons[1].label}
+            href={buttons[1].href}
             variant="outline"
             data-aos="fade-right"
             data-aos-delay="700"
