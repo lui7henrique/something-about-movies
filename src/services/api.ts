@@ -37,3 +37,24 @@ export async function list<T>(
 
   return payload
 }
+
+export async function pagination<T>(
+  locale: Locale,
+  endpoint: string,
+  query?: Query
+): Promise<T | undefined> {
+  let payload
+
+  try {
+    const { data } = await TMDB(locale).get<T>(endpoint, {
+      params: { ...query }
+    })
+
+    payload = data
+  } catch (error: unknown) {
+    payload = undefined
+    throw error
+  }
+
+  return payload
+}
