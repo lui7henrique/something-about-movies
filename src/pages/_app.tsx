@@ -7,14 +7,20 @@ import { ChakraProvider, CSSReset } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 
 import { theme } from '../styles/theme'
+import { useRouter } from 'next/router'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const { asPath, push } = useRouter()
+
   React.useEffect(() => {
     AOS.init({
       easing: 'ease-out-cubic',
       once: true,
       duration: 250
     })
+
+    const locale = localStorage.getItem('locale')
+    if (locale) push(asPath, asPath, { locale: locale })
   }, [])
 
   return (
