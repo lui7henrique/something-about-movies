@@ -20,6 +20,7 @@ import { useRouter } from 'next/router'
 // Types
 export type GenreItemProps = TotalByGenre & {
   title: string
+  delay: number // in seconds
 }
 
 /*
@@ -38,12 +39,13 @@ export const GenreItem = (props: GenreItemProps) => {
   |
   |
   */
-  const { id, name, total, title } = props
+  const { id, name, total, title, delay } = props
+
   const Icon = icons[id]
+
   const {
     colors: { primary }
   } = useTheme()
-
   const { locale } = useRouter()
 
   /*
@@ -158,6 +160,7 @@ export const GenreItem = (props: GenreItemProps) => {
             <CountUp
               end={total}
               duration={5}
+              delay={delay}
               formattingFn={(num) => num.toLocaleString(locale)}
             />
             <Text>+ {title.toLowerCase()}</Text>

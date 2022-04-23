@@ -122,7 +122,12 @@ export const GenreList = (props: GenreListProps) => {
 
           return (
             <Box data-aos="fade-up" data-aos-delay={delay}>
-              <GenreItem {...item} key={item.id} title={localeTitle} />
+              <GenreItem
+                {...item}
+                key={item.id}
+                title={localeTitle}
+                delay={delay / 1000}
+              />
             </Box>
           )
         })}
