@@ -1,12 +1,13 @@
 import { useToast } from '@chakra-ui/react'
-import { Session, User } from '@supabase/supabase-js'
+import { AuthChangeEvent, Session, User } from '@supabase/supabase-js'
 import { useRouter } from 'next/router'
 import {
   ReactNode,
   useCallback,
   useContext,
   useState,
-  createContext
+  createContext,
+  useEffect
 } from 'react'
 import { Locale } from 'services/api'
 
@@ -26,10 +27,12 @@ const STORAGE_KEY = '@cineapp/auth-token'
 export const AuthContextProvider = (props: AuthContextProviderProps) => {
   const [session, setSession] = useState<Session>({} as Session)
   const [user, setUser] = useState({} as User)
+  const [authenticatedState, setAuthenticatedState] =
+    useState('not-authenticated')
 
   const chakraToast = useToast()
 
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
   const { login: loginToast } = toasts[locale as Locale]
 
   const login = useCallback(async (email: string, password: string) => {
@@ -40,6 +43,7 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
       })
 
       if (error) {
+        console.log(error)
         chakraToast({
           title: loginToast.errors[error.message].title,
           description: loginToast.errors[error.message].description,
@@ -52,6 +56,8 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
         setSession(session)
         setUser(user)
 
+        console.log(loginToast.success, user, session)
+
         chakraToast({
           title: loginToast.success.title,
           description: loginToast.success.description,
@@ -60,12 +66,53 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
         })
       }
     } catch (e) {
+      console.log(e)
       chakraToast({
         title: loginToast.errors.default.title,
         description: loginToast.errors.default.description,
         status: 'error',
         duration: 5000
       })
+    }
+  }, [])
+
+  const checkUser = useCallback(async () => {
+    const user = await supabase.auth.user()
+
+    if (user) {
+      setAuthenticatedState('authenticated')
+    }
+  }, [])
+
+  const handleAuthChange = useCallback(
+    async (event: AuthChangeEvent, session: Session | null) => {
+      await fetch('/api/auth', {
+        method: 'POST',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        credentials: 'same-origin',
+        body: JSON.stringify({ event, session })
+      })
+    },
+    []
+  )
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        handleAuthChange(event, session)
+        if (event === 'SIGNED_IN') {
+          setAuthenticatedState('authenticated')
+          push('/app')
+        }
+        if (event === 'SIGNED_OUT') {
+          setAuthenticatedState('not-authenticated')
+        }
+      }
+    )
+    checkUser()
+
+    return () => {
+      authListener?.unsubscribe()
     }
   }, [])
 
