@@ -14,9 +14,10 @@ import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 import { Locale } from 'services/api'
 import { translation } from './translation'
+import { supabase } from 'services/supabase'
+import { useAuth } from 'contexts/auth'
 
 // Types
-export type LoginFormProps = {}
 
 type FormData = {
   email: string
@@ -31,7 +32,7 @@ type FormData = {
 |
 */
 
-export const LoginForm = (props: LoginFormProps) => {
+export const LoginForm = () => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -40,8 +41,8 @@ export const LoginForm = (props: LoginFormProps) => {
   |
   */
   const { locale } = useRouter()
+  const { login } = useAuth()
 
-  const {} = props
   const {
     register,
     formState: { isSubmitting, errors },
@@ -69,7 +70,7 @@ export const LoginForm = (props: LoginFormProps) => {
   |
   */
   const onSubmit = useCallback(async (data: FormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await login(data.email, data.password)
   }, [])
 
   /*
