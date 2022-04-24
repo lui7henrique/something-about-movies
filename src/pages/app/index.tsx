@@ -1,12 +1,14 @@
+import { User } from '@supabase/supabase-js'
+import { LayoutPrivate } from 'layout/Private'
 import { GetServerSideProps, GetStaticProps } from 'next'
 import { supabase } from 'services/supabase'
 
-const App = () => {
-  return (
-    <>
-      <h1>oi</h1>{' '}
-    </>
-  )
+type AppProps = {
+  user: User
+}
+
+const App = (props: AppProps) => {
+  return <LayoutPrivate />
 }
 
 export default App

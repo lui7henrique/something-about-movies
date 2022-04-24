@@ -1,8 +1,8 @@
 // Vendors
 
 // Components
-import { Box, Heading, useBreakpointValue, useTheme } from '@chakra-ui/react'
-import Link from 'next/link'
+import { Flex, Grid, HStack } from '@chakra-ui/react'
+import { Sidebar } from 'layout/Private/components/Sidebar'
 
 // Types
 
@@ -14,7 +14,7 @@ import Link from 'next/link'
 |
 */
 
-export const Logo = () => {
+export const LayoutPrivate = () => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -63,20 +63,9 @@ export const Logo = () => {
   |
   */
   return (
-    <Link href="/">
-      <a>
-        <Heading
-          as="h1"
-          fontSize="3xl"
-          bg="primary.500"
-          sx={{
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}
-        >
-          cineapp
-        </Heading>
-      </a>
-    </Link>
+    <Grid gridTemplateColumns="250px 7fr">
+      <Sidebar />
+      <h2>conteudo</h2>
+    </Grid>
   )
 }

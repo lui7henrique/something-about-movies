@@ -2,13 +2,26 @@
 import { useRouter } from 'next/router'
 
 // Components
-import { Flex, IconButton, Stack, useBreakpointValue } from '@chakra-ui/react'
+import {
+  Box,
+  Divider,
+  Flex,
+  IconButton,
+  Stack,
+  useBreakpointValue,
+  VStack
+} from '@chakra-ui/react'
 import { Button } from 'components/Button'
 import { ButtonLanguage } from 'components/ButtonLanguage'
 import { Limiter } from 'components/Limiter'
 import { Logo } from 'components/Logo'
 
 import { MdMenu, MdPerson } from 'react-icons/md'
+import { translations } from './translations'
+import { Locale } from 'services/api'
+import { HeaderActiveLink } from 'components/HeaderActiveLink'
+import { supabase } from 'services/supabase'
+import { FaUnlock } from 'react-icons/fa'
 
 // Types
 export type HeaderProps = {}
@@ -29,7 +42,9 @@ export const Header = (props: HeaderProps) => {
   |
   |
   */
-  const { push } = useRouter()
+  const { push, locale } = useRouter()
+  const { links } = translations[locale as Locale]
+  const user = supabase.auth.user()
 
   const buttonLogin = useBreakpointValue({
     base: (
@@ -43,10 +58,10 @@ export const Header = (props: HeaderProps) => {
     ),
     lg: (
       <Button
-        label="Login"
+        label={user ? (locale === 'pt-BR' ? 'Acessar' : 'Access') : 'Login'}
         variant="outline"
-        onClick={() => push('/login')}
-        leftIcon={<MdPerson size={20} />}
+        href={user ? '/app' : '/login'}
+        leftIcon={user ? <FaUnlock size={20} /> : <MdPerson size={20} />}
       />
     )
   })
@@ -65,9 +80,17 @@ export const Header = (props: HeaderProps) => {
       />
     ),
     lg: (
-      <Flex as="nav">
+      <Stack direction="row" align="center" spacing={8} h="100%">
         <Logo />
-      </Flex>
+
+        <Box w="1px" h="70%" bgColor="white" opacity={0.1} />
+
+        <Flex as="nav">
+          {links.map((link) => {
+            return <HeaderActiveLink {...link} />
+          })}
+        </Flex>
+      </Stack>
     )
   })
 

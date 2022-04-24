@@ -11,11 +11,11 @@ export const translation = {
     },
     buttons: [
       {
-        label: 'Get started',
+        label: 'Get started for free',
         href: '/login'
       },
       {
-        label: 'Leia mais',
+        label: 'Learn more',
         href: '#movies'
       }
     ]
@@ -32,7 +32,7 @@ export const translation = {
     },
     buttons: [
       {
-        label: 'Começar',
+        label: 'Comece agora gratuitamente',
         href: '/login'
       },
       {

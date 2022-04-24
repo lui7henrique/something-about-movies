@@ -25,15 +25,13 @@ type AuthContextProviderProps = {
 const STORAGE_KEY = '@cineapp/auth-token'
 
 export const AuthContextProvider = (props: AuthContextProviderProps) => {
-  const [session, setSession] = useState<Session>({} as Session)
-  const [user, setUser] = useState({} as User)
   const [authenticatedState, setAuthenticatedState] =
     useState('not-authenticated')
 
   const chakraToast = useToast()
 
   const { locale, push } = useRouter()
-  const { login: loginToast } = toasts[locale as Locale]
+  const { login: loginToast, logout: logoutToast } = toasts[locale as Locale]
 
   const login = useCallback(async (email: string, password: string) => {
     try {
@@ -53,11 +51,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
       }
 
       if (session && user && !error) {
-        setSession(session)
-        setUser(user)
-
-        console.log(loginToast.success, user, session)
-
         chakraToast({
           title: loginToast.success.title,
           description: loginToast.success.description,
@@ -70,6 +63,31 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
       chakraToast({
         title: loginToast.errors.default.title,
         description: loginToast.errors.default.description,
+        status: 'error',
+        duration: 5000
+      })
+    }
+  }, [])
+
+  const logout = useCallback(async () => {
+    try {
+      await push('/')
+
+      supabase.auth.signOut()
+
+      localStorage.removeItem(STORAGE_KEY)
+      setAuthenticatedState('not-authenticated')
+
+      chakraToast({
+        title: logoutToast.success.title,
+        description: logoutToast.success.description,
+        status: 'success',
+        duration: 5000
+      })
+    } catch {
+      chakraToast({
+        title: logoutToast.errors.default.title,
+        description: logoutToast.errors.default.description,
         status: 'error',
         duration: 5000
       })
@@ -119,10 +137,8 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
   return (
     <AuthContext.Provider
       value={{
-        session,
-        user,
-
-        login
+        login,
+        logout
       }}
     >
       {props.children}

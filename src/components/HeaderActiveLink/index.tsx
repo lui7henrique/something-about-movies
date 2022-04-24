@@ -1,10 +1,15 @@
 // Vendors
-
-// Components
-import { Box, Heading, useBreakpointValue, useTheme } from '@chakra-ui/react'
 import Link from 'next/link'
 
+// Components
+import { Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+
 // Types
+export type HeaderActiveLinkProps = {
+  href: string
+  label: string
+}
 
 /*
 |-----------------------------------------------------------------------------
@@ -14,7 +19,7 @@ import Link from 'next/link'
 |
 */
 
-export const Logo = () => {
+export const HeaderActiveLink = (props: HeaderActiveLinkProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -22,6 +27,7 @@ export const Logo = () => {
   |
   |
   */
+  const { href, label } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -30,6 +36,8 @@ export const Logo = () => {
   |
   |
   */
+  const { asPath } = useRouter()
+  const isActive = href === '/' ? asPath === href : asPath.startsWith(href)
 
   /*
   |-----------------------------------------------------------------------------
@@ -63,19 +71,31 @@ export const Logo = () => {
   |
   */
   return (
-    <Link href="/">
+    <Link key={href} href={href}>
       <a>
-        <Heading
-          as="h1"
-          fontSize="3xl"
-          bg="primary.500"
-          sx={{
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+        <Text
+          size="sm"
+          mr="4"
+          color={isActive ? 'gray.50' : 'gray.100'}
+          transition="color 0.2s"
+          _after={{
+            display: 'block',
+            content: '""',
+            width: isActive ? '100%' : '0',
+            height: '3px',
+            backgroundColor: isActive ? 'primary.500' : 'primary.700',
+            transition: '0.2s ease-in-out',
+            borderRadius: '3px'
+          }}
+          _hover={{
+            color: 'gray.50',
+            _after: {
+              width: '100%'
+            }
           }}
         >
-          cineapp
-        </Heading>
+          {label}
+        </Text>
       </a>
     </Link>
   )
