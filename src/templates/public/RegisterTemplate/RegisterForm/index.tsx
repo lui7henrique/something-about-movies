@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import Link from 'next/link'
 import zxcvbn from 'zxcvbn'
+import { supabase } from 'services/supabase'
 
 // Components
 import {
@@ -13,6 +14,7 @@ import {
   HStack,
   Stack,
   Text,
+  useToast,
   VStack
 } from '@chakra-ui/react'
 import { Button } from 'components/Button'
@@ -29,7 +31,7 @@ import { translation } from './translation'
 
 type FormData = {
   name: string
-  userName: string
+  username: string
   email: string
   password: string
   confirmPassword: string
@@ -51,7 +53,7 @@ export const RegisterForm = () => {
   |
   |
   */
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
 
   const {
     register,
@@ -66,9 +68,12 @@ export const RegisterForm = () => {
     title,
     text,
     login,
-    fields: { name, userName, email, password, confirmPassword },
-    button
+    fields: { name, username, email, password, confirmPassword },
+    button,
+    toasts: { success, error }
   } = translation[locale as Locale]
+
+  const chakraToast = useToast()
 
   /*
   |-----------------------------------------------------------------------------
@@ -86,9 +91,45 @@ export const RegisterForm = () => {
   |
   */
   const onSubmit = useCallback(async (data: FormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const { email, password } = data
 
-    alert(JSON.stringify(data, null, 2))
+      const {
+        user,
+        session,
+        error: apiError
+      } = await supabase.auth.signUp(
+        {
+          email,
+          password
+        },
+        {
+          data: {
+            name: data.name,
+            username: data.username
+          }
+        }
+      )
+
+      if (!apiError) {
+        push('/login')
+        chakraToast({
+          title: success.title,
+          description: success.description,
+          status: 'success',
+          duration: 5000
+        })
+      }
+
+      if (apiError) {
+        chakraToast({
+          title: error.title,
+          description: error.description,
+          status: 'error',
+          duration: 5000
+        })
+      }
+    } catch (e) {}
   }, [])
 
   /*
@@ -171,12 +212,12 @@ export const RegisterForm = () => {
           />
 
           <FieldText
-            label={userName.label}
-            placeholder={userName.placeholder}
-            type="userName"
+            label={username.label}
+            placeholder={username.placeholder}
+            type="username"
             inputLeftElement={<MdPerson size={20} />}
-            {...register('userName')}
-            error={errors.userName}
+            {...register('username')}
+            error={errors.username}
           />
         </Stack>
 

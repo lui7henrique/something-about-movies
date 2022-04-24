@@ -1,4 +1,34 @@
-export const translation = {
+import { Locale } from 'services/api'
+import { Field } from 'types/form/field'
+
+type Translation = {
+  [key in Locale]: {
+    title: string
+    text: string
+    login: {
+      label: string
+      link: string
+    }
+    fields: {
+      name: Field
+      username: Field
+      email: Field
+      password: Field
+      confirmPassword: Field
+    }
+    button: {
+      label: string
+    }
+    toasts: {
+      [key in 'success' | 'error']: {
+        title: string
+        description: string
+      }
+    }
+  }
+}
+
+export const translation: Translation = {
   'en-US': {
     title: 'Create an account',
     text: 'Be part of the largest cinema community in the world, meet and discuss thousands of movies and TV series!',
@@ -12,7 +42,7 @@ export const translation = {
         placeholder: 'Enter your name',
         required: 'Please enter your name.'
       },
-      userName: {
+      username: {
         label: 'Username',
         placeholder: 'Enter your username',
         required: 'Please enter your username.'
@@ -39,6 +69,16 @@ export const translation = {
     },
     button: {
       label: 'Register'
+    },
+    toasts: {
+      success: {
+        title: 'Account created successfully!',
+        description: 'Pleas, verify the account in your email.'
+      },
+      error: {
+        title: 'Error creating account!',
+        description: 'Please try again later.'
+      }
     }
   },
   'pt-BR': {
@@ -54,7 +94,7 @@ export const translation = {
         placeholder: 'Digite seu nome',
         required: 'Por favor, insira seu nome.'
       },
-      userName: {
+      username: {
         label: 'Nome de usuário',
         placeholder: 'Digite seu nome de usuário',
         required: 'Por favor, insira seu nome de usuário.'
@@ -81,6 +121,16 @@ export const translation = {
     },
     button: {
       label: 'Criar conta'
+    },
+    toasts: {
+      success: {
+        title: 'Conta criada com sucesso!',
+        description: 'Verifique a conta em seu email.'
+      },
+      error: {
+        title: 'Erro ao criar conta!',
+        description: 'Por favor, tente novamente mais tarde.'
+      }
     }
   }
 }

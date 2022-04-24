@@ -16,6 +16,7 @@
     "@emotion/styled": "^11",
     "@faker-js/faker": "^6.1.2",
     "@hookform/resolvers": "^2.8.8",
+    "@supabase/supabase-js": "^1.35.2",
     "aos": "^2.3.4",
     "axios": "^0.26.1",
     "framer-motion": "^4",

@@ -5,20 +5,20 @@ import { translation } from './translation'
 
 export const schema = (t: Locale) => {
   const {
-    fields: { name, userName, email, password, confirmPassword }
+    fields: { name, username, email, password, confirmPassword }
   } = translation[t]
 
   return yup.object().shape({
     name: yup.string().required(name.required),
 
-    userName: yup.string().required(userName.required),
+    username: yup.string().required(username.required),
 
     email: yup.string().email(email.invalid).required(email.required),
 
     password: yup
       .string()
       .required(password.required)
-      .test('is-strong', password.invalid, (value) => {
+      .test('is-strong', password.invalid!, (value) => {
         if (value) {
           return zxcvbn(value).score >= 4
         }
