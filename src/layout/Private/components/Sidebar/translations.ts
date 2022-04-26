@@ -143,7 +143,7 @@ export const translations: Translations = (id: string) => {
               },
               {
                 label: 'Watchlist',
-                href: '/app/watch-list',
+                href: `/app/watch-list/${id}`,
                 icon: FaList
               }
             ]

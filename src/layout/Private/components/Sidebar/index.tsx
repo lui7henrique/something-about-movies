@@ -46,6 +46,7 @@ export const Sidebar = (props: SidebarProps) => {
   const { logout } = useAuth()
 
   const { locale } = useRouter()
+
   const {
     sidebar: { nav, sign_out }
   } = translations(user?.id ?? '')[locale as Locale]

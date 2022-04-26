@@ -171,7 +171,12 @@ export const MediaSlider = (props: MediaSliderProps) => {
                 </Text>
 
                 <HStack>
-                  <Button label={buttons.details} />
+                  <Button
+                    label={buttons.details}
+                    href={`/${item.type === 'movie' ? 'movies' : 'tv'}/${
+                      item.id
+                    }`}
+                  />
                   <Button label={buttons.watchlist} />
                 </HStack>
               </VStack>
