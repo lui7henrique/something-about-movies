@@ -18,15 +18,11 @@ export const translations: Translations = {
       },
       {
         label: 'Movies',
-        href: '/app/movies'
+        href: '/app/movies/popular'
       },
       {
         label: 'Series',
-        href: '/app/series'
-      },
-      {
-        label: 'Actors',
-        href: '/app/actors'
+        href: '/app/tv/popular'
       }
     ]
   },
@@ -38,15 +34,11 @@ export const translations: Translations = {
       },
       {
         label: 'Filmes',
-        href: '/app/movies'
+        href: '/app/movies/popular'
       },
       {
         label: 'Séries',
-        href: '/app/series'
-      },
-      {
-        label: 'Atores',
-        href: '/app/actors'
+        href: '/app/tv/popular'
       }
     ]
   }
