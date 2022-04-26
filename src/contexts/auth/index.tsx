@@ -121,8 +121,11 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         handleAuthChange(event, session)
+
         if (event === 'SIGNED_IN') {
           setAuthenticatedState('authenticated')
+          console.log('signed in')
+
           await push('/app')
         }
         if (event === 'SIGNED_OUT') {

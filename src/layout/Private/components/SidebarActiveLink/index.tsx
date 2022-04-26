@@ -105,11 +105,11 @@ export const SidebarActiveLink = (props: SidebarActiveLinkProps) => {
         transition="all 0.2s"
         alignItems="center"
         cursor="pointer"
-        spacing={4}
+        spacing={2}
         color={isActive ? 'gray.50' : 'gray.400'}
       >
-        {Icon && <Icon size={20} color={isActive && primary[500]} />}
-        <Text mr="4" transition="color 0.2s" fontSize="md" fontWeight="bold">
+        {Icon && <Icon size={16} color={isActive && primary[500]} />}
+        <Text mr="4" transition="color 0.2s" fontSize="sm" fontWeight="bold">
           {label}
         </Text>
       </HStack>

@@ -1,7 +1,8 @@
 // Vendors
 
 // Components
-import { Flex, Grid, HStack } from '@chakra-ui/react'
+import { Box, Flex, Grid, Heading, HStack } from '@chakra-ui/react'
+import { ButtonLanguage } from 'components/ButtonLanguage'
 import { Sidebar } from 'layout/Private/components/Sidebar'
 
 // Types
@@ -65,7 +66,12 @@ export const LayoutPrivate = () => {
   return (
     <Grid gridTemplateColumns="250px 7fr">
       <Sidebar />
-      <h2>conteudo</h2>
+      <Box>
+        <Flex w="100%" justifyContent="space-between" p={4}>
+          <Heading>busca</Heading>
+          <ButtonLanguage />
+        </Flex>
+      </Box>
     </Grid>
   )
 }

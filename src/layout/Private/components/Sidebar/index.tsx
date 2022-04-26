@@ -3,7 +3,14 @@ import { useRouter } from 'next/router'
 import { Locale } from 'services/api'
 
 // Components
-import { chakra, Heading, HStack, VStack, Image } from '@chakra-ui/react'
+import {
+  chakra,
+  Heading,
+  HStack,
+  VStack,
+  Image,
+  Divider
+} from '@chakra-ui/react'
 import { SidebarActiveLink } from 'layout/Private/components/SidebarActiveLink'
 
 import { supabase } from 'services/supabase'
@@ -113,22 +120,33 @@ export const Sidebar = (props: SidebarProps) => {
           </HStack>
         )}
 
-        <VStack w="100%" alignItems="flex-start" spacing={2}>
-          <Heading
-            as="h3"
-            fontSize="sm"
-            textTransform="uppercase"
-            color="gray.400"
-            alignItems="flex-start"
-            px={4}
-          >
-            Menu
-          </Heading>
-          <VStack w="100%" spacing={4}>
-            {nav.map((link) => {
-              return <SidebarActiveLink {...link} key={link.href} />
-            })}
-          </VStack>
+        <VStack
+          w="100%"
+          alignItems="flex-start"
+          spacing={4}
+          divider={<Divider />}
+        >
+          {nav.map((item) => {
+            return (
+              <VStack w="100%" alignItems="flex-start" spacing={2}>
+                <Heading
+                  as="h3"
+                  fontSize="xs"
+                  textTransform="uppercase"
+                  color="gray.400"
+                  alignItems="flex-start"
+                  px={4}
+                >
+                  {item.title}
+                </Heading>
+                <VStack w="100%" spacing={4}>
+                  {item.links.map((link) => {
+                    return <SidebarActiveLink {...link} key={link.href} />
+                  })}
+                </VStack>
+              </VStack>
+            )
+          })}
         </VStack>
       </VStack>
 
