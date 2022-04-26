@@ -33,41 +33,44 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
   const { locale, push } = useRouter()
   const { login: loginToast, logout: logoutToast } = toasts[locale as Locale]
 
-  const login = useCallback(async (email: string, password: string) => {
-    try {
-      const { session, user, error } = await supabase.auth.signIn({
-        email,
-        password
-      })
+  const login = useCallback(
+    async (email: string, password: string) => {
+      try {
+        const { session, user, error } = await supabase.auth.signIn({
+          email,
+          password
+        })
 
-      if (error) {
-        console.log(error)
+        if (error) {
+          console.log(error)
+          chakraToast({
+            title: loginToast.errors[error.message].title,
+            description: loginToast.errors[error.message].description,
+            status: 'error',
+            duration: 5000
+          })
+        }
+
+        if (session && user && !error) {
+          chakraToast({
+            title: loginToast.success.title,
+            description: loginToast.success.description,
+            status: 'success',
+            duration: 5000
+          })
+        }
+      } catch (e) {
+        console.log(e)
         chakraToast({
-          title: loginToast.errors[error.message].title,
-          description: loginToast.errors[error.message].description,
+          title: loginToast.errors.default.title,
+          description: loginToast.errors.default.description,
           status: 'error',
           duration: 5000
         })
       }
-
-      if (session && user && !error) {
-        chakraToast({
-          title: loginToast.success.title,
-          description: loginToast.success.description,
-          status: 'success',
-          duration: 5000
-        })
-      }
-    } catch (e) {
-      console.log(e)
-      chakraToast({
-        title: loginToast.errors.default.title,
-        description: loginToast.errors.default.description,
-        status: 'error',
-        duration: 5000
-      })
-    }
-  }, [])
+    },
+    [locale]
+  )
 
   const logout = useCallback(async () => {
     try {
@@ -92,7 +95,7 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
         duration: 5000
       })
     }
-  }, [])
+  }, [locale])
 
   const checkUser = useCallback(async () => {
     const user = await supabase.auth.user()
@@ -116,11 +119,11 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         handleAuthChange(event, session)
         if (event === 'SIGNED_IN') {
           setAuthenticatedState('authenticated')
-          push('/app')
+          await push('/app')
         }
         if (event === 'SIGNED_OUT') {
           setAuthenticatedState('not-authenticated')

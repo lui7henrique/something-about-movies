@@ -1,10 +1,9 @@
 // Vendors
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { Locale } from 'services/api'
 
 // Components
-import { Box, chakra, Heading, HStack, VStack } from '@chakra-ui/react'
+import { chakra, Heading, HStack, VStack, Image } from '@chakra-ui/react'
 import { SidebarActiveLink } from 'layout/Private/components/SidebarActiveLink'
 
 import { supabase } from 'services/supabase'
@@ -95,19 +94,13 @@ export const Sidebar = (props: SidebarProps) => {
       <VStack w="100%">
         {user && (
           <HStack p={4} alignItems="flex-end" w="100%" spacing={2}>
-            <Box
+            <Image
+              src={`https://ui-avatars.com/api/?name=${user.user_metadata.username}&background=ca2b5f&color=fffffb&bold=true`}
+              layout="fill"
+              borderRadius="sm"
               w="10"
               h="10"
-              borderRadius="sm"
-              overflow="hidden"
-              position="relative"
-            >
-              <ChakraNextImage
-                src={`https://ui-avatars.com/api/?name=${user.user_metadata.username}&background=ca2b5f&color=fffffb&bold=true`}
-                layout="fill"
-                borderRadius="sm"
-              />
-            </Box>
+            />
 
             <VStack spacing={0} alignItems="flex-start">
               <Heading as="h4" fontSize="12px" fontWeight="semibold">

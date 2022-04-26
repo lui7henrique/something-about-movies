@@ -30,7 +30,7 @@ export const translations: Translations = {
           icon: HiHome
         },
         {
-          label: 'Explore',
+          label: 'Discover',
           href: '/app/discover',
           icon: FaCompass
         },

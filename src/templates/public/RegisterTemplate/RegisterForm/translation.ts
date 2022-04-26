@@ -73,7 +73,7 @@ export const translation: Translation = {
     toasts: {
       success: {
         title: 'Account created successfully!',
-        description: 'Pleas, verify the account in your email.'
+        description: 'Please, verify the account in your email.'
       },
       error: {
         title: 'Error creating account!',

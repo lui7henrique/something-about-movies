@@ -43,7 +43,7 @@ export const SidebarActiveLink = (props: SidebarActiveLinkProps) => {
   |
   |
   */
-  const isActive = href === '/' ? asPath === href : asPath.startsWith(href)
+  const isActive = href === '/app' ? asPath === href : asPath.startsWith(href)
 
   /*
   |-----------------------------------------------------------------------------
