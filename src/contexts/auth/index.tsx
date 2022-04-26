@@ -42,7 +42,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
         })
 
         if (error) {
-          console.log(error)
           chakraToast({
             title: loginToast.errors[error.message].title,
             description: loginToast.errors[error.message].description,
@@ -60,7 +59,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
           })
         }
       } catch (e) {
-        console.log(e)
         chakraToast({
           title: loginToast.errors.default.title,
           description: loginToast.errors.default.description,
@@ -123,7 +121,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
 
         if (event === 'SIGNED_IN') {
           setAuthenticatedState('authenticated')
-          console.log('signed in')
 
           await push('/app')
         }

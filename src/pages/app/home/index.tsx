@@ -18,8 +18,6 @@ type AppHomeProps = {
 const Home = (props: AppHomeProps) => {
   const { user, ...appProps } = props
 
-  console.log(appProps)
-
   return (
     <LayoutPrivate>
       <AppHomeTemplate {...appProps} />
