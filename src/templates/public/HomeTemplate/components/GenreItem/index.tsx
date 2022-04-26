@@ -12,7 +12,7 @@ import {
   VStack
 } from '@chakra-ui/react'
 import { TotalByGenre } from 'pages'
-import { icons } from 'utils/genreIcons'
+import { icons } from 'utils/genre'
 
 import CountUp from 'react-countup'
 import { useRouter } from 'next/router'

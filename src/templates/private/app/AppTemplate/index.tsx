@@ -1,23 +1,25 @@
 // Vendors
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 // Components
 
 import { Box, chakra } from '@chakra-ui/react'
-import { AppPageProps } from 'pages/app'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import { v4 } from 'uuid'
 import { Movie } from 'types/movies/list'
 import { TV } from 'types/tv/list'
-import { MediaSlider } from 'layout/Private/components/MediaSlider'
+import {
+  BannerSlide,
+  BannerSlider
+} from 'layout/Private/components/BannerSlider'
 
 // Types
-export type AppTemplateProps = AppPageProps
+export type AppHomeTemplateProps = {
+  banners: BannerSlide[]
+}
 
 /*
 |-----------------------------------------------------------------------------
@@ -27,7 +29,7 @@ export type AppTemplateProps = AppPageProps
 |
 */
 
-export const AppTemplate = (props: AppTemplateProps) => {
+export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -35,8 +37,7 @@ export const AppTemplate = (props: AppTemplateProps) => {
   |
   |
   */
-  const { popularMovies, popularTV } = props
-  const { locale } = useRouter()
+  const { banners } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -53,18 +54,6 @@ export const AppTemplate = (props: AppTemplateProps) => {
   |
   |
   */
-  const media = [...popularMovies, ...popularTV].map((item) => {
-    const title = (item as Movie).title || (item as TV).name
-    const type = (item as Movie).title ? 'movie' : 'tv'
-
-    return {
-      id: item.id,
-      image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
-      title: title as string,
-      description: item.overview,
-      type: type as 'movie' | 'tv'
-    }
-  })
 
   /*
   |-----------------------------------------------------------------------------
@@ -92,7 +81,7 @@ export const AppTemplate = (props: AppTemplateProps) => {
   return (
     <Box>
       <Box h="80vh" w="100%">
-        <MediaSlider media={media} />
+        <BannerSlider banners={banners} />
       </Box>
     </Box>
   )

@@ -34,7 +34,7 @@ export const translations: Translations = (id: string) => {
             links: [
               {
                 label: 'Home',
-                href: '/app',
+                href: '/app/home',
                 icon: HiHome
               },
               {
@@ -123,7 +123,7 @@ export const translations: Translations = (id: string) => {
             links: [
               {
                 label: 'Início',
-                href: '/app',
+                href: '/app/home',
                 icon: HiHome
               },
               {

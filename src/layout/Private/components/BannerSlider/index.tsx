@@ -10,19 +10,20 @@ import {
   Heading,
   HStack,
   Image,
+  Progress,
   Text,
+  useTheme,
   VStack
 } from '@chakra-ui/react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper'
 
-import { supabase } from 'services/supabase'
 import { v4 } from 'uuid'
 import { Button } from 'components/Button'
 import { translations } from './translations'
 
 // Types
-export type MediaSlide = {
+export type BannerSlide = {
   id: number
   image: string
   title: string
@@ -30,8 +31,8 @@ export type MediaSlide = {
   type: 'movie' | 'tv'
 }
 
-export type MediaSliderProps = {
-  media: MediaSlide[]
+export type BannerSliderProps = {
+  banners: BannerSlide[]
 }
 
 /*
@@ -44,7 +45,7 @@ export type MediaSliderProps = {
 const ChakraSwiper = chakra(Swiper)
 const ChakraNextImage = chakra(Image)
 
-export const MediaSlider = (props: MediaSliderProps) => {
+export const BannerSlider = (props: BannerSliderProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -52,8 +53,12 @@ export const MediaSlider = (props: MediaSliderProps) => {
   |
   |
   */
-  const { media } = props
+  const { banners } = props
   const { locale } = useRouter()
+
+  const {
+    colors: { primary }
+  } = useTheme()
 
   const {
     slide: { type: slideType },
@@ -126,7 +131,7 @@ export const MediaSlider = (props: MediaSliderProps) => {
       }}
       zIndex={1}
     >
-      {media.map((item) => {
+      {banners.map((item) => {
         const { id, image, title, description, type: mediaType } = item
 
         return (
@@ -160,7 +165,11 @@ export const MediaSlider = (props: MediaSliderProps) => {
                   <Box h="7" w="2" bgColor="primary.500" />
                   <Text fontSize="lg">{slideType[mediaType]}</Text>
                 </HStack>
-                <Heading fontSize="5xl">{title}</Heading>
+
+                <HStack>
+                  <Heading fontSize="5xl">{title}</Heading>
+                </HStack>
+
                 <Text
                   fontSize="lg"
                   textAlign="justify"
