@@ -19,6 +19,7 @@ import { MinimalMedia } from 'types/media'
 import { Locale } from 'services/api'
 import Image from 'next/image'
 import { useState } from 'react'
+import { Skeleton } from 'components/Skeleton'
 
 // Types
 export type MediaListProps = {
@@ -174,6 +175,7 @@ export const MediaList = (props: MediaListProps) => {
                   }}
                   backgroundColor="primary.500"
                 >
+                  <Skeleton w="100%" h="100%" borderRadius="0" />
                   <ChakraNextImage
                     src={media.image}
                     alt={`{media.title}`}
@@ -182,6 +184,7 @@ export const MediaList = (props: MediaListProps) => {
                     objectPosition="center"
                     w="100%"
                     h="100%"
+                    quality={25}
                     transition="all 0.2s"
                   />
                   <HStack
