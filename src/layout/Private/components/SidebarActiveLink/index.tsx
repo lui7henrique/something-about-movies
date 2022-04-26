@@ -105,7 +105,7 @@ export const SidebarActiveLink = (props: SidebarActiveLinkProps) => {
         transition="all 0.2s"
         alignItems="center"
         cursor="pointer"
-        spacing={2}
+        spacing={4}
         color={isActive ? 'gray.50' : 'gray.400'}
       >
         {Icon && <Icon size={16} color={isActive && primary[500]} />}

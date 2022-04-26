@@ -43,8 +43,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      movies: movies!.slice(0, 3),
-      tv: tv!.slice(0, 3)
+      movies: movies!.slice(0, 2),
+      tv: tv!.slice(0, 2)
     },
     revalidate: 60 * 60 * 24 // 1 day
   }

@@ -3,14 +3,10 @@
 // Components
 import {
   Box,
-  Flex,
-  Heading,
   Popover,
-  PopoverArrow,
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverHeader,
   PopoverTrigger,
   Stack,
   Text

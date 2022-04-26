@@ -1,12 +1,23 @@
 // Vendors
 
 // Components
-import { Box, IconButton, IconButtonProps } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { IoMdArrowBack } from 'react-icons/io'
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerOverlay
+} from '@chakra-ui/react'
+import { Sidebar } from '../Sidebar'
 
 // Types
-type ButtonBackProps = Omit<IconButtonProps, 'aria-label'>
+export type SidebarDrawerProps = {
+  onClose: () => void
+  onOpen: () => void
+  isOpen: boolean
+}
 
 /*
 |-----------------------------------------------------------------------------
@@ -16,7 +27,7 @@ type ButtonBackProps = Omit<IconButtonProps, 'aria-label'>
 |
 */
 
-export const ButtonBack = (props: ButtonBackProps) => {
+export const SidebarDrawer = (props: SidebarDrawerProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -24,7 +35,7 @@ export const ButtonBack = (props: ButtonBackProps) => {
   |
   |
   */
-  const { back } = useRouter()
+  const { onClose, onOpen, isOpen } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -66,13 +77,12 @@ export const ButtonBack = (props: ButtonBackProps) => {
   |
   */
   return (
-    <IconButton
-      aria-label="back"
-      icon={<IoMdArrowBack size={20} />}
-      onClick={back}
-      zIndex={5}
-      borderRadius="sm"
-      {...props}
-    />
+    <Drawer onClose={onClose} isOpen={isOpen} placement="left">
+      <DrawerOverlay />
+      <DrawerContent size="sm">
+        <DrawerCloseButton onClick={onClose} />
+        <Sidebar />
+      </DrawerContent>
+    </Drawer>
   )
 }

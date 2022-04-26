@@ -48,7 +48,7 @@ export const Sidebar = (props: SidebarProps) => {
   const { locale } = useRouter()
   const {
     sidebar: { nav, sign_out }
-  } = translations[locale as Locale]
+  } = translations(user?.id ?? '')[locale as Locale]
 
   /*
   |-----------------------------------------------------------------------------
@@ -111,7 +111,7 @@ export const Sidebar = (props: SidebarProps) => {
 
             <VStack spacing={0} alignItems="flex-start">
               <Heading as="h4" fontSize="12px" fontWeight="semibold">
-                Bem-vindo
+                {locale === 'pt-BR' ? 'Bem-vindo' : 'Welcome'}
               </Heading>
               <Heading as="h3" size="md" fontWeight="bold">
                 {user.user_metadata.username}

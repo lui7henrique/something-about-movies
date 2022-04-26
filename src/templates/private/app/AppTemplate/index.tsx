@@ -1,12 +1,23 @@
 // Vendors
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 // Components
-import { Box, IconButton, IconButtonProps } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { IoMdArrowBack } from 'react-icons/io'
+
+import { Box, chakra } from '@chakra-ui/react'
+import { AppPageProps } from 'pages/app'
+
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+
+import { v4 } from 'uuid'
+import { Movie } from 'types/movies/list'
+import { TV } from 'types/tv/list'
+import { MediaSlider } from 'layout/Private/components/MediaSlider'
 
 // Types
-type ButtonBackProps = Omit<IconButtonProps, 'aria-label'>
+export type AppTemplateProps = AppPageProps
 
 /*
 |-----------------------------------------------------------------------------
@@ -16,7 +27,7 @@ type ButtonBackProps = Omit<IconButtonProps, 'aria-label'>
 |
 */
 
-export const ButtonBack = (props: ButtonBackProps) => {
+export const AppTemplate = (props: AppTemplateProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -24,7 +35,8 @@ export const ButtonBack = (props: ButtonBackProps) => {
   |
   |
   */
-  const { back } = useRouter()
+  const { popularMovies, popularTV } = props
+  const { locale } = useRouter()
 
   /*
   |-----------------------------------------------------------------------------
@@ -41,6 +53,18 @@ export const ButtonBack = (props: ButtonBackProps) => {
   |
   |
   */
+  const media = [...popularMovies, ...popularTV].map((item) => {
+    const title = (item as Movie).title || (item as TV).name
+    const type = (item as Movie).title ? 'movie' : 'tv'
+
+    return {
+      id: item.id,
+      image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+      title: title as string,
+      description: item.overview,
+      type: type as 'movie' | 'tv'
+    }
+  })
 
   /*
   |-----------------------------------------------------------------------------
@@ -66,13 +90,10 @@ export const ButtonBack = (props: ButtonBackProps) => {
   |
   */
   return (
-    <IconButton
-      aria-label="back"
-      icon={<IoMdArrowBack size={20} />}
-      onClick={back}
-      zIndex={5}
-      borderRadius="sm"
-      {...props}
-    />
+    <Box>
+      <Box h="80vh" w="100%">
+        <MediaSlider media={media} />
+      </Box>
+    </Box>
   )
 }
