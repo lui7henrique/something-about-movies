@@ -12,6 +12,7 @@ import {
   Heading,
   HStack,
   Text,
+  useTheme,
   VStack
 } from '@chakra-ui/react'
 import { MinimalMedia } from 'types/media'
@@ -46,9 +47,13 @@ export const MediaList = (props: MediaListProps) => {
   |
   */
   const { media, title } = props
-  const { locale } = useRouter()
 
+  const { locale } = useRouter()
   const localeTitle = title[locale as Locale]
+
+  const {
+    colors: { primary }
+  } = useTheme()
 
   /*
   |-----------------------------------------------------------------------------
@@ -110,8 +115,65 @@ export const MediaList = (props: MediaListProps) => {
         {media.slice(0, 5).map((media) => {
           return (
             <VStack alignItems="flex-start" spacing={2} w="100%" key={media.id}>
-              <AspectRatio w="100%" ratio={16 / 9} overflow="hidden">
-                <Box w="100%" h="100%" position="relative">
+              <AspectRatio
+                w="100%"
+                ratio={16 / 9}
+                overflow="unset"
+                sx={{
+                  span: {
+                    overflow: 'unset !important'
+                  }
+                }}
+              >
+                <Box
+                  w="100%"
+                  h="100%"
+                  position="relative"
+                  overflow="unset !important"
+                  _after={{
+                    content: '""',
+                    display: 'block',
+                    backgroundColor: primary[500],
+                    width: '8px',
+                    height: '8px',
+                    position: 'absolute',
+                    transition: 'all .15s ease',
+                    right: 0,
+                    bottom: 0,
+                    transformOrigin: 'bottom right',
+                    transform: 'rotate(45deg) scale(0)',
+                    zIndex: -1
+                  }}
+                  _before={{
+                    content: '""',
+                    display: 'block',
+                    backgroundColor: primary[500],
+                    width: '8px',
+                    height: '8px',
+                    position: 'absolute',
+                    transition: 'all .15s ease',
+                    top: 0,
+                    left: 0,
+                    transformOrigin: 'top left',
+                    transform: 'rotate(-45deg) scale(0)',
+                    zIndex: -1
+                  }}
+                  _hover={{
+                    img: {
+                      transform: 'translate(6px, -6px)'
+                    },
+                    div: {
+                      transform: 'translate(6px, -6px)'
+                    },
+                    '&:before': {
+                      transform: 'rotate(-45deg) scale(1)'
+                    },
+                    '&:after': {
+                      transform: 'rotate(45deg) scale(1)'
+                    }
+                  }}
+                  backgroundColor="primary.500"
+                >
                   <ChakraNextImage
                     src={media.image}
                     alt={`{media.title}`}
@@ -120,7 +182,6 @@ export const MediaList = (props: MediaListProps) => {
                     objectPosition="center"
                     w="100%"
                     h="100%"
-                    quality={25}
                     transition="all 0.2s"
                   />
                   <HStack
@@ -129,6 +190,7 @@ export const MediaList = (props: MediaListProps) => {
                     position="absolute"
                     bottom={2}
                     left={2}
+                    transition="all 0.2s"
                   >
                     {media.genres.slice(0, 1).map((genre) => {
                       return (
