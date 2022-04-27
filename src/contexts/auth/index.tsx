@@ -76,13 +76,13 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
 
   const logout = useCallback(async () => {
     try {
+      await push('/')
+
       await supabase.auth.signOut()
 
       localStorage.removeItem(STORAGE_KEY)
       setAuthenticatedState('not-authenticated')
       await handleAuthChange('SIGNED_OUT', null)
-
-      await push('/')
 
       chakraToast({
         title: logoutToast.success.title,
