@@ -114,6 +114,8 @@ export const MediaList = (props: MediaListProps) => {
         gap={4}
       >
         {media.slice(0, 5).map((media) => {
+          const [isLoading, setIsLoading] = useState(true)
+
           return (
             <VStack alignItems="flex-start" spacing={2} w="100%" key={media.id}>
               <AspectRatio
@@ -175,7 +177,8 @@ export const MediaList = (props: MediaListProps) => {
                   }}
                   backgroundColor="primary.500"
                 >
-                  <Skeleton w="100%" h="100%" borderRadius="0" />
+                  {isLoading && <Skeleton w="100%" h="100%" />}
+
                   <ChakraNextImage
                     src={media.image}
                     alt={`{media.title}`}
@@ -186,6 +189,7 @@ export const MediaList = (props: MediaListProps) => {
                     h="100%"
                     quality={25}
                     transition="all 0.2s"
+                    onLoad={() => setIsLoading(false)}
                   />
                   <HStack
                     w="100%"
