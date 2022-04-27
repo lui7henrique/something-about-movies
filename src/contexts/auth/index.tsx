@@ -82,8 +82,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
       setAuthenticatedState('not-authenticated')
       await handleAuthChange('SIGNED_OUT', null)
 
-      await push('/', '/', { locale })
-
       chakraToast({
         title: logoutToast.success.title,
         description: logoutToast.success.description,
