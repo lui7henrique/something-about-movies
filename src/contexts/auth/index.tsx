@@ -51,6 +51,10 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
         }
 
         if (session && user && !error) {
+          setAuthenticatedState('authenticated')
+          await handleAuthChange('SIGNED_IN', session)
+          await push('/app/home')
+
           chakraToast({
             title: loginToast.success.title,
             description: loginToast.success.description,
@@ -76,8 +80,10 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
 
       localStorage.removeItem(STORAGE_KEY)
       setAuthenticatedState('not-authenticated')
+      await handleAuthChange('SIGNED_OUT', null)
 
       await push('/')
+
       chakraToast({
         title: logoutToast.success.title,
         description: logoutToast.success.description,
@@ -94,14 +100,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
     }
   }, [locale])
 
-  const checkUser = useCallback(async () => {
-    const user = await supabase.auth.user()
-
-    if (user) {
-      setAuthenticatedState('authenticated')
-    }
-  }, [])
-
   const handleAuthChange = useCallback(
     async (event: AuthChangeEvent, session: Session | null) => {
       await fetch('/api/auth', {
@@ -113,28 +111,6 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
     },
     []
   )
-
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        handleAuthChange(event, session)
-
-        if (event === 'SIGNED_IN') {
-          setAuthenticatedState('authenticated')
-
-          await push('/app')
-        }
-        if (event === 'SIGNED_OUT') {
-          setAuthenticatedState('not-authenticated')
-        }
-      }
-    )
-    checkUser()
-
-    return () => {
-      authListener?.unsubscribe()
-    }
-  }, [])
 
   return (
     <AuthContext.Provider
