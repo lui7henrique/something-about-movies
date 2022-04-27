@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { AuthContextProvider } from 'contexts/auth'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const { asPath, push, locale } = useRouter()
+  const { asPath, push } = useRouter()
 
   React.useEffect(() => {
     AOS.init({
@@ -21,15 +21,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       duration: 250
     })
 
-    const storageLocale = localStorage.getItem('locale')
+    const locale = localStorage.getItem('locale')
 
-    if (locale === storageLocale) {
+    if (locale) {
       push(asPath, asPath, { locale: locale })
-    }
-
-    if (locale !== storageLocale) {
-      localStorage.setItem('locale', locale!)
-      push(asPath, asPath, { locale: storageLocale! })
     }
   }, [])
 
