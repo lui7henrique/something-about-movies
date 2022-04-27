@@ -80,16 +80,16 @@ export const AuthContextProvider = (props: AuthContextProviderProps) => {
 
       await supabase.auth.signOut()
 
-      localStorage.removeItem(STORAGE_KEY)
-      setAuthenticatedState('not-authenticated')
-      await handleAuthChange('SIGNED_OUT', null)
-
       chakraToast({
         title: logoutToast.success.title,
         description: logoutToast.success.description,
         status: 'success',
         duration: 5000
       })
+
+      localStorage.removeItem(STORAGE_KEY)
+      setAuthenticatedState('not-authenticated')
+      await handleAuthChange('SIGNED_OUT', null)
     } catch {
       chakraToast({
         title: logoutToast.errors.default.title,
