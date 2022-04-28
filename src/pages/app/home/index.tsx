@@ -109,7 +109,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     .map((item) => {
       return {
         id: item.id,
-        image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+        image: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
         title: item.title,
         description: item.overview,
         genres: item.genre_ids.map((id) => {
@@ -133,7 +133,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     .map((item) => {
       return {
         id: item.id,
-        image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+        image: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
         title: item.name,
         description: item.overview,
         genres: item.genre_ids.map((id) => {
