@@ -3,7 +3,7 @@ import { supabase } from 'services/supabase'
 
 export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
   if (!req.url.includes('/app')) {
-    return NextResponse.next()
+    return undefined
   }
 
   const { user } = await supabase.auth.api.getUserByCookie(req)
@@ -12,5 +12,5 @@ export const middleware = async (req: NextRequest, ev: NextFetchEvent) => {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
-  return NextResponse.next()
+  return undefined
 }
