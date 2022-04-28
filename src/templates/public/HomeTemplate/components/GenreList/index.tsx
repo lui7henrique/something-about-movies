@@ -5,23 +5,17 @@ import {
   Box,
   Flex,
   Grid,
-  Heading,
-  IconButton,
-  keyframes,
+  GridProps,
+  HStack,
   Text,
-  useBreakpointValue,
-  useTheme
+  useBreakpointValue
 } from '@chakra-ui/react'
-import { Limiter } from 'components/Limiter'
 import { useRouter } from 'next/router'
 import { TotalByGenre } from 'pages'
 import { Locale } from 'services/api'
 import { GenreItem } from '../GenreItem'
 
-import { BiChevronUp } from 'react-icons/bi'
-import { useState } from 'react'
 import { translation } from './translation'
-import { text } from 'stream/consumers'
 
 // Types
 export type GenreListProps = {
@@ -30,6 +24,9 @@ export type GenreListProps = {
     'en-US': string
   }
   list: TotalByGenre[]
+  hasAnimation?: boolean
+  gridProps?: GridProps
+  type: 'movies' | 'tv'
 }
 
 /*
@@ -48,13 +45,24 @@ export const GenreList = (props: GenreListProps) => {
   |
   |
   */
-  const { title, list } = props
+  const { title, list, hasAnimation = false, gridProps, type } = props
 
   const { locale } = useRouter()
   const localeTitle = title[locale as Locale]
-  const { text } = translation[locale as Locale]
 
   const qtd = useBreakpointValue({ base: 6, lg: list.length })
+
+  const totalLessShowing = list.length - qtd!
+
+  const totalGenre = list
+    .slice(qtd, qtd! + list.length)
+    .reduce((acc, value) => {
+      console.log(value)
+
+      return acc + value.total
+    }, 0)
+
+  const { text } = translation(totalLessShowing, totalGenre)[locale as Locale]
 
   /*
   |-----------------------------------------------------------------------------
@@ -96,18 +104,18 @@ export const GenreList = (props: GenreListProps) => {
   |
   */
   return (
-    <Limiter
-      minH={{
-        base: 'auto',
-        lg: '100vh'
-      }}
-      py={{ base: 4, lg: 0 }}
-      as="section"
-      id={localeTitle.toLowerCase()}
-    >
-      <Heading mb={4} data-aos="fade-right" data-aos-delay="100">
-        {localeTitle}
-      </Heading>
+    <Box as="section" w="100%" id={localeTitle.toLowerCase()}>
+      {hasAnimation ? (
+        <HStack data-aos="fade-right" data-aos-delay="100" mb={4}>
+          <Box h="7" w="2" bgColor="primary.500" />
+          <Text fontSize="lg">{localeTitle}</Text>
+        </HStack>
+      ) : (
+        <HStack mb={4}>
+          <Box h="7" w="2" bgColor="primary.500" />
+          <Text fontSize="lg">{localeTitle}</Text>
+        </HStack>
+      )}
 
       <Grid
         templateColumns={{
@@ -116,42 +124,53 @@ export const GenreList = (props: GenreListProps) => {
           lg: 'repeat(3, 1fr)'
         }}
         gap={4}
+        {...gridProps}
       >
         {list.slice(0, qtd).map((item, index) => {
           const delay = index * 100
 
-          return (
+          return hasAnimation ? (
             <Box data-aos="fade-up" data-aos-delay={delay}>
               <GenreItem
                 {...item}
                 key={item.id}
                 title={localeTitle}
                 delay={delay / 1000}
+                type={type}
               />
             </Box>
+          ) : (
+            <GenreItem
+              {...item}
+              key={item.id}
+              title={localeTitle}
+              delay={delay / 1000}
+              type={type}
+            />
           )
         })}
       </Grid>
 
-      {list.length > qtd! && (
-        <Flex
-          justifyContent="center"
-          alignItems="center"
-          mt={4}
-          data-aos="fade-right"
-          data-aos-delay="800"
-        >
-          <Text fontSize="lg" mr={2}>
-            {text[1]} {list.length - qtd!}
-            {text[2]}{' '}
-            {list
-              .slice(qtd, qtd! + list.length)
-              .reduce((acc, item) => acc + item.total, 0)
-              .toLocaleString(locale)}{' '}
-            {localeTitle.toLowerCase()}.
-          </Text>
-        </Flex>
-      )}
-    </Limiter>
+      {list.length > qtd! &&
+        (hasAnimation ? (
+          <Flex
+            justifyContent="center"
+            alignItems="center"
+            mt={4}
+            data-aos="fade-right"
+            data-aos-delay="800"
+          >
+            <Text fontSize="lg" mr={2}>
+              {text}
+            </Text>
+          </Flex>
+        ) : (
+          <Flex justifyContent="center" alignItems="center" mt={4}>
+            <Text fontSize="lg" mr={2}>
+              {text}
+            </Text>
+          </Flex>
+        ))}
+    </Box>
   )
 }

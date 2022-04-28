@@ -2,7 +2,7 @@
 
 // Components
 
-import { Box } from '@chakra-ui/react'
+import { Box, Divider } from '@chakra-ui/react'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -14,12 +14,16 @@ import {
 } from 'layout/Private/components/BannerSlider'
 import { MinimalMedia } from 'types/media'
 import { MediaList } from 'layout/Private/components/MediaList'
+import { TotalByGenre } from 'pages'
+import { GenreList } from 'templates/public/HomeTemplate/components/GenreList'
 
 // Types
 export type AppHomeTemplateProps = {
   banners: BannerSlide[]
   movies: MinimalMedia[]
   tv: MinimalMedia[]
+  moviesTotalByGenre: TotalByGenre[]
+  tvTotalByGenre: TotalByGenre[]
 }
 
 /*
@@ -38,7 +42,7 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
   |
   |
   */
-  const { banners, movies, tv } = props
+  const { banners, movies, tv, moviesTotalByGenre, tvTotalByGenre } = props
 
   /*
   |-----------------------------------------------------------------------------
@@ -92,6 +96,7 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
             'pt-BR': 'Filmes que achamos que você vai gostar'
           }}
           media={movies}
+          type="movie"
         />
       </Box>
 
@@ -102,6 +107,43 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
             'pt-BR': 'Séries que achamos que você vai curtir'
           }}
           media={tv}
+          type="tv"
+        />
+      </Box>
+
+      <Box as="section" p={4}>
+        <GenreList
+          title={{
+            'en-US': 'Movies by genres',
+            'pt-BR': 'Filmes por gêneros'
+          }}
+          list={moviesTotalByGenre}
+          gridProps={{
+            gridTemplateColumns: {
+              base: '1fr',
+              lg: 'repeat(3, 1fr)',
+              xl: 'repeat(5, 1fr)'
+            }
+          }}
+          type="movies"
+        />
+      </Box>
+
+      <Box as="section" p={5}>
+        <GenreList
+          title={{
+            'en-US': 'Series by genre',
+            'pt-BR': 'Séries por gêneros'
+          }}
+          list={tvTotalByGenre}
+          gridProps={{
+            gridTemplateColumns: {
+              base: '1fr',
+              lg: 'repeat(3, 1fr)',
+              xl: 'repeat(5, 1fr)'
+            }
+          }}
+          type="tv"
         />
       </Box>
     </Box>

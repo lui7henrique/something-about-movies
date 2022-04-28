@@ -2,7 +2,6 @@ import { User } from '@supabase/supabase-js'
 import { LayoutPrivate } from 'layout/Private'
 import { GetServerSideProps } from 'next'
 import { list, Locale, TMDB } from 'services/api'
-import { supabase } from 'services/supabase'
 import {
   AppHomeTemplate,
   AppHomeTemplateProps
@@ -144,11 +143,59 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
       }
     })
 
+  /*
+  |-----------------------------------------------------------------------------
+  | Get movies total by genre
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const moviesTotalByGenre = await Promise.all(
+    moviesGenres.map(async (genre) => {
+      const {
+        data: { total_results }
+      } = await TMDB(locale as Locale).get<{
+        total_results: number
+      }>(`/discover/movie?with_genres=${genre.id}`)
+
+      return {
+        id: genre.id,
+        name: genre.name,
+        total: total_results
+      }
+    })
+  )
+
+  /*
+  |-----------------------------------------------------------------------------
+  | Get tv total by genre
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const tvTotalByGenre = await Promise.all(
+    tvGenres.map(async (genre) => {
+      const {
+        data: { total_results }
+      } = await TMDB(locale as Locale).get<{
+        total_results: number
+      }>(`/discover/movie?with_genres=${genre.id}`)
+
+      return {
+        id: genre.id,
+        name: genre.name,
+        total: total_results
+      }
+    })
+  )
+
   return {
     props: {
       banners,
       movies,
-      tv
+      tv,
+      moviesTotalByGenre: moviesTotalByGenre.filter((genre) => genre.total),
+      tvTotalByGenre: tvTotalByGenre.filter((genre) => genre.total)
     },
     revalidate: 60 * 60 * 24 // 1 day
   }
