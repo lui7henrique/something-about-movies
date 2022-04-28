@@ -1,14 +1,12 @@
-export const translation = {
-  'en-US': {
-    text: {
-      1: 'And others ',
-      2: ' genres, with over'
-    }
-  },
-  'pt-BR': {
-    text: {
-      1: 'Entre outros ',
-      2: ' gêneros, com mais de'
+export const translation = (genres: number, total: number) => {
+  return {
+    'en-US': {
+      text: `And others ${genres} genres, with over ${total} movies`,
+      viewAll: 'View all'
+    },
+    'pt-BR': {
+      text: `E outros ${genres} gêneros, com mais de ${total} filmes`,
+      viewAll: 'Ver todos'
     }
   }
 }

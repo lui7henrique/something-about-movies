@@ -37,7 +37,6 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   */
   const { movies, tv, moviesTotalByGenre, tvTotalByGenre } = props
-  const { locale } = useRouter()
 
   /*
   |-----------------------------------------------------------------------------
@@ -70,20 +69,6 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   |
   |
   */
-  // const featuredMedia = useMemo(
-  //   () =>
-  //     [...movies, ...tv].map((item) => {
-  //       const title = (item as any).title || (item as any).name
-
-  //       return {
-  //         id: item.id,
-  //         image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
-  //         title: title,
-  //         description: item.overview
-  //       }
-  //     }),
-  //   [locale]
-  // )
 
   /*
   |-----------------------------------------------------------------------------
@@ -96,26 +81,31 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
     <>
       <Hero />
 
-      <GenreList
-        title={{
-          'en-US': 'Movies',
-          'pt-BR': 'Filmes'
-        }}
-        list={moviesTotalByGenre}
-      />
+      <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+        <GenreList
+          title={{
+            'en-US': 'Movies by genres',
+            'pt-BR': 'Filmes por gêneros'
+          }}
+          list={moviesTotalByGenre}
+          type="movies"
+        />
+      </Limiter>
 
-      <GenreList
-        title={{
-          'en-US': 'Series',
-          'pt-BR': 'Séries'
-        }}
-        list={tvTotalByGenre}
-      />
+      <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+        <GenreList
+          title={{
+            'en-US': 'Series by genres',
+            'pt-BR': 'Séries por gêneros'
+          }}
+          list={tvTotalByGenre}
+          type="tv"
+        />
+      </Limiter>
 
       <Limiter as="section" d="flex" justifyContent="center" h="100vh">
         <Heading>Tecnologias</Heading>
       </Limiter>
-
       <Limiter as="section" d="flex" justifyContent="center" h="100vh">
         <Heading>Contribuidores</Heading>
       </Limiter>

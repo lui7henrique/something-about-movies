@@ -21,6 +21,7 @@ import { useRouter } from 'next/router'
 export type GenreItemProps = TotalByGenre & {
   title: string
   delay: number // in seconds
+  type: 'movies' | 'tv'
 }
 
 /*
@@ -39,7 +40,7 @@ export const GenreItem = (props: GenreItemProps) => {
   |
   |
   */
-  const { id, name, total, title, delay } = props
+  const { id, name, total, title, delay, type } = props
 
   const Icon = icons[id]
 
@@ -163,7 +164,7 @@ export const GenreItem = (props: GenreItemProps) => {
               delay={delay}
               formattingFn={(num) => num.toLocaleString(locale)}
             />
-            <Text>+ {title.toLowerCase()}</Text>
+            <Text>+ {type === 'movies' ? 'movies' : 'series'}</Text>
           </Text>
         </VStack>
       </HStack>
