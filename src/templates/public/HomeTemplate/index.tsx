@@ -89,7 +89,7 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
           }}
           list={moviesTotalByGenre}
           type="movies"
-        />
+        >
       </Limiter>
 
       <Limiter as="section" d="flex" justifyContent="center" h="100vh">
