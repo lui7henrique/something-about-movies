@@ -59,8 +59,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn build",
-      "pre-push": "yarn build"
+      "pre-commit": "npm run build",
+      "pre-push": "npm run build"
     }
   }
 }
