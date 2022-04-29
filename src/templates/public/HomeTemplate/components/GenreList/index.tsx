@@ -104,7 +104,7 @@ export const GenreList = (props: GenreListProps) => {
   |
   */
   return (
-    <Box as="section" w="100%" id={localeTitle.toLowerCase()}>
+    <Box as="section" w="100%">
       {hasAnimation ? (
         <HStack data-aos="fade-right" data-aos-delay="100" mb={4}>
           <Box h="7" w="2" bgColor="primary.500" />
