@@ -1,4 +1,4 @@
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 
 type Cases = 'login' | 'logout'
 

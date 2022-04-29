@@ -15,7 +15,7 @@ import {
   VStack
 } from '@chakra-ui/react'
 import { MinimalMedia } from 'types/media'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from 'components/Button'

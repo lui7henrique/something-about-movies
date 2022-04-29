@@ -1,4 +1,4 @@
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import * as yup from 'yup'
 import zxcvbn from 'zxcvbn'
 import { translation } from './translation'

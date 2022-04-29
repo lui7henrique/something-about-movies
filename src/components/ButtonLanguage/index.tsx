@@ -16,7 +16,7 @@ import { useRouter } from 'next/router'
 import { useCallback } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { BiWorld } from 'react-icons/bi'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import { languages } from 'utils/languages'
 import { translation } from './translation'
 

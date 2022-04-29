@@ -1,6 +1,6 @@
 // Vendors
 import { useRouter } from 'next/router'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 
 // Components
 import {

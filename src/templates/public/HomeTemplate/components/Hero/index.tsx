@@ -15,7 +15,7 @@ import {
 import { Button } from 'components/Button'
 import { Limiter } from 'components/Limiter'
 import { useRouter } from 'next/router'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import { translation } from './translation'
 
 // Types

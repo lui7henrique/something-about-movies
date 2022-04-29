@@ -9,7 +9,7 @@ import {
   createContext,
   useEffect
 } from 'react'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 
 import { supabase } from 'services/supabase'
 import { toasts } from './toasts'

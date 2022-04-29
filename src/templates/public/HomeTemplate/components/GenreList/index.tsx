@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { TotalByGenre } from 'pages'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import { GenreItem } from '../GenreItem'
 
 import { translation } from './translation'
@@ -57,8 +57,6 @@ export const GenreList = (props: GenreListProps) => {
   const totalGenre = list
     .slice(qtd, qtd! + list.length)
     .reduce((acc, value) => {
-      console.log(value)
-
       return acc + value.total
     }, 0)
 

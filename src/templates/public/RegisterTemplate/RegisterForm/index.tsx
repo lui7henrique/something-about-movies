@@ -24,7 +24,7 @@ import { MdEmail, MdLock, MdPerson } from 'react-icons/md'
 import { schema } from './schema'
 import { useCallback } from 'react'
 import { useRouter } from 'next/router'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import { translation } from './translation'
 
 // Types

@@ -18,7 +18,7 @@ import { Logo } from 'components/Logo'
 
 import { MdMenu, MdPerson } from 'react-icons/md'
 import { translations } from './translations'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import { HeaderActiveLink } from 'components/HeaderActiveLink'
 import { supabase } from 'services/supabase'
 import { FaUnlock } from 'react-icons/fa'

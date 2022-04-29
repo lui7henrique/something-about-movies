@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons/lib'
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 
 import { FaCompass, FaEye, FaFire, FaStar, FaList } from 'react-icons/fa'
 import { HiHome } from 'react-icons/hi'

@@ -1,4 +1,4 @@
-import { Locale } from 'services/api'
+import { Locale } from 'types/locale'
 import { Field } from 'types/form/field'
 
 type Translation = {

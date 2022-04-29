@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next'
 
 import { api } from 'services/api/index'
 import { list } from 'services/api/list'
-import { Locale } from 'services/api/types'
+import { Locale } from 'types/locale'
 
 import {
   AppHomeTemplate,
