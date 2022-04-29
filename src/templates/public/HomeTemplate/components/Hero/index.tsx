@@ -6,6 +6,7 @@ import Lottie from 'react-lottie'
 import {
   AspectRatio,
   Box,
+  chakra,
   Heading,
   Stack,
   Text,
@@ -137,13 +138,7 @@ export const Hero = () => {
       </VStack>
 
       <AspectRatio display={{ base: 'none', lg: 'flex' }} w="50%" ratio={1}>
-        <Lottie
-          options={defaultOptions}
-          height="100%"
-          width="100%"
-          isStopped={false}
-          isPaused={false}
-        />
+        <Lottie options={defaultOptions} w="100%" h="100%" />
       </AspectRatio>
     </Limiter>
   )
