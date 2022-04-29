@@ -92,7 +92,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
 
     return {
       id: item.id,
-      image: `https://image.api.org/t/p/original/${item.backdrop_path}`,
+      image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
       title: title as string,
       description: item.overview,
       type: type as 'movie' | 'tv'
@@ -112,7 +112,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     .map((item) => {
       return {
         id: item.id,
-        image: `https://image.api.org/t/p/w500/${item.backdrop_path}`,
+        image: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
         title: item.title,
         description: item.overview,
         genres: item.genre_ids.map((id) => {
@@ -136,7 +136,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     .map((item) => {
       return {
         id: item.id,
-        image: `https://image.api.org/t/p/w500/${item.backdrop_path}`,
+        image: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
         title: item.name,
         description: item.overview,
         genres: item.genre_ids.map((id) => {
