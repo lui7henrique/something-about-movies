@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Locale } from './types'
+import { Locale } from 'types/locale'
 
 export const api = (language: Locale) => {
   return axios.create({

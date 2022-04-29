@@ -1,6 +1,6 @@
+import { Locale } from 'types/locale'
 import { Query } from 'types/request'
 import { api } from './index'
-import { Locale } from './types'
 
 export async function list<T>(
   locale: Locale,
