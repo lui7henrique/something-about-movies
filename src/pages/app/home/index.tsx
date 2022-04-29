@@ -1,7 +1,11 @@
 import { User } from '@supabase/supabase-js'
 import { LayoutPrivate } from 'layout/Private'
 import { GetServerSideProps } from 'next'
-import { list, Locale, TMDB } from 'services/api'
+
+import { api } from 'services/api/index'
+import { list } from 'services/api/list'
+import { Locale } from 'services/api/types'
+
 import {
   AppHomeTemplate,
   AppHomeTemplateProps
@@ -45,7 +49,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   */
   const {
     data: { genres: moviesGenres }
-  } = await TMDB(locale as Locale).get<{
+  } = await api(locale as Locale).get<{
     genres: Genre[]
   }>('/genre/movie/list')
 
@@ -67,7 +71,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   */
   const {
     data: { genres: tvGenres }
-  } = await TMDB(locale as Locale).get<{
+  } = await api(locale as Locale).get<{
     genres: Genre[]
   }>('/genre/tv/list')
 
@@ -88,7 +92,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
 
     return {
       id: item.id,
-      image: `https://image.tmdb.org/t/p/original/${item.backdrop_path}`,
+      image: `https://image.api.org/t/p/original/${item.backdrop_path}`,
       title: title as string,
       description: item.overview,
       type: type as 'movie' | 'tv'
@@ -108,7 +112,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     .map((item) => {
       return {
         id: item.id,
-        image: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
+        image: `https://image.api.org/t/p/w500/${item.backdrop_path}`,
         title: item.title,
         description: item.overview,
         genres: item.genre_ids.map((id) => {
@@ -132,7 +136,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     .map((item) => {
       return {
         id: item.id,
-        image: `https://image.tmdb.org/t/p/w500/${item.backdrop_path}`,
+        image: `https://image.api.org/t/p/w500/${item.backdrop_path}`,
         title: item.name,
         description: item.overview,
         genres: item.genre_ids.map((id) => {
@@ -154,7 +158,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     moviesGenres.map(async (genre) => {
       const {
         data: { total_results }
-      } = await TMDB(locale as Locale).get<{
+      } = await api(locale as Locale).get<{
         total_results: number
       }>(`/discover/movie?with_genres=${genre.id}`)
 
@@ -177,7 +181,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
     tvGenres.map(async (genre) => {
       const {
         data: { total_results }
-      } = await TMDB(locale as Locale).get<{
+      } = await api(locale as Locale).get<{
         total_results: number
       }>(`/discover/movie?with_genres=${genre.id}`)
 

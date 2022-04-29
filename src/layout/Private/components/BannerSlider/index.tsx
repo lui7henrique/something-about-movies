@@ -182,7 +182,7 @@ export const BannerSlider = (props: BannerSliderProps) => {
                 <HStack>
                   <Button
                     label={buttons.details}
-                    href={`/${item.type === 'movie' ? 'movies' : 'tv'}/${
+                    href={`/app/${item.type === 'movie' ? 'movies' : 'tv'}/${
                       item.id
                     }`}
                   />

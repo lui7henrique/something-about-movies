@@ -1,7 +1,8 @@
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
-import { list, Locale } from 'services/api'
+import { list } from 'services/api/list'
+import { Locale } from 'services/api/types'
 import { LoginTemplate } from 'templates/public/LoginTemplate'
 
 import { Movie } from 'types/movies/list'

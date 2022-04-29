@@ -121,7 +121,9 @@ export const MediaList = (props: MediaListProps) => {
         gap={4}
       >
         {media.slice(0, showItems).map((media) => {
-          const linkUrl = `/${type}/${media.id}`
+          const linkUrl = `/app/${type === 'movie' ? 'movies' : 'tv'}/${
+            media.id
+          }`
 
           return (
             <Link href={linkUrl}>

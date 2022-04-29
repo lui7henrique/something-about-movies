@@ -1,6 +1,10 @@
 import { LayoutPublic } from 'layout/Public'
 import { GetStaticProps } from 'next'
-import { list, Locale, TMDB } from 'services/api'
+
+import { api } from 'services/api/index'
+import { list } from 'services/api/list'
+import { Locale } from 'services/api/types'
+
 import { HomeTemplate } from 'templates/public/HomeTemplate'
 import { Genre } from 'types/genres/genres'
 import { Movie } from 'types/movies/list'
@@ -42,7 +46,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const {
     data: { genres: moviesGenres }
-  } = await TMDB(locale as Locale).get<{
+  } = await api(locale as Locale).get<{
     genres: Genre[]
   }>('/genre/movie/list')
 
@@ -50,7 +54,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     moviesGenres.map(async (genre) => {
       const {
         data: { total_results }
-      } = await TMDB(locale as Locale).get<{
+      } = await api(locale as Locale).get<{
         total_results: number
       }>(`/discover/movie?with_genres=${genre.id}`)
 
@@ -64,7 +68,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const {
     data: { genres: tvGenres }
-  } = await TMDB(locale as Locale).get<{
+  } = await api(locale as Locale).get<{
     genres: Genre[]
   }>('/genre/tv/list')
 
@@ -72,7 +76,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     tvGenres.map(async (genre) => {
       const {
         data: { total_results }
-      } = await TMDB(locale as Locale).get<{
+      } = await api(locale as Locale).get<{
         total_results: number
       }>(`/discover/movie?with_genres=${genre.id}`)
 

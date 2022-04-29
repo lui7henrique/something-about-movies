@@ -105,7 +105,13 @@ export const Hero = () => {
         h="100vh"
         justifyContent="center"
       >
-        <Box w="32" h="10px" backgroundColor="primary.500" />
+        <Box
+          w="32"
+          h="10px"
+          backgroundColor="primary.500"
+          data-aos="fade-right"
+          data-aos-delay="50"
+        />
         <Heading
           as="h2"
           fontWeight="bold"
