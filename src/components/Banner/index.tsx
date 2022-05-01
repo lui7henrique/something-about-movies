@@ -25,6 +25,7 @@ import { Button } from 'components/Button'
 import { Genre } from 'types/genres/genres'
 import { Locale } from 'types/locale'
 import { Skeleton } from 'components/Skeleton'
+import { translations } from './translations'
 
 // Types
 export type BannerProps = {
@@ -71,6 +72,8 @@ export const Banner = (props: BannerProps) => {
   const { isLoading, handleAddToWatchList } = useWatchList()
   const { handleRenderVotes } = useVotes()
   const { locale } = useRouter()
+
+  const { addToWatchList, watchTrailer } = translations[locale as Locale]
 
   /*
   |-----------------------------------------------------------------------------
@@ -183,12 +186,16 @@ export const Banner = (props: BannerProps) => {
 
         <HStack>
           <Button
-            label="Add to watchlist"
+            label={addToWatchList}
             leftIcon={<FaList />}
             onClick={() => handleAddToWatchList(id)}
             isLoading={isLoading}
           />
-          <Button label="Trailer" leftIcon={<IoMdPlay />} variant="outline" />
+          <Button
+            label={watchTrailer}
+            leftIcon={<IoMdPlay />}
+            variant="outline"
+          />
         </HStack>
       </VStack>
     </Box>
