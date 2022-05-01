@@ -7,7 +7,9 @@ import { Locale } from 'types/locale'
 export const useVotes = () => {
   const handleRenderVotes = useCallback(
     (voteAverage: number, voteCount: number, locale: Locale) => {
-      const votes = Number((voteAverage / 2).toFixed(1))
+      const votes = Math.round(Number(voteAverage / 2))
+
+      console.log(voteAverage)
       const filled = _.range(0, votes)
       const empty = _.range(0, 5)
 
@@ -20,7 +22,7 @@ export const useVotes = () => {
               return (
                 <FaStar
                   key={index}
-                  color={isFilled ? '#ca2b5f' : '#212024'}
+                  color={isFilled ? '#ca2b5f' : '#2b0712'}
                   style={{
                     verticalAlign: 'middle'
                   }}
@@ -30,7 +32,7 @@ export const useVotes = () => {
 
             <Text fontSize="sm" marginTop={4}>
               ({voteCount.toLocaleString(locale)}{' '}
-              {locale === 'pt-BR' ? 'Votos' : 'Votes'})
+              {locale === 'pt-BR' ? 'votos' : 'votes'})
             </Text>
           </HStack>
         )
