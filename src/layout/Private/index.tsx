@@ -9,8 +9,8 @@ import {
   IconButton,
   useDisclosure
 } from '@chakra-ui/react'
-import { ButtonBack } from 'components/ButtonBack'
 import { ButtonLanguage } from 'components/ButtonLanguage'
+import { useSidebar } from 'contexts/sidebar'
 import { Sidebar } from 'layout/Private/components/Sidebar'
 import { IoMdMenu } from 'react-icons/io'
 import { SidebarDrawer } from './components/SidebarDrawer'
@@ -39,6 +39,7 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
   const { children } = props
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isMinimized } = useSidebar()
 
   /*
   |-----------------------------------------------------------------------------
@@ -81,14 +82,8 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
   */
   return (
     <>
-      <Grid
-        gridTemplateColumns={{
-          base: '1fr',
-          lg: '250px 7fr'
-        }}
-      >
+      <Flex position="relative" w="100%">
         <Box
-          w="100%"
           display={{
             base: 'none',
             lg: 'block'
@@ -125,7 +120,7 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
 
           {children}
         </Box>
-      </Grid>
+      </Flex>
 
       <SidebarDrawer onClose={onClose} onOpen={onOpen} isOpen={isOpen} />
     </>

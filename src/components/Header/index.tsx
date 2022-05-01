@@ -19,7 +19,7 @@ import { translations } from './translations'
 import { Locale } from 'types/locale'
 import { HeaderActiveLink } from 'components/HeaderActiveLink'
 import { supabase } from 'services/supabase'
-import { FaUnlock } from 'react-icons/fa'
+import { BsUnlockFill } from 'react-icons/bs'
 
 // Types
 export type HeaderProps = {}
@@ -59,7 +59,7 @@ export const Header = (props: HeaderProps) => {
         label={user ? (locale === 'pt-BR' ? 'Acessar' : 'Access') : 'Login'}
         variant="outline"
         href={user ? '/app' : '/login'}
-        leftIcon={user ? <FaUnlock size={20} /> : <MdPerson size={20} />}
+        leftIcon={user ? <BsUnlockFill size={20} /> : <MdPerson size={20} />}
       />
     )
   })

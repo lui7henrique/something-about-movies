@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { AuthContextProvider } from './auth'
+import { SidebarContextProvider } from './sidebar'
 import { WatchListContextProvider } from './watchList'
 
 type AppProviderProps = {
@@ -11,7 +12,9 @@ export const AppProvider = (props: AppProviderProps) => {
 
   return (
     <AuthContextProvider>
-      <WatchListContextProvider>{children}</WatchListContextProvider>
+      <WatchListContextProvider>
+        <SidebarContextProvider>{children}</SidebarContextProvider>
+      </WatchListContextProvider>
     </AuthContextProvider>
   )
 }

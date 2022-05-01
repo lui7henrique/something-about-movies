@@ -9,20 +9,22 @@ import {
   Image,
   Divider,
   Stack,
-  Progress
+  IconButton
 } from '@chakra-ui/react'
 import { SidebarActiveLink } from 'layout/Private/components/SidebarActiveLink'
 import { Button } from 'components/Button'
 
 import { supabase } from 'services/supabase'
 
-import { CgLogOut } from 'react-icons/cg'
+import { CgArrowsBreakeH, CgLogOut } from 'react-icons/cg'
 
 import { translations } from './translations'
 import { useAuth } from 'contexts/auth'
 
 // Types
 import { Locale } from 'types/locale'
+import { useSidebar } from 'contexts/sidebar'
+import { MdCompareArrows } from 'react-icons/md'
 
 export type SidebarProps = {}
 
@@ -44,12 +46,13 @@ export const Sidebar = (props: SidebarProps) => {
   */
   const user = supabase.auth.user()
   const { logout } = useAuth()
-
   const { locale } = useRouter()
 
   const {
     sidebar: { nav, sign_out }
   } = translations(user?.id ?? '')[locale as Locale]
+
+  const { isMinimized, handleToggleSidebar } = useSidebar()
 
   /*
   |-----------------------------------------------------------------------------
@@ -94,11 +97,26 @@ export const Sidebar = (props: SidebarProps) => {
     <VStack
       bgColor="gray.800"
       height="100vh"
-      w="100%"
+      w={{ base: '100%', lg: isMinimized ? '70px' : '250px' }}
       alignItems="flex-start"
       justifyContent="space-between"
       spacing={2}
+      position="relative"
+      transition="all 0.2s"
     >
+      <IconButton
+        position="absolute"
+        right={isMinimized ? -9 : -3}
+        top={8}
+        aria-label="toggle-sidebar"
+        zIndex={900000}
+        size="xs"
+        borderRadius="sm"
+        onClick={handleToggleSidebar}
+        icon={<MdCompareArrows size={20} />}
+        transition="all 0.2s"
+      />
+
       <VStack w="100%">
         <Stack direction="row" p={4} alignItems="flex-end" w="100%" spacing={2}>
           {user && (
@@ -111,7 +129,11 @@ export const Sidebar = (props: SidebarProps) => {
                 h="10"
               />
 
-              <VStack spacing={0} alignItems="flex-start">
+              <VStack
+                spacing={0}
+                alignItems="flex-start"
+                display={isMinimized ? 'none' : 'flex'}
+              >
                 <Heading as="h4" fontSize="12px" fontWeight="semibold">
                   {locale === 'pt-BR' ? 'Bem-vindo' : 'Welcome'}
                 </Heading>

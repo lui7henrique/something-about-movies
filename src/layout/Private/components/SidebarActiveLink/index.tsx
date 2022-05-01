@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { HStack, Text, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { IconType } from 'react-icons/lib'
+import { useSidebar } from 'contexts/sidebar'
 
 // Types
 export type SidebarActiveLinkProps = {
@@ -35,6 +36,8 @@ export const SidebarActiveLink = (props: SidebarActiveLinkProps) => {
   const {
     colors: { primary }
   } = useTheme()
+
+  const { isMinimized } = useSidebar()
 
   /*
   |-----------------------------------------------------------------------------
@@ -108,8 +111,25 @@ export const SidebarActiveLink = (props: SidebarActiveLinkProps) => {
         spacing={4}
         color={isActive ? 'gray.50' : 'gray.400'}
       >
-        {Icon && <Icon size={16} color={isActive && primary[500]} />}
-        <Text mr="4" transition="color 0.2s" fontSize="sm" fontWeight="bold">
+        {Icon && (
+          <Icon
+            size={20}
+            color={isActive && primary[500]}
+            style={{
+              transition: 'all 0.2s',
+              marginLeft: isMinimized ? 8 : 0
+            }}
+          />
+        )}
+
+        <Text
+          mr="4"
+          fontSize="sm"
+          fontWeight="bold"
+          display={isMinimized ? 'none' : 'block'}
+          transition="all 0.2s"
+          whiteSpace="nowrap"
+        >
           {label}
         </Text>
       </HStack>
