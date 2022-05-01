@@ -2,7 +2,7 @@
 import Link from 'next/link'
 
 // Components
-import { HStack, Text, useTheme } from '@chakra-ui/react'
+import { Box, HStack, Text, Tooltip, useTheme } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { IconType } from 'react-icons/lib'
 import { useSidebar } from 'contexts/sidebar'
@@ -111,16 +111,22 @@ export const SidebarActiveLink = (props: SidebarActiveLinkProps) => {
         spacing={4}
         color={isActive ? 'gray.50' : 'gray.400'}
       >
-        {Icon && (
-          <Icon
-            size={20}
-            color={isActive && primary[500]}
-            style={{
-              transition: 'all 0.2s',
-              marginLeft: isMinimized ? 8 : 0
-            }}
-          />
-        )}
+        <Tooltip
+          label={label}
+          placement="top-end"
+          display={isMinimized ? 'block' : 'none'}
+        >
+          <Box>
+            <Icon
+              size={20}
+              color={isActive && primary[500]}
+              style={{
+                transition: 'all 0.2s',
+                marginLeft: isMinimized ? 8 : 0
+              }}
+            />
+          </Box>
+        </Tooltip>
 
         <Text
           mr="4"
