@@ -176,7 +176,7 @@ export const Sidebar = (props: SidebarProps) => {
       </VStack>
 
       <Button
-        label={sign_out.label}
+        label={isMinimized ? '' : sign_out.label}
         w="100%"
         variant="ghost"
         leftIcon={<CgLogOut />}
