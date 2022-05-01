@@ -166,12 +166,10 @@ export const BannerSlider = (props: BannerSliderProps) => {
                   <Text fontSize="lg">{slideType[mediaType]}</Text>
                 </HStack>
 
-                <HStack>
-                  <Heading fontSize="5xl">{title}</Heading>
-                </HStack>
+                <Heading fontSize={{ base: '3xl', lg: '5xl' }}>{title}</Heading>
 
                 <Text
-                  fontSize="lg"
+                  fontSize={{ base: 'md', lg: 'lg' }}
                   textAlign="justify"
                   noOfLines={4}
                   lineHeight={8}
@@ -186,7 +184,7 @@ export const BannerSlider = (props: BannerSliderProps) => {
                       item.id
                     }`}
                   />
-                  <Button label={buttons.watchlist} />
+                  {/* <Button label={buttons.watchlist} /> */}
                 </HStack>
               </VStack>
             </Flex>

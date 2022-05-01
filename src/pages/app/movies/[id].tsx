@@ -1,16 +1,31 @@
 import { LayoutPrivate } from 'layout/Private'
 import { GetServerSideProps } from 'next'
-import { redirect } from 'next/dist/server/api-utils'
+import { get } from 'services/api/get'
 
-type MovieProps = {}
+import {
+  MovieTemplate,
+  MovieTemplateProps
+} from 'templates/private/app/MovieTemplate'
+
+import { Locale } from 'types/locale'
+import { Details } from 'types/movies/list'
+
+type MovieProps = MovieTemplateProps
 
 const Movie = (props: MovieProps) => {
-  return <LayoutPrivate>h1</LayoutPrivate>
+  return (
+    <LayoutPrivate>
+      <MovieTemplate {...props} />
+    </LayoutPrivate>
+  )
 }
 
 export default Movie
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  locale
+}) => {
   const id = params?.id
 
   /*
@@ -32,12 +47,16 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   /*
   |-----------------------------------------------------------------------------
-  | Request to get initial movie detail's
+  | Request to get movie detail's
   |-----------------------------------------------------------------------------
   |
   |
   */
-  console.log(id)
+  const details = await get<Details>(locale as Locale, `/movie/${id}`)
 
-  return { props: {} }
+  return {
+    props: {
+      details
+    }
+  }
 }

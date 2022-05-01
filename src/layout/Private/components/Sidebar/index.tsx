@@ -1,21 +1,20 @@
 // Vendors
 import { useRouter } from 'next/router'
-import { Locale } from 'types/locale'
+import { Suspense } from 'react'
 
 // Components
 import {
-  chakra,
   Heading,
-  HStack,
   VStack,
   Image,
-  Divider
+  Divider,
+  Stack,
+  Progress
 } from '@chakra-ui/react'
 import { SidebarActiveLink } from 'layout/Private/components/SidebarActiveLink'
+import { Button } from 'components/Button'
 
 import { supabase } from 'services/supabase'
-
-import { Button } from 'components/Button'
 
 import { CgLogOut } from 'react-icons/cg'
 
@@ -23,6 +22,8 @@ import { translations } from './translations'
 import { useAuth } from 'contexts/auth'
 
 // Types
+import { Locale } from 'types/locale'
+
 export type SidebarProps = {}
 
 /*
@@ -32,7 +33,6 @@ export type SidebarProps = {}
 |
 |
 */
-const ChakraNextImage = chakra(Image)
 
 export const Sidebar = (props: SidebarProps) => {
   /*
@@ -100,26 +100,28 @@ export const Sidebar = (props: SidebarProps) => {
       spacing={2}
     >
       <VStack w="100%">
-        {user && (
-          <HStack p={4} alignItems="flex-end" w="100%" spacing={2}>
-            <Image
-              src={`https://ui-avatars.com/api/?name=${user.user_metadata.username}&background=ca2b5f&color=fffffb&bold=true`}
-              layout="fill"
-              borderRadius="sm"
-              w="10"
-              h="10"
-            />
+        <Stack direction="row" p={4} alignItems="flex-end" w="100%" spacing={2}>
+          {user && (
+            <>
+              <Image
+                src={`https://ui-avatars.com/api/?name=${user.user_metadata.username}&background=ca2b5f&color=fffffb&bold=true`}
+                layout="fill"
+                borderRadius="sm"
+                w="10"
+                h="10"
+              />
 
-            <VStack spacing={0} alignItems="flex-start">
-              <Heading as="h4" fontSize="12px" fontWeight="semibold">
-                {locale === 'pt-BR' ? 'Bem-vindo' : 'Welcome'}
-              </Heading>
-              <Heading as="h3" size="md" fontWeight="bold">
-                {user.user_metadata.username}
-              </Heading>
-            </VStack>
-          </HStack>
-        )}
+              <VStack spacing={0} alignItems="flex-start">
+                <Heading as="h4" fontSize="12px" fontWeight="semibold">
+                  {locale === 'pt-BR' ? 'Bem-vindo' : 'Welcome'}
+                </Heading>
+                <Heading as="h3" size="md" fontWeight="bold">
+                  {user.user_metadata.username}
+                </Heading>
+              </VStack>
+            </>
+          )}
+        </Stack>
 
         <VStack
           w="100%"
