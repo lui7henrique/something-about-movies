@@ -23,8 +23,8 @@ export type Details = Omit<Movie, 'genre_ids'> & {
   genres: Genre[]
   homepage: string
   imdb_id: string
-  production_companies: ProductionCompanies[]
-  production_countries: ProductionCountries[]
+  production_companies: ProductionCompany[]
+  production_countries: ProductionCountry[]
   release_date: string
   revenue: number
   runtime: number
@@ -40,14 +40,14 @@ type Collection = {
   backdrop_path: string
 }
 
-type ProductionCompanies = {
+type ProductionCompany = {
   id: number
   logo_path: string
   name: string
   origin_country: string
 }
 
-type ProductionCountries = {
+type ProductionCountry = {
   iso_3166_1: string
   name: string
 }

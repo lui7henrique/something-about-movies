@@ -47,7 +47,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   /*
   |-----------------------------------------------------------------------------
-  | Request to get movie detail's
+  | Request to get movie details
   |-----------------------------------------------------------------------------
   |
   |
