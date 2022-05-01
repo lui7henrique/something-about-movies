@@ -5,16 +5,22 @@ import {
   Badge,
   Box,
   chakra,
+  Divider,
   Flex,
   Heading,
   HStack,
+  Stack,
   Text,
   VStack
 } from '@chakra-ui/react'
 import { Button } from 'components/Button'
+import { useWatchList } from 'contexts/watchList'
+import { useVotes } from 'hooks/useVotes'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { FaList, FaPlay } from 'react-icons/fa'
 import { IoMdPlay } from 'react-icons/io'
+import { Locale } from 'types/locale'
 
 // Types
 import { Details } from 'types/movies/list'
@@ -42,6 +48,11 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
   |
   */
   const { details } = props
+
+  const { isLoading, handleAddToWatchList } = useWatchList()
+  const { handleRenderVotes } = useVotes()
+
+  const { locale } = useRouter()
 
   /*
   |-----------------------------------------------------------------------------
@@ -100,7 +111,6 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
           w="100%"
           h="100%"
         />
-        <Heading>{details.title}</Heading>
 
         <VStack
           position="absolute"
@@ -126,16 +136,27 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
             {details.title}
           </Heading>
 
-          <HStack>
-            {details.genres.map((genre) => {
-              return (
-                <Badge bgColor="primary.500" color="white">
-                  {genre.name}
-                </Badge>
-              )
-            })}
-          </HStack>
+          <Stack
+            direction={{ base: 'column', lg: 'row' }}
+            spacing={{ base: 2, lg: 4 }}
+            divider={<Box w="1px" h="100%" />}
+          >
+            <HStack>
+              {details.genres.map((genre) => {
+                return (
+                  <Badge bgColor="primary.500" color="white">
+                    {genre.name}
+                  </Badge>
+                )
+              })}
+            </HStack>
 
+            {handleRenderVotes(
+              details.vote_average,
+              details.vote_count,
+              locale as Locale
+            )}
+          </Stack>
           <Text
             fontSize={{ base: 'md', lg: 'lg' }}
             textAlign="justify"
@@ -146,7 +167,12 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
           </Text>
 
           <HStack>
-            <Button label="Add to watchlist" leftIcon={<FaList />} />
+            <Button
+              label="Add to watchlist"
+              leftIcon={<FaList />}
+              onClick={() => handleAddToWatchList(details.id)}
+              isLoading={isLoading}
+            />
             <Button label="Trailer" leftIcon={<IoMdPlay />} variant="outline" />
           </HStack>
         </VStack>

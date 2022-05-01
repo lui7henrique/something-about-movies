@@ -4,12 +4,10 @@ import { useRouter } from 'next/router'
 // Components
 import {
   Box,
-  Divider,
   Flex,
   IconButton,
   Stack,
-  useBreakpointValue,
-  VStack
+  useBreakpointValue
 } from '@chakra-ui/react'
 import { Button } from 'components/Button'
 import { ButtonLanguage } from 'components/ButtonLanguage'
