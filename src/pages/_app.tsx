@@ -10,6 +10,7 @@ import { theme } from '../styles/theme'
 import { useRouter } from 'next/router'
 
 import { AuthContextProvider } from 'contexts/auth'
+import { AppProvider } from 'contexts'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const { asPath, push } = useRouter()
@@ -36,9 +37,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         options={{ showSpinner: true }}
         color="#ca2b5f"
       />
-      <AuthContextProvider>
+      <AppProvider>
         <Component {...pageProps} />
-      </AuthContextProvider>
+      </AppProvider>
     </ChakraProvider>
   )
 }
