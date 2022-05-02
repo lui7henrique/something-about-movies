@@ -6,7 +6,8 @@ export const api = (language: Locale) => {
     baseURL: 'https://api.themoviedb.org/3',
     params: {
       api_key: process.env.NEXT_PUBLIC_TMDB_KEY,
-      language
+      language,
+      with_original_language: 'en'
     }
   })
 }
