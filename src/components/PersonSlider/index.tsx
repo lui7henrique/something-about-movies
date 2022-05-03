@@ -3,7 +3,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 // Components
-import { AspectRatio, chakra, Text, VStack } from '@chakra-ui/react'
+import {
+  AspectRatio,
+  chakra,
+  Text,
+  useBreakpointValue,
+  VStack
+} from '@chakra-ui/react'
 import { Cast, Crew } from 'types/movies/credits'
 
 import { Navigation } from 'swiper'
@@ -35,6 +41,18 @@ export const PersonSlider = (props: PersonSliderProps) => {
   |
   */
   const { items } = props
+
+  const sliderPerView = useBreakpointValue({
+    base: 2,
+    md: 4,
+    '2xl': 6
+  })
+
+  const aspectRatio = useBreakpointValue({
+    base: 1 / 1,
+    md: 2 / 1,
+    '2xl': 3 / 1
+  })
 
   /*
   |-----------------------------------------------------------------------------
@@ -76,11 +94,11 @@ export const PersonSlider = (props: PersonSliderProps) => {
   |
   */
   return (
-    <AspectRatio ratio={3 / 1} w="100%">
+    <AspectRatio ratio={aspectRatio} w="100%">
       <ChakraSwiper
         h="100%"
         w="100%"
-        slidesPerView={5}
+        slidesPerView={sliderPerView}
         spaceBetween={10}
         modules={[Navigation]}
         navigation={true}

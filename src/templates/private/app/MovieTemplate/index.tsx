@@ -132,10 +132,10 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
         title={title}
         sections={[
           {
-            title: 'Detalhes',
+            title: locale === 'pt-BR' ? 'Detalhes' : 'Details',
             items: [
               {
-                title: 'Sinopse',
+                title: locale === 'pt-BR' ? 'Sinopse' : 'overview',
                 value: overview
               },
               {
@@ -151,8 +151,9 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
                           fontWeight="bold"
                           textTransform="uppercase"
                           opacity={0.3}
+                          mr={1}
                         >
-                          Duração:{' '}
+                          {locale === 'pt-BR' ? 'Duração' : 'Duration'}:
                         </Text>
                         {time}
                       </Text>
@@ -163,8 +164,12 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
                           fontWeight="bold"
                           textTransform="uppercase"
                           opacity={0.3}
+                          mr={1}
                         >
-                          Data de lançamento:{' '}
+                          {locale === 'pt-BR'
+                            ? 'Data de lançamento'
+                            : 'Release date'}
+                          :
                         </Text>
                         {releaseDate}
                       </Text>
@@ -180,8 +185,9 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
                           fontWeight="bold"
                           textTransform="uppercase"
                           opacity={0.3}
+                          mr={1}
                         >
-                          Orçamento:{' '}
+                          {locale === 'pt-BR' ? 'Orçamento' : 'Budget'}:
                         </Text>
                         {currency(budget, locale as Locale)}
                       </Text>
@@ -193,7 +199,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
                           textTransform="uppercase"
                           opacity={0.3}
                         >
-                          Bilheteria:{' '}
+                          {locale === 'pt-BR' ? 'Receita' : 'Revenue'}:
                         </Text>
                         {currency(revenue, locale as Locale)}
                       </Text>
@@ -204,7 +210,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
             ]
           },
           {
-            title: 'Elenco principal',
+            title: locale === 'pt-BR' ? 'Elenco principal' : 'Casting',
             items: [
               {
                 title: 'Elenco',
