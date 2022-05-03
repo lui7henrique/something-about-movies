@@ -145,12 +145,7 @@ export const Banner = (props: BannerProps) => {
         {subtitle && (
           <HStack>
             <Box h="7" w="2" bgColor="primary.500" />
-            <Text
-              fontSize="md"
-              textAlign="justify"
-              noOfLines={4}
-              lineHeight={8}
-            >
+            <Text fontSize="md" textAlign="justify">
               {subtitle}
             </Text>
           </HStack>
@@ -179,7 +174,7 @@ export const Banner = (props: BannerProps) => {
           fontSize={{ base: 'md', lg: 'lg' }}
           textAlign="justify"
           lineHeight={8}
-          noOfLines={5}
+          noOfLines={3}
         >
           {description}
         </Text>

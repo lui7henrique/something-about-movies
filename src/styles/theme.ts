@@ -45,7 +45,18 @@ export const theme = extendTheme(
           // color: '#ededed',
         },
         html: {
-          scrollBehavior: 'smooth'
+          scrollBehavior: 'smooth',
+          'body::-webkit-scrollbar': {
+            width: '5px'
+          },
+          'body::-webkit-scrollbar-track': {
+            background: 'transparent'
+          },
+          'body::-webkit-scrollbar-thumb': {
+            backgroundColor: '#ca2b5f',
+            borderRadius: '1px',
+            border: '3px solid var(--primary)'
+          }
         },
         'h1, h2, h3, h4, h5, h6': {
           color: '#ffff'
