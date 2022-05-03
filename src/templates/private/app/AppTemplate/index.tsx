@@ -85,7 +85,7 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
   */
   return (
     <Box>
-      <Box h="80vh" w="100%" as="section">
+      <Box h="85vh" w="100%" as="section">
         <BannerSlider banners={banners} />
       </Box>
 

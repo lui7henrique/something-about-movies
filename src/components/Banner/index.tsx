@@ -117,7 +117,7 @@ export const Banner = (props: BannerProps) => {
   return (
     <Box
       as="section"
-      h={{ base: '100vh', lg: '80vh' }}
+      h={{ base: '100vh', lg: '85vh' }}
       position="relative"
       w="100%"
     >

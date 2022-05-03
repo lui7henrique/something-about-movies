@@ -1,10 +1,10 @@
 export const translations = {
   'en-US': {
     addToWatchList: 'Add to watchlist',
-    watchTrailer: 'Watch trailer'
+    watchTrailer: 'Trailer'
   },
   'pt-BR': {
     addToWatchList: 'Adicionar à watchlist',
-    watchTrailer: 'Assistir trailer'
+    watchTrailer: 'Trailer'
   }
 }

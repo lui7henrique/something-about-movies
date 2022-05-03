@@ -8,7 +8,8 @@ import {
 } from 'templates/private/app/MovieTemplate'
 
 import { Locale } from 'types/locale'
-import { Details } from 'types/movies/list'
+import { Cast, Crew } from 'types/movies/credits'
+import { Details, Keyword } from 'types/movies/list'
 
 type MovieProps = MovieTemplateProps
 
@@ -54,9 +55,36 @@ export const getServerSideProps: GetServerSideProps = async ({
   */
   const details = await get<Details>(locale as Locale, `/movie/${id}`)
 
+  /*
+  |-----------------------------------------------------------------------------
+  | Request to get movie keywords
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const { keywords }: { keywords: Keyword[] } = await get<any>(
+    locale as Locale,
+    `/movie/${id}/keywords`
+  )
+
+  /*
+  |-----------------------------------------------------------------------------
+  | Request to get movie credits
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const { cast, crew }: { cast: Cast[]; crew: Crew } = await get<any>(
+    locale as Locale,
+    `/movie/${id}/credits`
+  )
+
   return {
     props: {
-      details
+      details,
+      keywords,
+      cast: cast.filter((cast) => cast.profile_path),
+      crew
     }
   }
 }

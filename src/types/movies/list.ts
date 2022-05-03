@@ -57,3 +57,8 @@ type SpokenLanguage = {
   iso_639_1: string
   name: string
 }
+
+export type Keyword = {
+  id: number
+  name: string
+}

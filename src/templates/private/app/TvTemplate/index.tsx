@@ -1,7 +1,7 @@
 // Vendors
 
 // Components
-import { VStack } from '@chakra-ui/react'
+import { AspectRatio, Grid, HStack, VStack } from '@chakra-ui/react'
 import { Banner } from 'components/Banner'
 import { Details } from 'types/tv/list'
 
@@ -36,7 +36,8 @@ export const TvTemplate = (props: TvTemplateProps) => {
       backdrop_path,
       genres,
       vote_average,
-      vote_count
+      vote_count,
+      poster_path
     }
   } = props
 
