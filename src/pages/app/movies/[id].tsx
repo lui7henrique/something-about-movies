@@ -74,7 +74,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   |
   |
   */
-  const { cast, crew }: { cast: Cast[]; crew: Crew } = await get<any>(
+  const { cast, crew }: { cast: Cast[]; crew: Crew[] } = await get<any>(
     locale as Locale,
     `/movie/${id}/credits`
   )
@@ -84,7 +84,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       details,
       keywords,
       cast: cast.filter((cast) => cast.profile_path),
-      crew
+      crew: crew.filter((crew) => crew.profile_path)
     }
   }
 }
