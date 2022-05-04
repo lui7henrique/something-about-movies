@@ -6,9 +6,9 @@ something-about-movies's a generic movie/series project using TMDB and front-end
 ### Movie 
 | Name | Description | Status |
 | ---- | ----------- | ------ |
-| Details | Some details about movies, like overview, description, budget, revenue, etc. | ✅ Done |
+| Details | Some details about movies, like overview, description, budget, revenue, etc. | ✅  |
 | Similar | Get a list of similar movies. This is not the same as the "Recommendation" system you see on the website. These items are assembled by looking at keywords and genres. | ⚠ In Progress |
-| Recommendations |  Get a list of recommended movies for a movie. |  ⚠ In Progress | 
+| Recommendations |  Get a list of recommended movies for a movie. |  ⚠  | 
 | Images | Get the images that belong to a movie. | ⚠ In Progress | 
-| Videos | Get the videos that have been added to a movie. |  ⚠ In Progress | 
-| Revies | Get Reviews about movies | ⚠ In Progress | 
+| Videos | Get the videos that have been added to a movie. |  ⚠  | 
+| Revies | Get Reviews about movies | ⚠ | 
