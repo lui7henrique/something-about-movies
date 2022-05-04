@@ -14,6 +14,7 @@ import { Locale } from 'types/locale'
 import { Cast, Crew } from 'types/movies/credits'
 import { MediaDetails } from 'components/MediaDetails'
 import { PersonSlider } from 'components/PersonSlider'
+import { Limiter } from 'components/Limiter'
 
 export type MovieTemplateProps = {
   details: Details
@@ -208,18 +209,13 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
                 )
               }
             ]
-          },
-          {
-            title: locale === 'pt-BR' ? 'Elenco principal' : 'Casting',
-            items: [
-              {
-                title: 'Elenco',
-                value: <PersonSlider items={cast} />
-              }
-            ]
           }
         ]}
       />
+
+      {/* <Box w="100%">
+        <PersonSlider items={cast} />
+      </Box> */}
     </VStack>
   )
 }

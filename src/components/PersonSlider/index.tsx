@@ -43,9 +43,9 @@ export const PersonSlider = (props: PersonSliderProps) => {
   const { items } = props
 
   const sliderPerView = useBreakpointValue({
-    base: 2,
-    md: 4,
-    '2xl': 6
+    base: 4,
+    md: 6,
+    '2xl': 10
   })
 
   const aspectRatio = useBreakpointValue({
@@ -99,9 +99,10 @@ export const PersonSlider = (props: PersonSliderProps) => {
         h="100%"
         w="100%"
         slidesPerView={sliderPerView}
-        spaceBetween={10}
+        spaceBetween={4}
         modules={[Navigation]}
         navigation={true}
+        padding={4}
         sx={{
           'div.swiper-button-prev, div.swiper-button-next': {
             top: '42%',
