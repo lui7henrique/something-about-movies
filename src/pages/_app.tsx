@@ -36,6 +36,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         delay={300}
         options={{ showSpinner: true }}
         color="#ca2b5f"
+        height={5}
       />
       <AppProvider>
         <Component {...pageProps} />
