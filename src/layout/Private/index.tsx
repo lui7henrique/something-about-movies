@@ -81,7 +81,7 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
         <Box
           display={{
             base: 'none',
-            lg: 'block'
+            xl: 'block'
           }}
         >
           <Sidebar />
@@ -104,14 +104,14 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
               onClick={onOpen}
               display={{
                 base: 'flex',
-                lg: 'none'
+                xl: 'none'
               }}
             />
 
             <ButtonBack
               display={{
                 base: 'none',
-                lg: 'flex'
+                xl: 'flex'
               }}
             />
 

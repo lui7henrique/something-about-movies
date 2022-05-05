@@ -3,6 +3,7 @@
 // Components
 import {
   Box,
+  IconButton,
   Popover,
   PopoverBody,
   PopoverCloseButton,
@@ -88,7 +89,18 @@ export const ButtonLanguage = () => {
     <Popover>
       <PopoverTrigger>
         <Box>
-          <Button label={label} leftIcon={<BiWorld size={20} />} />
+          <Button
+            label={label}
+            leftIcon={<BiWorld size={20} />}
+            display={{ base: 'none', lg: 'flex' }}
+          />
+
+          <IconButton
+            aria-label={label}
+            display={{ base: 'flex', lg: 'none' }}
+            icon={<BiWorld size={20} />}
+            borderRadius="sm"
+          />
         </Box>
       </PopoverTrigger>
 

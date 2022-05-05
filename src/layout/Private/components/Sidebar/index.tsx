@@ -1,6 +1,5 @@
 // Vendors
 import { useRouter } from 'next/router'
-import { Suspense } from 'react'
 
 // Components
 import {
@@ -9,14 +8,15 @@ import {
   Image,
   Divider,
   Stack,
-  IconButton
+  IconButton,
+  useBreakpointValue
 } from '@chakra-ui/react'
 import { SidebarActiveLink } from 'layout/Private/components/SidebarActiveLink'
 import { Button } from 'components/Button'
 
 import { supabase } from 'services/supabase'
 
-import { CgArrowsBreakeH, CgLogOut } from 'react-icons/cg'
+import { CgLogOut } from 'react-icons/cg'
 
 import { translations } from './translations'
 import { useAuth } from 'contexts/auth'
@@ -25,6 +25,7 @@ import { useAuth } from 'contexts/auth'
 import { Locale } from 'types/locale'
 import { useSidebar } from 'contexts/sidebar'
 import { MdCompareArrows } from 'react-icons/md'
+import { useEffect } from 'react'
 
 export type SidebarProps = {}
 
@@ -53,6 +54,7 @@ export const Sidebar = (props: SidebarProps) => {
   } = translations(user?.id ?? '')[locale as Locale]
 
   const { isMinimized, handleToggleSidebar } = useSidebar()
+  const isMobile = useBreakpointValue({ base: true, xl: false })
 
   /*
   |-----------------------------------------------------------------------------
@@ -77,6 +79,11 @@ export const Sidebar = (props: SidebarProps) => {
   |
   |
   */
+  useEffect(() => {
+    if (isMinimized) {
+      isMobile && handleToggleSidebar()
+    }
+  }, [isMobile])
 
   /*
   |-----------------------------------------------------------------------------
@@ -115,6 +122,7 @@ export const Sidebar = (props: SidebarProps) => {
         borderRadius="sm"
         onClick={handleToggleSidebar}
         icon={<MdCompareArrows size={20} />}
+        display={{ base: 'none', lg: 'flex' }}
         transition="all 0.2s"
       />
 
