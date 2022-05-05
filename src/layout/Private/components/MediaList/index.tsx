@@ -21,8 +21,6 @@ import { useState } from 'react'
 import { Button } from 'components/Button'
 import { translations } from './translations'
 import Link from 'next/link'
-import { MdArrowUpward, MdChevronRight } from 'react-icons/md'
-import { BiDownArrow } from 'react-icons/bi'
 
 // Types
 export type MediaListProps = {
@@ -62,6 +60,8 @@ export const MediaList = (props: MediaListProps) => {
   const {
     colors: { primary }
   } = useTheme()
+
+  const hasMore = media.length > 5
 
   /*
   |-----------------------------------------------------------------------------
@@ -241,25 +241,27 @@ export const MediaList = (props: MediaListProps) => {
         })}
       </Grid>
 
-      <HStack w="100%" alignItems="center" spacing={8}>
-        <Box w="90%" h="2px" bgColor="gray.800" />
-        <Button
-          label={showItems === media.length ? showLess : showMore}
-          variant="ghost"
-          w="15%"
-          onClick={() =>
-            showItems === media.length
-              ? setShowItems(5)
-              : setShowItems(media.length)
-          }
-          outline="none"
-          boxShadow="none"
-          _focus={{
-            boxShadow: 'none'
-          }}
-        />
-        <Box w="90%" h="2px" bgColor="gray.800" />
-      </HStack>
+      {hasMore && (
+        <HStack w="100%" alignItems="center" spacing={8}>
+          <Box w="90%" h="2px" bgColor="gray.800" />
+          <Button
+            label={showItems === media.length ? showLess : showMore}
+            variant="ghost"
+            w="15%"
+            onClick={() =>
+              showItems === media.length
+                ? setShowItems(5)
+                : setShowItems(media.length)
+            }
+            outline="none"
+            boxShadow="none"
+            _focus={{
+              boxShadow: 'none'
+            }}
+          />
+          <Box w="90%" h="2px" bgColor="gray.800" />
+        </HStack>
+      )}
     </VStack>
   )
 }
