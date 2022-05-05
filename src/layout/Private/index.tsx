@@ -1,17 +1,13 @@
 // Vendors
 
 // Components
-import {
-  Box,
-  Flex,
-  Grid,
-  HStack,
-  IconButton,
-  useDisclosure
-} from '@chakra-ui/react'
+import { Box, Flex, HStack, IconButton, useDisclosure } from '@chakra-ui/react'
+import { ButtonBack } from 'components/ButtonBack'
 import { ButtonLanguage } from 'components/ButtonLanguage'
-import { useSidebar } from 'contexts/sidebar'
+import { Search } from 'layout/Private/components/Search'
+
 import { Sidebar } from 'layout/Private/components/Sidebar'
+
 import { IoMdMenu } from 'react-icons/io'
 import { SidebarDrawer } from './components/SidebarDrawer'
 
@@ -39,7 +35,6 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
   const { children } = props
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isMinimized } = useSidebar()
 
   /*
   |-----------------------------------------------------------------------------
@@ -102,20 +97,28 @@ export const LayoutPrivate = (props: LayoutPrivateProps) => {
             px={{ base: 4, lg: 8 }}
             zIndex={25}
           >
-            <HStack>
-              <IconButton
-                aria-label="open-menu"
-                icon={<IoMdMenu />}
-                borderRadius="sm"
-                onClick={onOpen}
-                display={{
-                  base: 'flex',
-                  lg: 'none'
-                }}
-              />
-            </HStack>
+            <IconButton
+              aria-label="open-menu"
+              icon={<IoMdMenu />}
+              borderRadius="sm"
+              onClick={onOpen}
+              display={{
+                base: 'flex',
+                lg: 'none'
+              }}
+            />
 
-            <ButtonLanguage />
+            <ButtonBack
+              display={{
+                base: 'none',
+                lg: 'flex'
+              }}
+            />
+
+            <HStack>
+              <Search />
+              <ButtonLanguage />
+            </HStack>
           </Flex>
 
           {children}
