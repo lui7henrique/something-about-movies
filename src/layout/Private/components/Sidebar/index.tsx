@@ -106,11 +106,12 @@ export const Sidebar = (props: SidebarProps) => {
     >
       <IconButton
         position="absolute"
-        right={isMinimized ? -9 : -3}
-        top={8}
+        right={isMinimized ? -3 : -3}
+        top={6}
         aria-label="toggle-sidebar"
         zIndex={900000}
-        size="xs"
+        size="10px"
+        variant="outline"
         borderRadius="sm"
         onClick={handleToggleSidebar}
         icon={<MdCompareArrows size={20} />}
@@ -118,7 +119,14 @@ export const Sidebar = (props: SidebarProps) => {
       />
 
       <VStack w="100%">
-        <Stack direction="row" p={4} alignItems="flex-end" w="100%" spacing={2}>
+        <Stack
+          direction="row"
+          py={2}
+          px={4}
+          alignItems="flex-end"
+          w="100%"
+          spacing={2}
+        >
           {user && (
             <>
               <Image
