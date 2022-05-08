@@ -1,7 +1,5 @@
 # 🍿 something-about-movies
-something-about-movies **(not yet defined)** is a generic movie/series project using TMDB and front-end technologies/tools like ReactJS, NextJS, ChakraUI and others..
-
-# Todo List
+## Todo List
 
 
 ### Home 
