@@ -7,9 +7,7 @@ import { useRouter } from 'next/router'
 import { MinimalMedia } from 'types/media'
 
 // Types
-import { Movie } from 'types/movies/list'
 import { Person } from 'types/person'
-import { TV } from 'types/tv/list'
 
 export type SearchTemplateProps = {
   movies: MinimalMedia[]
@@ -78,19 +76,6 @@ export const SearchTemplate = (props: SearchTemplateProps) => {
   */
   return (
     <>
-      {/* <Flex
-        w="100%"
-        justifyContent="space-between"
-        zIndex={25}
-        px={{ base: 4, lg: 8 }}
-        mt={20}
-      >
-        <Heading fontSize={16} color="gray.400" fontWeight="normal">
-          Mostrando resultados para:
-          <Heading fontSize={32}> {query.query}</Heading>
-        </Heading>
-      </Flex> */}
-
       <VStack
         px={{ base: 4, lg: 8 }}
         py={{ base: 4, lg: 8 }}

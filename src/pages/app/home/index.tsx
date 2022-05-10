@@ -196,8 +196,8 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   return {
     props: {
       banners,
-      movies: movies.slice(0, 10),
-      tv: tv.slice(0, 10),
+      movies: movies,
+      tv: tv,
       moviesTotalByGenre: moviesTotalByGenre.filter((genre) => genre.total),
       tvTotalByGenre: tvTotalByGenre.filter((genre) => genre.total)
     },

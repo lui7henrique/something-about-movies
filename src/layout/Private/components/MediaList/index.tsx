@@ -20,6 +20,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Button } from 'components/Button'
 import { translations } from './translations'
+
 import Link from 'next/link'
 
 // Types
@@ -71,6 +72,7 @@ export const MediaList = (props: MediaListProps) => {
   |
   */
   const [showItems, setShowItems] = useState(5)
+  const [loadedItems, setLoadedItems] = useState(media.map((i) => false))
 
   /*
   |-----------------------------------------------------------------------------
@@ -120,10 +122,12 @@ export const MediaList = (props: MediaListProps) => {
         w="100%"
         gap={4}
       >
-        {media.slice(0, showItems).map((media) => {
+        {media.slice(0, showItems).map((media, index) => {
           const linkUrl = `/app/${type === 'movie' ? 'movies' : 'tv'}/${
             media.id
           }`
+
+          const isLoaded = loadedItems[index]
 
           return (
             <Link href={linkUrl}>
@@ -152,7 +156,9 @@ export const MediaList = (props: MediaListProps) => {
                       _after={{
                         content: '""',
                         display: 'block',
-                        backgroundColor: primary[500],
+                        backgroundColor: isLoaded
+                          ? primary[500]
+                          : 'transparent',
                         width: '8px',
                         height: '8px',
                         position: 'absolute',
@@ -166,7 +172,9 @@ export const MediaList = (props: MediaListProps) => {
                       _before={{
                         content: '""',
                         display: 'block',
-                        backgroundColor: primary[500],
+                        backgroundColor: isLoaded
+                          ? primary[500]
+                          : 'transparent',
                         width: '8px',
                         height: '8px',
                         position: 'absolute',
@@ -179,19 +187,28 @@ export const MediaList = (props: MediaListProps) => {
                       }}
                       _hover={{
                         img: {
-                          transform: 'translate(6px, -6px)'
+                          transform: isLoaded
+                            ? 'translate(6px, -6px)'
+                            : 'translate(0, 0)',
+                          filter: isLoaded ? 'brightness(0.)' : 'brightness(1)'
                         },
                         div: {
-                          transform: 'translate(6px, -6px)'
+                          transform: isLoaded
+                            ? 'translate(6px, -6px)'
+                            : 'translate(0, 0)'
                         },
                         '&:before': {
-                          transform: 'rotate(-45deg) scale(1)'
+                          transform: isLoaded
+                            ? 'rotate(-45deg) scale(1)'
+                            : 'rotate(0deg) scale(0)'
                         },
                         '&:after': {
-                          transform: 'rotate(45deg) scale(1)'
+                          transform: isLoaded
+                            ? 'rotate(45deg) scale(1)'
+                            : 'rotate(0deg) scale(0)'
                         }
                       }}
-                      backgroundColor="primary.500"
+                      bgColor={isLoaded ? primary[500] : 'transparent'}
                     >
                       <ChakraNextImage
                         src={media.image}
@@ -203,7 +220,15 @@ export const MediaList = (props: MediaListProps) => {
                         h="100%"
                         quality={25}
                         transition="all 0.2s"
+                        onLoadingComplete={() =>
+                          setLoadedItems((prevItems) => {
+                            const newItems = [...prevItems]
+                            newItems[index] = true
+                            return newItems
+                          })
+                        }
                       />
+
                       <HStack
                         w="100%"
                         flexWrap="wrap"
