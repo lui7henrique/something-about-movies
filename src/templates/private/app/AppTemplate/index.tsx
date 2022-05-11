@@ -2,7 +2,7 @@
 
 // Components
 
-import { Box, Divider } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -14,16 +14,14 @@ import {
 } from 'layout/Private/components/BannerSlider'
 import { MinimalMedia } from 'types/media'
 import { MediaList } from 'layout/Private/components/MediaList'
-import { TotalByGenre } from 'pages'
-import { GenreList } from 'templates/public/HomeTemplate/components/GenreList'
 
 // Types
 export type AppHomeTemplateProps = {
   banners: BannerSlide[]
-  movies: MinimalMedia[]
-  tv: MinimalMedia[]
-  moviesTotalByGenre: TotalByGenre[]
-  tvTotalByGenre: TotalByGenre[]
+  popularMovies: MinimalMedia[]
+  topRatedMovies: MinimalMedia[]
+  popularTV: MinimalMedia[]
+  topRatedTV: MinimalMedia[]
 }
 
 /*
@@ -42,7 +40,8 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
   |
   |
   */
-  const { banners, movies, tv, moviesTotalByGenre, tvTotalByGenre } = props
+  const { banners, popularMovies, topRatedMovies, popularTV, topRatedTV } =
+    props
 
   /*
   |-----------------------------------------------------------------------------
@@ -92,10 +91,10 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
       <Box as="section" p={4}>
         <MediaList
           title={{
-            'en-US': 'Movies we think you’ll like',
-            'pt-BR': 'Filmes que achamos que você vai gostar'
+            'en-US': 'Popular Movies',
+            'pt-BR': 'Filmes Populares'
           }}
-          media={movies}
+          media={popularMovies}
           type="movie"
         />
       </Box>
@@ -103,48 +102,36 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
       <Box as="section" p={4}>
         <MediaList
           title={{
-            'en-US': 'Series we think you’ll like',
-            'pt-BR': 'Séries que achamos que você vai curtir'
+            'en-US': 'Popular TV Shows',
+            'pt-BR': 'Séries Populares'
           }}
-          media={tv}
+          media={popularTV}
           type="tv"
         />
       </Box>
 
       <Box as="section" p={4}>
-        {/* <GenreList
+        <MediaList
           title={{
-            'en-US': 'Movies by genres',
-            'pt-BR': 'Filmes por gêneros'
+            'en-US': 'Top Rated Movies',
+            'pt-BR': 'Filmes Mais Votados'
           }}
-          list={moviesTotalByGenre}
-          gridProps={{
-            gridTemplateColumns: {
-              base: '1fr',
-              lg: 'repeat(3, 1fr)',
-              xl: 'repeat(5, 1fr)'
-            }
-          }}
-          type="movies"
-        /> */}
+          media={topRatedMovies}
+          type="tv"
+          poster
+        />
       </Box>
 
       <Box as="section" p={5}>
-        {/* <GenreList
+        <MediaList
           title={{
-            'en-US': 'Series by genre',
-            'pt-BR': 'Séries por gêneros'
+            'en-US': 'Top Rated TV Shows',
+            'pt-BR': 'Séries Mais Votadas'
           }}
-          list={tvTotalByGenre}
-          gridProps={{
-            gridTemplateColumns: {
-              base: '1fr',
-              lg: 'repeat(3, 1fr)',
-              xl: 'repeat(5, 1fr)'
-            }
-          }}
+          media={topRatedTV}
           type="tv"
-        /> */}
+          poster
+        />
       </Box>
     </Box>
   )

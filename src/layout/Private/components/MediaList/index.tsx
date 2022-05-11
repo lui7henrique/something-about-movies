@@ -22,6 +22,7 @@ import { Button } from 'components/Button'
 import { translations } from './translations'
 
 import Link from 'next/link'
+import { Skeleton } from 'components/Skeleton'
 
 // Types
 export type MediaListProps = {
@@ -31,6 +32,7 @@ export type MediaListProps = {
     'pt-BR': string
   }
   type: 'movie' | 'tv'
+  poster?: boolean
 }
 
 /*
@@ -50,7 +52,7 @@ export const MediaList = (props: MediaListProps) => {
   |
   |
   */
-  const { media, title, type } = props
+  const { media, title, type, poster } = props
 
   const { locale } = useRouter()
   const localeTitle = title[locale as Locale]
@@ -59,7 +61,7 @@ export const MediaList = (props: MediaListProps) => {
   } = translations[locale as Locale]
 
   const {
-    colors: { primary }
+    colors: { primary, secondary, gray }
   } = useTheme()
 
   const hasMore = media.length > 5
@@ -71,8 +73,22 @@ export const MediaList = (props: MediaListProps) => {
   |
   |
   */
-  const [showItems, setShowItems] = useState(5)
+  const [showItems, setShowItems] = useState(poster ? 8 : 5)
   const [loadedItems, setLoadedItems] = useState(media.map((i) => false))
+
+  const templateColumns = poster
+    ? {
+        base: 'repeat(2, 1fr)',
+        lg: 'repeat(4, 1fr)',
+        xl: 'repeat(6, 1fr)',
+        '2xl': 'repeat(8, 1fr)'
+      }
+    : {
+        base: 'repeat(2, 1fr)',
+        lg: 'repeat(3, 1fr)',
+        xl: 'repeat(4, 1fr)',
+        '2xl': 'repeat(5, 1fr)'
+      }
 
   /*
   |-----------------------------------------------------------------------------
@@ -112,16 +128,7 @@ export const MediaList = (props: MediaListProps) => {
         <Text fontSize="lg">{localeTitle}</Text>
       </HStack>
 
-      <Grid
-        gridTemplateColumns={{
-          base: 'repeat(1, 1fr)',
-          lg: 'repeat(3, 1fr)',
-          xl: 'repeat(4, 1fr)',
-          '2xl': 'repeat(5, 1fr)'
-        }}
-        w="100%"
-        gap={4}
-      >
+      <Grid gridTemplateColumns={templateColumns} w="100%" gap={4}>
         {media.slice(0, showItems).map((media, index) => {
           const linkUrl = `/app/${type === 'movie' ? 'movies' : 'tv'}/${
             media.id
@@ -140,7 +147,7 @@ export const MediaList = (props: MediaListProps) => {
                 >
                   <AspectRatio
                     w="100%"
-                    ratio={16 / 9}
+                    ratio={poster ? 1 / 1.5 : 16 / 9}
                     overflow="unset"
                     sx={{
                       span: {
@@ -190,7 +197,7 @@ export const MediaList = (props: MediaListProps) => {
                           transform: isLoaded
                             ? 'translate(6px, -6px)'
                             : 'translate(0, 0)',
-                          filter: isLoaded ? 'brightness(0.)' : 'brightness(1)'
+                          filter: isLoaded ? 'brightness(1)' : 'brightness(1)'
                         },
                         div: {
                           transform: isLoaded
@@ -210,6 +217,7 @@ export const MediaList = (props: MediaListProps) => {
                       }}
                       bgColor={isLoaded ? primary[500] : 'transparent'}
                     >
+                      {!isLoaded && <Skeleton w="100%" h="100%" />}
                       <ChakraNextImage
                         src={media.image}
                         alt={`{media.title}`}
@@ -227,6 +235,7 @@ export const MediaList = (props: MediaListProps) => {
                             return newItems
                           })
                         }
+                        filter="brightness(0.6)"
                       />
 
                       <HStack
@@ -251,14 +260,16 @@ export const MediaList = (props: MediaListProps) => {
                       </HStack>
                     </Box>
                   </AspectRatio>
-                  <VStack alignItems="flex-start">
-                    <Heading as="h3" fontSize="sm">
-                      {media.title}
-                    </Heading>
-                    <Text fontSize="sm" noOfLines={2}>
-                      {media.description}
-                    </Text>
-                  </VStack>
+                  {!poster && (
+                    <VStack alignItems="flex-start">
+                      <Heading as="h3" fontSize="sm">
+                        {media.title}
+                      </Heading>
+                      <Text fontSize="sm" noOfLines={2}>
+                        {media.description}
+                      </Text>
+                    </VStack>
+                  )}
                 </VStack>
               </a>
             </Link>
@@ -268,14 +279,15 @@ export const MediaList = (props: MediaListProps) => {
 
       {hasMore && (
         <HStack w="100%" alignItems="center" spacing={8}>
-          <Box w="90%" h="2px" bgColor="gray.800" />
+          <Box w="90%" h="1px" bgColor="gray.900" />
+
           <Button
             label={showItems === media.length ? showLess : showMore}
             variant="ghost"
             w="15%"
             onClick={() =>
               showItems === media.length
-                ? setShowItems(5)
+                ? setShowItems(poster ? 8 : 5)
                 : setShowItems(media.length)
             }
             outline="none"
@@ -284,7 +296,8 @@ export const MediaList = (props: MediaListProps) => {
               boxShadow: 'none'
             }}
           />
-          <Box w="90%" h="2px" bgColor="gray.800" />
+
+          <Box w="90%" h="1px" bgColor="gray.900" />
         </HStack>
       )}
     </VStack>

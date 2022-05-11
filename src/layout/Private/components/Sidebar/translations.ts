@@ -55,7 +55,7 @@ export const translations: Translations = (id: string) => {
               },
               {
                 label: 'Series',
-                href: '/app/series',
+                href: '/app/tv',
                 icon: FiTv
               }
             ]
@@ -94,7 +94,7 @@ export const translations: Translations = (id: string) => {
               },
               {
                 label: 'Séries',
-                href: '/app/series',
+                href: '/app/tv',
                 icon: FiTv
               }
             ]

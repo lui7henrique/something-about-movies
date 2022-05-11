@@ -38,7 +38,10 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   |
   |
   */
-  const popularMovies = await list<Movie[]>(locale as Locale, '/movie/popular')
+  const allPopularMovies = await list<Movie[]>(
+    locale as Locale,
+    '/movie/popular'
+  )
 
   /*
   |-----------------------------------------------------------------------------
@@ -60,7 +63,7 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   |
   |
   */
-  const popularTV = await list<TV[]>(locale as Locale, '/tv/popular')
+  const allPopularTV = await list<TV[]>(locale as Locale, '/tv/popular')
 
   /*
   |-----------------------------------------------------------------------------
@@ -84,8 +87,8 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   */
   const BANNER_BY_TYPE = 3
   const banners = [
-    ...popularMovies!.slice(0, BANNER_BY_TYPE),
-    ...popularTV!.slice(0, BANNER_BY_TYPE)
+    ...allPopularMovies!.slice(0, BANNER_BY_TYPE),
+    ...allPopularTV!.slice(0, BANNER_BY_TYPE)
   ].map((item) => {
     const title = (item as Movie).title || (item as TV).name
     const type = (item as Movie).title ? 'movie' : 'tv'
@@ -106,8 +109,8 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   |
   |
   */
-  const movies = popularMovies!
-    .slice(BANNER_BY_TYPE, popularMovies?.length)
+  const popularMovies = allPopularMovies!
+    .slice(BANNER_BY_TYPE, allPopularMovies?.length)
     .filter((item) => item.backdrop_path)
     .map((item) => {
       return {
@@ -130,8 +133,8 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
   |
   |
   */
-  const tv = popularTV!
-    .slice(BANNER_BY_TYPE, popularTV?.length)
+  const popularTV = allPopularTV!
+    .slice(BANNER_BY_TYPE, allPopularTV?.length)
     .filter((item) => item.backdrop_path)
     .map((item) => {
       return {
@@ -149,57 +152,80 @@ export const getStaticProps: GetServerSideProps = async ({ req, locale }) => {
 
   /*
   |-----------------------------------------------------------------------------
-  | Get movies total by genre
+  | Request to get top rated movies with 20 items
   |-----------------------------------------------------------------------------
   |
   |
   */
-  const moviesTotalByGenre = await Promise.all(
-    moviesGenres.map(async (genre) => {
-      const {
-        data: { total_results }
-      } = await api(locale as Locale).get<{
-        total_results: number
-      }>(`/discover/movie?with_genres=${genre.id}`)
-
-      return {
-        id: genre.id,
-        name: genre.name,
-        total: total_results
-      }
-    })
+  const allTopRatedMovies = await list<Movie[]>(
+    locale as Locale,
+    '/movie/top_rated'
   )
 
   /*
   |-----------------------------------------------------------------------------
-  | Get tv total by genre
+  | Request to get top rated tv shows with 20 items
   |-----------------------------------------------------------------------------
   |
   |
   */
-  const tvTotalByGenre = await Promise.all(
-    tvGenres.map(async (genre) => {
-      const {
-        data: { total_results }
-      } = await api(locale as Locale).get<{
-        total_results: number
-      }>(`/discover/movie?with_genres=${genre.id}`)
 
+  const allTopRatedTV = await list<TV[]>(locale as Locale, '/tv/top_rated')
+
+  /*
+  |-----------------------------------------------------------------------------
+  | Format the movies to show just with basic infos and get genres infos
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+
+  const topRatedMovies = allTopRatedMovies!
+    .filter((item) => item.poster_path)
+    .map((item) => {
       return {
-        id: genre.id,
-        name: genre.name,
-        total: total_results
+        id: item.id,
+        image: `https://image.tmdb.org/t/p/original/${item.poster_path}`,
+        title: item.title,
+        description: item.overview,
+        genres: item.genre_ids.map((id) => {
+          const genre = moviesGenres.find((g) => g.id === id)
+
+          return genre ? genre : { id: id, name: 'Unknown' }
+        })
       }
     })
-  )
+
+  /*
+  |-----------------------------------------------------------------------------
+  | Format the tv shows to show just with basic infos
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const topRatedTV = allTopRatedTV!
+    .filter((item) => item.poster_path)
+    .map((item) => {
+      return {
+        id: item.id,
+        image: `https://image.tmdb.org/t/p/original/${item.poster_path}`,
+        title: item.name,
+        description: item.overview,
+        genres: item.genre_ids.map((id) => {
+          const genre = tvGenres.find((g) => g.id === id)
+
+          return genre ? genre : { id: id, name: 'Unknown' }
+        })
+      }
+    })
 
   return {
     props: {
       banners,
-      movies: movies,
-      tv: tv,
-      moviesTotalByGenre: moviesTotalByGenre.filter((genre) => genre.total),
-      tvTotalByGenre: tvTotalByGenre.filter((genre) => genre.total)
+      popularMovies,
+      topRatedMovies,
+      popularTV,
+      topRatedTV
     },
     revalidate: 60 * 60 * 24 // 1 day
   }
