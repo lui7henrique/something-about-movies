@@ -117,7 +117,7 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
             'pt-BR': 'Filmes Mais Votados'
           }}
           media={topRatedMovies}
-          type="tv"
+          type="movie"
           poster
         />
       </Box>
