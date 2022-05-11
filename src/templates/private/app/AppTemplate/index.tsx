@@ -112,7 +112,7 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
       </Box>
 
       <Box as="section" p={4}>
-        <GenreList
+        {/* <GenreList
           title={{
             'en-US': 'Movies by genres',
             'pt-BR': 'Filmes por gêneros'
@@ -126,11 +126,11 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
             }
           }}
           type="movies"
-        />
+        /> */}
       </Box>
 
       <Box as="section" p={5}>
-        <GenreList
+        {/* <GenreList
           title={{
             'en-US': 'Series by genre',
             'pt-BR': 'Séries por gêneros'
@@ -144,7 +144,7 @@ export const AppHomeTemplate = (props: AppHomeTemplateProps) => {
             }
           }}
           type="tv"
-        />
+        /> */}
       </Box>
     </Box>
   )
