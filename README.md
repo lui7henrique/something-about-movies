@@ -16,27 +16,11 @@
 | Name | Description | Status |
 | ---- | ----------- | ------ |
 | Home | - | 💭 |
-| Discover | - |  ⚠  |
 | Community | - |  ⚠  |
-| Technologies | - | ⚠  |
-| Coming soon | - | ⚠  |
+| Movies | - | ⚠  |
+| TV| - | ⚠  |
 | Watchlist | - | ⚠  |
 
-### Movies 
-| Name | Description | Status |
-| ---- | ----------- | ------ |
-| Popular | - | 💭 |
-| Now playing | - |  ⚠  |
-| Up coming | - |  ⚠  |
-| Top rated | - | ⚠  |
-
-### TV 
-| Name | Description | Status |
-| ---- | ----------- | ------ |
-| Popular | - | 💭 |
-| Now playing | - |  ⚠  |
-| Up coming | - |  ⚠  |
-| Top rated | - | ⚠  |
 
 ### Movie 
 | Name | Description | Status |
