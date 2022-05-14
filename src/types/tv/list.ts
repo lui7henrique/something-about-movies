@@ -22,7 +22,7 @@ export type Details = TV & {
   first_air_date: string
   genres: Genre[]
   homepage: string
-  in_production: true
+  in_production: boolean
   languages: string[]
   last_air_date: string
   last_episode_to_air: Episode

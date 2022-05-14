@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 // Components
 import {
   AspectRatio,
-  Badge,
   Box,
   chakra,
   Grid,
@@ -14,25 +13,19 @@ import {
   useTheme,
   VStack
 } from '@chakra-ui/react'
-import { MinimalMedia } from 'types/media'
-import { Locale } from 'types/locale'
 import Image from 'next/image'
+import { MinimalPeople, Title } from './types'
 import { useState } from 'react'
-import { Button } from 'components/Button'
-import { translations } from './translations'
-
+import { Locale } from 'types/locale'
 import Link from 'next/link'
 import { Skeleton } from 'components/Skeleton'
+import { translations } from './translations'
+import { Button } from 'components/Button'
 
 // Types
-export type MediaListProps = {
-  media: MinimalMedia[]
-  title: {
-    'en-US': string
-    'pt-BR': string
-  }
-  type: 'movie' | 'tv'
-  poster?: boolean
+export type PeopleListProps = {
+  people: MinimalPeople[]
+  title: Title
 }
 
 /*
@@ -42,9 +35,11 @@ export type MediaListProps = {
 |
 |
 */
+const DEFAULT_SHOW = 8
+
 const ChakraNextImage = chakra(Image)
 
-export const MediaList = (props: MediaListProps) => {
+export const PeopleList = (props: PeopleListProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -52,19 +47,25 @@ export const MediaList = (props: MediaListProps) => {
   |
   |
   */
-  const { media, title, type, poster } = props
+  const { people, title } = props
 
   const { locale } = useRouter()
-  const localeTitle = title[locale as Locale]
-  const {
-    button: { showLess, showMore }
-  } = translations[locale as Locale]
-
   const {
     colors: { primary }
   } = useTheme()
 
-  const hasMore = media.length > 5
+  const hasMore = people.length > DEFAULT_SHOW
+  const templateColumns = {
+    base: 'repeat(2, 1fr)',
+    lg: 'repeat(4, 1fr)',
+    xl: 'repeat(6, 1fr)',
+    '2xl': 'repeat(8, 1fr)'
+  }
+
+  const localeTitle = title[locale as Locale]
+  const {
+    button: { showLess, showMore }
+  } = translations[locale as Locale]
 
   /*
   |-----------------------------------------------------------------------------
@@ -73,22 +74,8 @@ export const MediaList = (props: MediaListProps) => {
   |
   |
   */
-  const [showItems, setShowItems] = useState(poster ? 8 : 5)
-  const [loadedItems, setLoadedItems] = useState(media.map((_) => false))
-
-  const templateColumns = poster
-    ? {
-        base: 'repeat(2, 1fr)',
-        lg: 'repeat(4, 1fr)',
-        xl: 'repeat(6, 1fr)',
-        '2xl': 'repeat(8, 1fr)'
-      }
-    : {
-        base: 'repeat(2, 1fr)',
-        lg: 'repeat(3, 1fr)',
-        xl: 'repeat(4, 1fr)',
-        '2xl': 'repeat(5, 1fr)'
-      }
+  const [show, setShow] = useState(DEFAULT_SHOW)
+  const [loadedItems, setLoadedItems] = useState(people.map((_) => false))
 
   /*
   |-----------------------------------------------------------------------------
@@ -129,11 +116,8 @@ export const MediaList = (props: MediaListProps) => {
       </HStack>
 
       <Grid gridTemplateColumns={templateColumns} w="100%" gap={4}>
-        {media.slice(0, showItems).map((media, index) => {
-          const linkUrl = `/app/${type === 'movie' ? 'movies' : 'tv'}/${
-            media.id
-          }`
-
+        {people.slice(0, show).map((person, index) => {
+          const linkUrl = `/app/people/${person.id}`
           const isLoaded = loadedItems[index]
 
           return (
@@ -143,11 +127,11 @@ export const MediaList = (props: MediaListProps) => {
                   alignItems="flex-start"
                   spacing={2}
                   w="100%"
-                  key={media.id}
+                  key={person.id}
                 >
                   <AspectRatio
                     w="100%"
-                    ratio={poster ? 1 / 1.5 : 16 / 9}
+                    ratio={1 / 1.5}
                     overflow="unset"
                     sx={{
                       span: {
@@ -219,8 +203,8 @@ export const MediaList = (props: MediaListProps) => {
                     >
                       {!isLoaded && <Skeleton w="100%" h="100%" />}
                       <ChakraNextImage
-                        src={media.image}
-                        alt={media.title}
+                        src={person.image}
+                        alt={`{media.title}`}
                         layout="fill"
                         objectFit="cover"
                         objectPosition="center"
@@ -237,39 +221,14 @@ export const MediaList = (props: MediaListProps) => {
                         }
                         filter="brightness(0.6)"
                       />
-
-                      <HStack
-                        w="100%"
-                        flexWrap="wrap"
-                        position="absolute"
-                        bottom={2}
-                        left={2}
-                        transition="all 0.2s"
-                      >
-                        {media.genres.slice(0, 1).map((genre) => {
-                          return (
-                            <Badge
-                              key={genre.id}
-                              bgColor="primary.500"
-                              color="white"
-                            >
-                              {genre.name}
-                            </Badge>
-                          )
-                        })}
-                      </HStack>
                     </Box>
                   </AspectRatio>
-                  {!poster && (
-                    <VStack alignItems="flex-start">
-                      <Heading as="h3" fontSize="sm" noOfLines={1}>
-                        {media.title}
-                      </Heading>
-                      <Text fontSize="sm" noOfLines={2}>
-                        {media.description}
-                      </Text>
-                    </VStack>
-                  )}
+
+                  <VStack alignItems="flex-start">
+                    <Heading as="h3" fontSize="sm" noOfLines={1}>
+                      {person.name}
+                    </Heading>
+                  </VStack>
                 </VStack>
               </a>
             </Link>
@@ -282,13 +241,13 @@ export const MediaList = (props: MediaListProps) => {
           <Box w="90%" h="1px" bgColor="gray.900" />
 
           <Button
-            label={showItems === media.length ? showLess : showMore}
+            label={show === people.length ? showLess : showMore}
             variant="ghost"
             w="15%"
             onClick={() =>
-              showItems === media.length
-                ? setShowItems(poster ? 8 : 5)
-                : setShowItems(media.length)
+              show === people.length
+                ? setShow(DEFAULT_SHOW)
+                : setShow(people.length)
             }
             outline="none"
             boxShadow="none"

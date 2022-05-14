@@ -135,10 +135,25 @@ export const getServerSideProps: GetServerSideProps = async ({
   |
   |
   */
-  const people = await list<Person>(
+  const unformattedPeople = await list<Person[]>(
     locale as Locale,
     `/search/person?query=${query}`
   )
+  /*
+  |-----------------------------------------------------------------------------
+  | Format people
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+
+  const people = unformattedPeople!.map((person) => {
+    return {
+      id: person.id,
+      image: `https://image.tmdb.org/t/p/original/${person.profile_path}`,
+      name: person.name
+    }
+  })
 
   return {
     props: {
