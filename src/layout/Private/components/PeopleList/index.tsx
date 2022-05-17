@@ -117,7 +117,7 @@ export const PeopleList = (props: PeopleListProps) => {
 
       <Grid gridTemplateColumns={templateColumns} w="100%" gap={4}>
         {people.slice(0, show).map((person, index) => {
-          const linkUrl = `/app/people/${person.id}`
+          const linkUrl = `/app/person/${person.id}`
           const isLoaded = loadedItems[index]
 
           return (

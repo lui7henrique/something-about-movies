@@ -300,6 +300,8 @@ export const MediaList = (props: MediaListProps) => {
           <Box w="90%" h="1px" bgColor="gray.900" />
         </HStack>
       )}
+
+      {!hasMore && <Box w="100%" h="1px" bgColor="gray.900" />}
     </VStack>
   )
 }

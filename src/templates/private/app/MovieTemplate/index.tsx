@@ -199,6 +199,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
                           fontWeight="bold"
                           textTransform="uppercase"
                           opacity={0.3}
+                          mr={1}
                         >
                           {locale === 'pt-BR' ? 'Receita' : 'Revenue'}:
                         </Text>
@@ -212,10 +213,6 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
           }
         ]}
       />
-
-      {/* <Box w="100%">
-        <PersonSlider items={cast} />
-      </Box> */}
     </VStack>
   )
 }
