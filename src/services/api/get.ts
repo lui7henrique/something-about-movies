@@ -3,7 +3,7 @@ import { Query } from 'types/request'
 import { api } from '.'
 
 export async function get<T>(
-  locale: Locale,
+  locale: Locale | undefined,
   endpoint: string,
   query?: Query
 ): Promise<T | undefined> {

@@ -4,7 +4,17 @@ import { intervalToDuration, format } from 'date-fns'
 import { currency } from 'utils/currency'
 
 // Components
-import { AspectRatio, Box, Flex, Stack, Text, VStack } from '@chakra-ui/react'
+import {
+  AspectRatio,
+  Box,
+  chakra,
+  Flex,
+  Grid,
+  HStack,
+  Stack,
+  Text,
+  VStack
+} from '@chakra-ui/react'
 import { Banner } from 'components/Banner'
 
 // Types
@@ -13,14 +23,17 @@ import { enUS, ptBR } from 'date-fns/locale'
 import { Locale } from 'types/locale'
 import { Cast, Crew } from 'types/movies/credits'
 import { MediaDetails } from 'components/MediaDetails'
-import { PersonSlider } from 'components/PersonSlider'
-import { Limiter } from 'components/Limiter'
+
+import { Images } from 'types/movies/images'
+import Image from 'next/image'
+import { MediaGallery } from 'components/MediaGallery'
 
 export type MovieTemplateProps = {
   details: Details
   keywords: Keyword[]
   cast: Cast[]
   crew: Crew[]
+  images: Images
 }
 
 /*
@@ -55,7 +68,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
       budget,
       revenue
     },
-    cast
+    images
   } = props
 
   const { locale } = useRouter()
@@ -213,6 +226,26 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
           }
         ]}
       />
+
+      <Box as="section" w="100%">
+        <MediaGallery
+          title={{
+            'pt-BR': 'Plano de fundos',
+            'en-US': 'Wallpappers'
+          }}
+          images={images.backdrops}
+        />
+      </Box>
+
+      <Box as="section" w="100%">
+        <MediaGallery
+          title={{
+            'pt-BR': 'Posters',
+            'en-US': 'Posters'
+          }}
+          images={images.posters}
+        />
+      </Box>
     </VStack>
   )
 }

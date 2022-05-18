@@ -9,6 +9,7 @@ import {
 
 import { Locale } from 'types/locale'
 import { Cast, Crew } from 'types/movies/credits'
+import { Images } from 'types/movies/images'
 import { Details, Keyword } from 'types/movies/list'
 
 type MovieProps = MovieTemplateProps
@@ -79,12 +80,22 @@ export const getServerSideProps: GetServerSideProps = async ({
     `/movie/${id}/credits`
   )
 
+  /*
+  |-----------------------------------------------------------------------------
+  | Request to get movie images
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const images = await get<Images>(undefined, `/movie/${id}/images`)
+
   return {
     props: {
       details,
       keywords,
       cast: cast.filter((cast) => cast.profile_path),
-      crew: crew.filter((crew) => crew.profile_path)
+      crew: crew.filter((crew) => crew.profile_path),
+      images
     }
   }
 }

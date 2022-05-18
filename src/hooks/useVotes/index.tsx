@@ -9,7 +9,6 @@ export const useVotes = () => {
     (voteAverage: number, voteCount: number, locale: Locale) => {
       const votes = Math.round(Number(voteAverage / 2))
 
-      console.log(voteAverage)
       const filled = _.range(0, votes)
       const empty = _.range(0, 5)
 
