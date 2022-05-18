@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import NextImage from 'next/image'
+
 import { AuthContextProvider } from './auth'
 import { SidebarContextProvider } from './sidebar'
 import { WatchListContextProvider } from './watchList'

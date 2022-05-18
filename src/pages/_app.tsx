@@ -9,7 +9,6 @@ import type { AppProps } from 'next/app'
 import { theme } from '../styles/theme'
 import { useRouter } from 'next/router'
 
-import { AuthContextProvider } from 'contexts/auth'
 import { AppProvider } from 'contexts'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {

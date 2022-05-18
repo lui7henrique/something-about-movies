@@ -116,7 +116,7 @@ export const Sidebar = (props: SidebarProps) => {
         right={isMinimized ? -3 : -3}
         top={6}
         aria-label="toggle-sidebar"
-        zIndex={900000}
+        zIndex={999}
         size="10px"
         variant="outline"
         borderRadius="sm"
