@@ -27,6 +27,7 @@ import { MediaDetails } from 'components/MediaDetails'
 import { Images } from 'types/movies/images'
 import Image from 'next/image'
 import { MediaGallery } from 'components/MediaGallery'
+import { sortBy } from 'lodash'
 
 export type MovieTemplateProps = {
   details: Details
@@ -95,6 +96,8 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
       locale: locale === 'pt-BR' ? ptBR : enUS
     }
   )
+
+  const allImages = [...images.backdrops, ...images.posters]
 
   /*
   |-----------------------------------------------------------------------------
@@ -228,16 +231,18 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
       />
 
       <Box as="section" w="100%">
-        <MediaGallery
-          title={{
-            'pt-BR': 'Plano de fundos',
-            'en-US': 'Wallpappers'
-          }}
-          images={images.backdrops}
-        />
+        <Box maxW="1180px" m="0 auto" px={4}>
+          <MediaGallery
+            title={{
+              'pt-BR': 'Plano de fundos',
+              'en-US': 'Wallpappers'
+            }}
+            images={sortBy(allImages, (image) => image.vote_count).reverse()}
+          />
+        </Box>
       </Box>
 
-      <Box as="section" w="100%">
+      {/* <Box as="section" w="100%">
         <MediaGallery
           title={{
             'pt-BR': 'Posters',
@@ -245,7 +250,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
           }}
           images={images.posters}
         />
-      </Box>
+      </Box> */}
     </VStack>
   )
 }

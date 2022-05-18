@@ -3,6 +3,7 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import SimpleReactLightbox, { SRLWrapper } from 'simple-react-lightbox'
+import Masonry from 'react-masonry-css'
 
 // Components
 import {
@@ -17,6 +18,7 @@ import {
 import { Locale } from 'types/locale'
 import { Image } from 'types/movies/images'
 import { settings } from './settings'
+import { Skeleton } from 'components/Skeleton'
 
 // Types
 export type MediaGalleryProps = {
@@ -35,6 +37,7 @@ export type MediaGalleryProps = {
 */
 
 const NextChakraImage = chakra(NextImage)
+const ChakraMasonry = chakra(Masonry)
 
 export const MediaGallery = (props: MediaGalleryProps) => {
   /*
@@ -65,7 +68,11 @@ export const MediaGallery = (props: MediaGalleryProps) => {
   |
   |
   */
-  console.log(`https://image.tmdb.org/t/p/original/${activeImage.file_path}`)
+  const breakpointColumnsObj = {
+    default: 3,
+    1000: 3,
+    600: 3
+  }
 
   /*
   |-----------------------------------------------------------------------------
@@ -93,7 +100,7 @@ export const MediaGallery = (props: MediaGalleryProps) => {
   return (
     <>
       <VStack spacing={4} w="100%" alignItems="flex-start">
-        <HStack px={4}>
+        <HStack>
           <Box h="7" w="2" bgColor="primary.500" />
           <Text fontSize="md" textAlign="justify">
             {localeTitle}
@@ -103,8 +110,23 @@ export const MediaGallery = (props: MediaGalleryProps) => {
         <Box w="100%">
           <SimpleReactLightbox>
             <SRLWrapper options={settings}>
-              <Grid templateColumns="repeat(5, 1fr)" w="100%" gap={2}>
-                {images.slice(0, 10).map((image) => {
+              <ChakraMasonry
+                breakpointCols={breakpointColumnsObj}
+                className="gallery__row"
+                columnClassName="gallery__column"
+                width="auto"
+                display="flex"
+                sx={{
+                  '.gallery__column': {
+                    paddingRight: '16px',
+                    backgroundClip: 'padding-box'
+                  },
+                  '.gallery__column > div': {
+                    marginBottom: '16px'
+                  }
+                }}
+              >
+                {images.map((image) => {
                   const url = `https://image.tmdb.org/t/p/original/${image.file_path}`
 
                   return (
@@ -119,16 +141,20 @@ export const MediaGallery = (props: MediaGalleryProps) => {
                       cursor="pointer"
                       onClick={() => setActiveImage(image)}
                     >
-                      <NextChakraImage
-                        src={url}
-                        w="100%"
-                        h="100%"
-                        layout="fill"
-                      />
+                      <Box w="100%">
+                        <Skeleton w="100%" h="100%" />
+
+                        <NextChakraImage
+                          src={url}
+                          w="100%"
+                          h="100%"
+                          layout="fill"
+                        />
+                      </Box>
                     </AspectRatio>
                   )
                 })}
-              </Grid>
+              </ChakraMasonry>
             </SRLWrapper>
           </SimpleReactLightbox>
         </Box>
