@@ -43,4 +43,3 @@
 | Images | Get the images that belong to a movie. | ⚠  | 
 | Videos | Get the videos that have been added to a movie. |  ⚠  | 
 | Revies | Get Reviews about movies | ⚠ | 
-
