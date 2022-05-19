@@ -71,7 +71,7 @@ export const MediaGallery = (props: MediaGalleryProps) => {
   const breakpointColumnsObj = {
     default: 3,
     1000: 3,
-    600: 3
+    600: 2
   }
 
   /*

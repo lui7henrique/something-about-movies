@@ -25,9 +25,13 @@ import { enUS, ptBR } from 'date-fns/locale'
 import { currency } from 'utils/currency'
 import { Locale } from 'types/locale'
 import Image from 'next/image'
+import { MediaGallery } from 'components/MediaGallery'
+import { Images } from 'types/tv/image'
+import { sortBy } from 'lodash'
 
 export type TvTemplateProps = {
   details: Details
+  images: Images
 }
 
 /*
@@ -64,7 +68,8 @@ export const TvTemplate = (props: TvTemplateProps) => {
       last_air_date,
       in_production,
       created_by
-    }
+    },
+    images
   } = props
 
   const { locale } = useRouter()
@@ -84,6 +89,8 @@ export const TvTemplate = (props: TvTemplateProps) => {
       locale: locale === 'pt-BR' ? ptBR : enUS
     }
   )
+
+  const allImages = [...images.backdrops, ...images.posters]
 
   /*
   |-----------------------------------------------------------------------------
@@ -247,6 +254,18 @@ export const TvTemplate = (props: TvTemplateProps) => {
           // }
         ]}
       />
+
+      <Box as="section" w="100%">
+        <Box maxW="1180px" m="0 auto" px={4}>
+          <MediaGallery
+            title={{
+              'pt-BR': 'Images',
+              'en-US': 'Imagens'
+            }}
+            images={sortBy(allImages, (image) => image.vote_count).reverse()}
+          />
+        </Box>
+      </Box>
     </VStack>
   )
 }

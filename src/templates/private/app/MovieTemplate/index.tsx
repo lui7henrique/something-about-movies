@@ -234,23 +234,13 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
         <Box maxW="1180px" m="0 auto" px={4}>
           <MediaGallery
             title={{
-              'pt-BR': 'Plano de fundos',
-              'en-US': 'Wallpappers'
+              'pt-BR': 'Images',
+              'en-US': 'Imagens'
             }}
             images={sortBy(allImages, (image) => image.vote_count).reverse()}
           />
         </Box>
       </Box>
-
-      {/* <Box as="section" w="100%">
-        <MediaGallery
-          title={{
-            'pt-BR': 'Posters',
-            'en-US': 'Posters'
-          }}
-          images={images.posters}
-        />
-      </Box> */}
     </VStack>
   )
 }
