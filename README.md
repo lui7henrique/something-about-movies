@@ -12,14 +12,14 @@
 | Developers | - | ⚠  |
 | Footer | - | ⚠  |
 
-### Menu 
+### All pages
 | Name | Description | Status |
 | ---- | ----------- | ------ |
 | Home | - | 💭 |
 | Community | - |  ⚠  |
-| Movies | - | ⚠  |
-| TV| - | ⚠  |
-| Watchlist | - | ⚠  |
+| Movies | - | 💭  |
+| TV| - | 💭  |
+| Watchlist | - | 💭  |
 
 
 ### Movie 
