@@ -6,11 +6,26 @@ export async function pagination<T>(
   locale: Locale,
   endpoint: string,
   query?: Query
-): Promise<T | undefined> {
+): Promise<
+  | {
+      page: number
+      results: T
+      total_pages: number
+      total_results: number
+    }
+  | undefined
+> {
   let payload
 
+  type Data = {
+    page: number
+    results: T
+    total_pages: number
+    total_results: number
+  }
+
   try {
-    const { data } = await api(locale).get<T>(endpoint, {
+    const { data } = await api(locale).get<Data>(endpoint, {
       params: { ...query }
     })
 

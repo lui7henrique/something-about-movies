@@ -18,7 +18,7 @@ import {
 import { Banner } from 'components/Banner'
 
 // Types
-import { Details, Keyword } from 'types/movies/list'
+import { Details, Keyword, Movie } from 'types/movies/list'
 import { enUS, ptBR } from 'date-fns/locale'
 import { Locale } from 'types/locale'
 import { Cast, Crew } from 'types/movies/credits'
@@ -29,6 +29,8 @@ import Image from 'next/image'
 import { MediaGallery } from 'components/MediaGallery'
 import { sortBy } from 'lodash'
 import { Video } from 'types/videos'
+import { MediaList } from 'layout/Private/components/MediaList'
+import { MinimalMedia } from 'types/media'
 
 export type MovieTemplateProps = {
   details: Details
@@ -37,6 +39,8 @@ export type MovieTemplateProps = {
   crew: Crew[]
   images: Images
   trailer?: Video
+  recommendations: MinimalMedia[]
+  similar: MinimalMedia[]
 }
 
 /*
@@ -72,7 +76,9 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
       revenue
     },
     trailer,
-    images
+    images,
+    recommendations,
+    similar
   } = props
 
   const { locale } = useRouter()
@@ -233,6 +239,34 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
           }
         ]}
       />
+
+      <Box as="section" w="100%" px={4}>
+        <Box maxW="1180px" m="0 auto">
+          <MediaList
+            title={{
+              'en-US': 'Movie recommendations ',
+              'pt-BR': 'Recomendações de filmes'
+            }}
+            media={recommendations}
+            type="movie"
+            poster
+          />
+        </Box>
+      </Box>
+
+      <Box as="section" w="100%">
+        <Box maxW="1180px" m="0 auto" px={4}>
+          <MediaList
+            title={{
+              'en-US': 'Similar  movies',
+              'pt-BR': 'Filmes parecidos'
+            }}
+            media={similar}
+            type="movie"
+            poster
+          />
+        </Box>
+      </Box>
 
       <Box as="section" w="100%">
         <Box maxW="1180px" m="0 auto" px={4}>

@@ -59,7 +59,6 @@ export const MediaGallery = (props: MediaGalleryProps) => {
   |
   |
   */
-  const [activeImage, setActiveImage] = useState({} as Image)
 
   /*
   |-----------------------------------------------------------------------------
@@ -117,12 +116,12 @@ export const MediaGallery = (props: MediaGalleryProps) => {
                 width="auto"
                 display="flex"
                 sx={{
-                  '.gallery__column': {
-                    paddingRight: '16px',
+                  '& > .gallery__column:not(:last-child)': {
+                    paddingRight: '24px',
                     backgroundClip: 'padding-box'
                   },
                   '.gallery__column > div': {
-                    marginBottom: '16px'
+                    marginBottom: '24px'
                   }
                 }}
               >
@@ -139,7 +138,6 @@ export const MediaGallery = (props: MediaGalleryProps) => {
                       transition="all 0.2s"
                       filter="brightness(0.5)"
                       cursor="pointer"
-                      onClick={() => setActiveImage(image)}
                     >
                       <Box w="100%">
                         <Skeleton w="100%" h="100%" />

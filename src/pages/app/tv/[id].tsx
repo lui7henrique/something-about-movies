@@ -5,12 +5,11 @@ import { TvTemplate, TvTemplateProps } from 'templates/private/app/TvTemplate'
 import { Locale } from 'types/locale'
 import { Images } from 'types/tv/image'
 import { Details } from 'types/tv/list'
+import { Videos } from 'types/videos'
 
 type TVProps = TvTemplateProps
 
 const TV = (props: TVProps) => {
-  console.log(props)
-
   return (
     <LayoutPrivate>
       <TvTemplate {...props} />
@@ -54,6 +53,21 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   /*
   |-----------------------------------------------------------------------------
+  | Request to get tv trailer
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+
+  const videos = await get<Videos>(locale as Locale, `/tv/${id}/videos`)
+
+  const trailer =
+    videos?.results.find(
+      (video) => video.type === 'Trailer' && video.official
+    ) ?? null
+
+  /*
+  |-----------------------------------------------------------------------------
   | Request to get tv images
   |-----------------------------------------------------------------------------
   |
@@ -64,7 +78,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       details,
-      images
+      images,
+      trailer
     }
   }
 }

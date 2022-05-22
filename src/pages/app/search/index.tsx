@@ -147,13 +147,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   |
   */
 
-  const people = unformattedPeople!.map((person) => {
-    return {
-      id: person.id,
-      image: `https://image.tmdb.org/t/p/original/${person.profile_path}`,
-      name: person.name
-    }
-  })
+  const people = unformattedPeople!
+    .filter((p) => p.profile_path)
+    .map((person) => {
+      return {
+        id: person.id,
+        image: `https://image.tmdb.org/t/p/original/${person.profile_path}`,
+        name: person.name
+      }
+    })
 
   return {
     props: {

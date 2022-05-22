@@ -1,16 +1,19 @@
 import { LayoutPrivate } from 'layout/Private'
 import { GetServerSideProps } from 'next'
+import { api } from 'services/api'
 import { get } from 'services/api/get'
+import { pagination } from 'services/api/pagination'
 
 import {
   MovieTemplate,
   MovieTemplateProps
 } from 'templates/private/app/MovieTemplate'
+import { Genre } from 'types/genres/genres'
 
 import { Locale } from 'types/locale'
 import { Cast, Crew } from 'types/movies/credits'
 import { Images } from 'types/movies/images'
-import { Details, Keyword } from 'types/movies/list'
+import { Details, Keyword, Movie } from 'types/movies/list'
 import { Videos } from 'types/videos'
 
 type MovieProps = MovieTemplateProps
@@ -50,6 +53,19 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   /*
   |-----------------------------------------------------------------------------
+  | Request to get movie genres
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const {
+    data: { genres: moviesGenres }
+  } = await api(locale as Locale).get<{
+    genres: Genre[]
+  }>('/genre/movie/list')
+
+  /*
+  |-----------------------------------------------------------------------------
   | Request to get movie details
   |-----------------------------------------------------------------------------
   |
@@ -66,9 +82,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   */
 
   const videos = await get<Videos>(locale as Locale, `/movie/${id}/videos`)
-  const trailer = videos?.results.find(
-    (video) => video.type === 'Trailer' && video.official
-  )
+  const trailer =
+    videos?.results.find(
+      (video) => video.type === 'Trailer' && video.official
+    ) ?? null
 
   /*
   |-----------------------------------------------------------------------------
@@ -103,6 +120,69 @@ export const getServerSideProps: GetServerSideProps = async ({
   */
   const images = await get<Images>(undefined, `/movie/${id}/images`)
 
+  /*
+  |-----------------------------------------------------------------------------
+  | Request to get movie recommendations
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+  const allRecommendations = await pagination<Movie[]>(
+    locale as Locale,
+
+    `/movie/${id}/recommendations`
+  )
+
+  const unformattedRecommendations = allRecommendations?.results?.filter(
+    (r) => r.poster_path
+  )
+
+  const recommendations = unformattedRecommendations?.map((item) => {
+    return {
+      id: item.id,
+      image: `https://image.tmdb.org/t/p/original/${item.poster_path}`,
+      title: item.title,
+      description: item.overview,
+      genres: item.genre_ids.map((id) => {
+        const genre = moviesGenres.find((g) => g.id === id)
+
+        return genre ? genre : { id: id, name: 'Unknown' }
+      })
+    }
+  })
+
+  /*
+  |-----------------------------------------------------------------------------
+  | Request to get similar movies
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+
+  const allSimilarMovies = await pagination<Movie[]>(
+    locale as Locale,
+
+    `/movie/${id}/similar`
+  )
+
+  const unformattedSimilarMovies = allSimilarMovies?.results?.filter(
+    (r) => r.poster_path
+  )
+
+  const similar = unformattedSimilarMovies?.map((item) => {
+    return {
+      id: item.id,
+      image: `https://image.tmdb.org/t/p/original/${item.poster_path}`,
+      title: item.title,
+      description: item.overview,
+      genres: item.genre_ids.map((id) => {
+        const genre = moviesGenres.find((g) => g.id === id)
+
+        return genre ? genre : { id: id, name: 'Unknown' }
+      })
+    }
+  })
+
   return {
     props: {
       details,
@@ -110,7 +190,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       keywords,
       cast: cast.filter((cast) => cast.profile_path),
       crew: crew.filter((crew) => crew.profile_path),
-      images
+      images,
+      recommendations,
+      similar
     }
   }
 }

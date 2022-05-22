@@ -127,7 +127,7 @@ export const PersonTemplate = (props: PersonTemplateProps) => {
       )}
 
       {/* TV Shows  */}
-      {hasMoviesCast && (
+      {hasTvCast && (
         <Box as="section" p={4}>
           <MediaList
             title={{
@@ -140,7 +140,7 @@ export const PersonTemplate = (props: PersonTemplateProps) => {
         </Box>
       )}
 
-      {hasMoviesCrew && (
+      {hasTvCrew && (
         <Box as="section" p={4}>
           <MediaList
             title={{

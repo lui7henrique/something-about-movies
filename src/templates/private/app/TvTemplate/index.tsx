@@ -2,36 +2,24 @@
 import { useRouter } from 'next/router'
 
 // Components
-import {
-  AspectRatio,
-  Badge,
-  Box,
-  chakra,
-  Grid,
-  Heading,
-  HStack,
-  Stack,
-  Text,
-  useToken,
-  VStack
-} from '@chakra-ui/react'
+import { Badge, Box, chakra, Stack, Text, VStack } from '@chakra-ui/react'
 import { Banner } from 'components/Banner'
 import { MediaDetails } from 'components/MediaDetails'
 
 // Types
 import { Details } from 'types/tv/list'
-import { format, intervalToDuration } from 'date-fns'
+import { format } from 'date-fns'
 import { enUS, ptBR } from 'date-fns/locale'
-import { currency } from 'utils/currency'
-import { Locale } from 'types/locale'
 import Image from 'next/image'
 import { MediaGallery } from 'components/MediaGallery'
 import { Images } from 'types/tv/image'
 import { sortBy } from 'lodash'
+import { Video } from 'types/videos'
 
 export type TvTemplateProps = {
   details: Details
   images: Images
+  trailer: Video
 }
 
 /*
@@ -66,9 +54,9 @@ export const TvTemplate = (props: TvTemplateProps) => {
       episode_run_time,
       first_air_date,
       last_air_date,
-      in_production,
-      created_by
+      in_production
     },
+    trailer,
     images
   } = props
 
@@ -143,6 +131,7 @@ export const TvTemplate = (props: TvTemplateProps) => {
         vote_average={vote_average}
         vote_count={vote_count}
         type="movie"
+        trailer={trailer}
       />
 
       <MediaDetails
