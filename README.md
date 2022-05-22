@@ -1,5 +1,13 @@
 # 🍿 something-about-movies
 ### Todo List
+### All pages
+| Name | Description | Status |
+| ---- | ----------- | ------ |
+| Home | - | 💭 |
+| Community | - |  ⚠  |
+| Movies | - | 💭  |
+| TV| - | 💭  |
+| Watchlist | - | 💭  |
 
 
 ### Home 
@@ -11,16 +19,6 @@
 | Technologies | - | ⚠  |
 | Developers | - | ⚠  |
 | Footer | - | ⚠  |
-
-### All pages
-| Name | Description | Status |
-| ---- | ----------- | ------ |
-| Home | - | 💭 |
-| Community | - |  ⚠  |
-| Movies | - | 💭  |
-| TV| - | 💭  |
-| Watchlist | - | 💭  |
-
 
 ### Movie 
 | Name | Description | Status |
