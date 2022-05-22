@@ -40,4 +40,4 @@
 | Similar | Get a list of similar tv show. This is not the same as the "Recommendation" system you see on the website. These items are assembled by looking at keywords and genres. | ⚠  |
 | Recommendations |  Get a list of recommended tv shows for a movie. |  ⚠  | 
 | Images | Get the images that belong to a movie. | ✅  | 
-| Revies | Get Reviews about movies | ⚠ | 
+| Revies | Get Reviews about tv show | ⚠ | 
