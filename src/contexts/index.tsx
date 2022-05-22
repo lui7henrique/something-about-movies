@@ -4,6 +4,7 @@ import NextImage from 'next/image'
 import { AuthContextProvider } from './auth'
 import { SidebarContextProvider } from './sidebar'
 import { WatchListContextProvider } from './watchList'
+import { PlayerContextProvider } from './player'
 
 type AppProviderProps = {
   children: ReactNode
@@ -15,7 +16,9 @@ export const AppProvider = (props: AppProviderProps) => {
   return (
     <AuthContextProvider>
       <WatchListContextProvider>
-        <SidebarContextProvider>{children}</SidebarContextProvider>
+        <PlayerContextProvider>
+          <SidebarContextProvider>{children}</SidebarContextProvider>
+        </PlayerContextProvider>
       </WatchListContextProvider>
     </AuthContextProvider>
   )

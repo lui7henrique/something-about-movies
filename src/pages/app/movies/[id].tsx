@@ -11,6 +11,7 @@ import { Locale } from 'types/locale'
 import { Cast, Crew } from 'types/movies/credits'
 import { Images } from 'types/movies/images'
 import { Details, Keyword } from 'types/movies/list'
+import { Videos } from 'types/videos'
 
 type MovieProps = MovieTemplateProps
 
@@ -58,6 +59,19 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   /*
   |-----------------------------------------------------------------------------
+  | Request to get movie trailer
+  |-----------------------------------------------------------------------------
+  |
+  |
+  */
+
+  const videos = await get<Videos>(locale as Locale, `/movie/${id}/videos`)
+  const trailer = videos?.results.find(
+    (video) => video.type === 'Trailer' && video.official
+  )
+
+  /*
+  |-----------------------------------------------------------------------------
   | Request to get movie keywords
   |-----------------------------------------------------------------------------
   |
@@ -92,6 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       details,
+      trailer,
       keywords,
       cast: cast.filter((cast) => cast.profile_path),
       crew: crew.filter((crew) => crew.profile_path),

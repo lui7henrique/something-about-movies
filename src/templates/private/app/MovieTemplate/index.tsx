@@ -28,6 +28,7 @@ import { Images } from 'types/movies/images'
 import Image from 'next/image'
 import { MediaGallery } from 'components/MediaGallery'
 import { sortBy } from 'lodash'
+import { Video } from 'types/videos'
 
 export type MovieTemplateProps = {
   details: Details
@@ -35,6 +36,7 @@ export type MovieTemplateProps = {
   cast: Cast[]
   crew: Crew[]
   images: Images
+  trailer?: Video
 }
 
 /*
@@ -69,6 +71,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
       budget,
       revenue
     },
+    trailer,
     images
   } = props
 
@@ -142,6 +145,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
         vote_average={vote_average}
         vote_count={vote_count}
         type="movie"
+        trailer={trailer}
       />
 
       <MediaDetails
