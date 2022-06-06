@@ -11,6 +11,7 @@ import { Limiter } from 'components/Limiter'
 import { Hero } from './components/Hero'
 import { TotalByGenre } from 'pages'
 import { GenreList } from './components/GenreList'
+import { SectionCount } from './components/SectionCount'
 
 // Types
 export type HomeTemplateProps = {
@@ -80,7 +81,11 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
   return (
     <>
       <Hero />
+      <SectionCount />
 
+      <h1>movie</h1>
+
+      {/*
       <Limiter as="section" d="flex" justifyContent="center" h="100vh">
         <GenreList
           title={{
@@ -90,9 +95,9 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
           list={moviesTotalByGenre}
           type="movies"
         />
-      </Limiter>
+      </Limiter> */}
 
-      <Limiter as="section" d="flex" justifyContent="center" h="100vh">
+      {/* <Limiter as="section" d="flex" justifyContent="center" h="100vh">
         <GenreList
           title={{
             'en-US': 'Series by genres',
@@ -108,7 +113,7 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
       </Limiter>
       <Limiter as="section" d="flex" justifyContent="center" h="100vh">
         <Heading>Contribuidores</Heading>
-      </Limiter>
+      </Limiter> */}
     </>
   )
 }
