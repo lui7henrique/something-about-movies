@@ -83,8 +83,6 @@ export const HomeTemplate = (props: HomeTemplateProps) => {
       <Hero />
       <SectionCount />
 
-      <h1>movie</h1>
-
       {/*
       <Limiter as="section" d="flex" justifyContent="center" h="100vh">
         <GenreList
