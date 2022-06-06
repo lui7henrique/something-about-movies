@@ -134,7 +134,7 @@ export const Banner = (props: BannerProps) => {
           layout="fill"
           objectFit="cover"
           objectPosition="center"
-          filter="brightness(0.15)"
+          filter="brightness(0.1)"
           w="100%"
           h="100%"
         />
@@ -168,7 +168,7 @@ export const Banner = (props: BannerProps) => {
             <HStack>
               {genres.map((genre) => {
                 return (
-                  <Badge bgColor="primary.500" color="white">
+                  <Badge bgColor="gray.800" color="white">
                     {genre.name}
                   </Badge>
                 )

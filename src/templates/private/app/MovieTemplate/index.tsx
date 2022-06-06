@@ -240,34 +240,6 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
         ]}
       />
 
-      <Box as="section" w="100%" px={4}>
-        <Box maxW="1180px" m="0 auto">
-          <MediaList
-            title={{
-              'en-US': 'Movie recommendations ',
-              'pt-BR': 'Recomendações de filmes'
-            }}
-            media={recommendations}
-            type="movie"
-            poster
-          />
-        </Box>
-      </Box>
-
-      <Box as="section" w="100%">
-        <Box maxW="1180px" m="0 auto" px={4}>
-          <MediaList
-            title={{
-              'en-US': 'Similar  movies',
-              'pt-BR': 'Filmes parecidos'
-            }}
-            media={similar}
-            type="movie"
-            poster
-          />
-        </Box>
-      </Box>
-
       <Box as="section" w="100%">
         <Box maxW="1180px" m="0 auto" px={4}>
           <MediaGallery

@@ -27,7 +27,7 @@ import { Skeleton } from 'components/Skeleton'
 // Types
 export type MediaListProps = {
   media: MinimalMedia[]
-  title: {
+  title?: {
     'en-US': string
     'pt-BR': string
   }
@@ -55,7 +55,7 @@ export const MediaList = (props: MediaListProps) => {
   const { media, title, type, poster } = props
 
   const { locale } = useRouter()
-  const localeTitle = title[locale as Locale]
+  const localeTitle = title ? title[locale as Locale] : ''
   const {
     button: { showLess, showMore }
   } = translations[locale as Locale]
@@ -123,10 +123,12 @@ export const MediaList = (props: MediaListProps) => {
   */
   return (
     <VStack alignItems="flex-start" spacing={8}>
-      <HStack>
-        <Box h="7" w="2" bgColor="primary.500" />
-        <Text fontSize="lg">{localeTitle}</Text>
-      </HStack>
+      {title && (
+        <HStack>
+          <Box h="7" w="2" bgColor="primary.500" />
+          <Text fontSize="lg">{localeTitle}</Text>
+        </HStack>
+      )}
 
       <Grid gridTemplateColumns={templateColumns} w="100%" gap={4}>
         {media.slice(0, showItems).map((media, index) => {

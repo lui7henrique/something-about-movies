@@ -36,7 +36,7 @@ export const Search = (props: SearchProps) => {
   |
   */
   const {
-    colors: { primary }
+    colors: { gray }
   } = useTheme()
 
   const { locale, push, query } = useRouter()
@@ -118,7 +118,7 @@ export const Search = (props: SearchProps) => {
         inputRightElement={
           <IconButton
             aria-label="search"
-            icon={<FaSearch color={primary[500]} />}
+            icon={<FaSearch color={gray[500]} size={16} />}
             size="sm"
             variant="ghost"
             type="submit"
