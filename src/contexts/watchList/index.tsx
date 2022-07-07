@@ -6,6 +6,7 @@ import {
   useCallback,
   useState
 } from 'react'
+import { supabase } from 'services/supabase'
 import { sleep } from 'utils/sleep'
 import { WatchListProviderProps, WatchListType } from './types'
 
@@ -15,9 +16,11 @@ export const WatchListContext = createContext<WatchListType>(
 
 export const WatchListContextProvider = (props: WatchListProviderProps) => {
   const [isLoading, setIsLoading] = useState(false)
+  const user = supabase.auth.user()
 
   const handleAddToWatchList = useCallback(async (id: number) => {
     setIsLoading(true)
+    console.log(user)
     await sleep(2000)
     setIsLoading(false)
   }, [])

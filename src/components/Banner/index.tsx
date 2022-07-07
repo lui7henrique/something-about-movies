@@ -158,7 +158,7 @@ export const Banner = (props: BannerProps) => {
             </HStack>
           )}
 
-          <Heading fontSize={{ base: '3xl', lg: '5xl' }}>{title}</Heading>
+          <Heading fontSize={{ base: '3xl', lg: '4xl' }}>{title}</Heading>
 
           <Stack
             direction={{ base: 'column', lg: 'row' }}
@@ -177,8 +177,9 @@ export const Banner = (props: BannerProps) => {
 
             {handleRenderVotes(vote_average, vote_count, locale as Locale)}
           </Stack>
+
           <Text
-            fontSize={{ base: 'md', lg: 'lg' }}
+            fontSize={{ base: 'sm', lg: 'md' }}
             textAlign="justify"
             lineHeight={8}
             noOfLines={3}
@@ -192,12 +193,14 @@ export const Banner = (props: BannerProps) => {
               leftIcon={<FaList />}
               onClick={() => handleAddToWatchList(id)}
               isLoading={isLoading}
+              size="sm"
             />
             {trailer && (
               <Button
                 label={watchTrailer}
                 leftIcon={<IoMdPlay />}
                 variant="outline"
+                size="sm"
                 onClick={() =>
                   openPlayer(`https://www.youtube.com/watch?v=${trailer.key}`)
                 }

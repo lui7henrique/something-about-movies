@@ -36,7 +36,7 @@ export const translations: Record<Locale, Content> = {
       label: 'séries de TV'
     },
     people: {
-      value: '2.5 million',
+      value: '2.5 milhões',
       label: 'de pessoas'
     }
   }

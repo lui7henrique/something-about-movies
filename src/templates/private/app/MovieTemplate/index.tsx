@@ -154,7 +154,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
         trailer={trailer}
       />
 
-      <MediaDetails
+      {/* <MediaDetails
         poster={`https://image.tmdb.org/t/p/original/${poster_path}`}
         title={title}
         sections={[
@@ -238,9 +238,9 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
             ]
           }
         ]}
-      />
+      /> */}
 
-      <Box as="section" w="100%">
+      {/* <Box as="section" w="100%">
         <Box maxW="1180px" m="0 auto" px={4}>
           <MediaGallery
             title={{
@@ -250,7 +250,7 @@ export const MovieTemplate = (props: MovieTemplateProps) => {
             images={sortBy(allImages, (image) => image.vote_count).reverse()}
           />
         </Box>
-      </Box>
+      </Box> */}
     </VStack>
   )
 }

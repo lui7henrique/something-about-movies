@@ -132,7 +132,7 @@ export const Header = (props: HeaderProps) => {
   |
   */
   return (
-    <Limiter as="header" h="4rem">
+    <Limiter as="header" h="5rem">
       <Flex
         justifyContent="space-between"
         alignItems="center"
@@ -140,6 +140,7 @@ export const Header = (props: HeaderProps) => {
         bgColor="transparent"
         maxWidth="1280"
         mx="auto"
+        py={4}
       >
         {nav}
         <Stack direction="row" spacing={4}>

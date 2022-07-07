@@ -8,17 +8,16 @@ import { Details } from 'types/tv/list'
 type TVProps = TvTemplateProps
 
 const TV = (props: TVProps) => {
-  return <LayoutPrivate></LayoutPrivate>
+  return (
+    <LayoutPrivate>
+      <h1>oi</h1>
+    </LayoutPrivate>
+  )
 }
 
 export default TV
 
-export const getServerSideProps: GetServerSideProps = async ({
-  params,
-  locale
-}) => {
-  const id = params?.id
-
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   /*
   |-----------------------------------------------------------------------------
   | Redirect to home if no id
