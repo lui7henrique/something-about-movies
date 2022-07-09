@@ -1,15 +1,15 @@
 // Vendors
-import Link from 'next/link'
 
 // Components
-import { Text } from '@chakra-ui/react'
+import { Box, IconButton, Tooltip } from '@chakra-ui/react'
+import { useTheme } from 'contexts/theme'
 import { useRouter } from 'next/router'
+import { FiMoon, FiSun } from 'react-icons/fi'
+import { Locale } from 'types/locale'
+import { buttonThemeTranslations } from './translations'
 
 // Types
-export type HeaderActiveLinkProps = {
-  href: string
-  label: string
-}
+export type ButtonThemeProps = {}
 
 /*
 |-----------------------------------------------------------------------------
@@ -19,7 +19,7 @@ export type HeaderActiveLinkProps = {
 |
 */
 
-export const HeaderActiveLink = (props: HeaderActiveLinkProps) => {
+export const ButtonTheme = (props: ButtonThemeProps) => {
   /*
   |-----------------------------------------------------------------------------
   | Constants
@@ -27,7 +27,12 @@ export const HeaderActiveLink = (props: HeaderActiveLinkProps) => {
   |
   |
   */
-  const { href, label } = props
+  const {} = props
+
+  const { theme, handleToggleTheme } = useTheme()
+  const { locale } = useRouter()
+
+  const { tooltip } = buttonThemeTranslations[locale as Locale][theme]
 
   /*
   |-----------------------------------------------------------------------------
@@ -36,8 +41,6 @@ export const HeaderActiveLink = (props: HeaderActiveLinkProps) => {
   |
   |
   */
-  const { asPath } = useRouter()
-  const isActive = href === '/' ? asPath === href : asPath.startsWith(href)
 
   /*
   |-----------------------------------------------------------------------------
@@ -71,32 +74,13 @@ export const HeaderActiveLink = (props: HeaderActiveLinkProps) => {
   |
   */
   return (
-    <Link key={href} href={href}>
-      <a>
-        <Text
-          size="sm"
-          mr="4"
-          color={isActive ? 'gray.50' : 'gray.100'}
-          transition="color 0.2s"
-          _after={{
-            display: 'block',
-            content: '""',
-            width: isActive ? '100%' : '0',
-            height: '3px',
-            backgroundColor: isActive ? 'gray.700' : 'gray.800',
-            transition: '0.2s ease-in-out',
-            borderRadius: '0px'
-          }}
-          _hover={{
-            color: 'gray.50',
-            _after: {
-              width: '100%'
-            }
-          }}
-        >
-          {label}
-        </Text>
-      </a>
-    </Link>
+    <Tooltip label={tooltip.label}>
+      <IconButton
+        aria-label="login"
+        borderRadius="full"
+        icon={theme === 'light' ? <FiSun size={20} /> : <FiMoon size={20} />}
+        onClick={handleToggleTheme}
+      />
+    </Tooltip>
   )
 }

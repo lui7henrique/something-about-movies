@@ -20,6 +20,7 @@ import { Locale } from 'types/locale'
 import { HeaderActiveLink } from 'components/HeaderActiveLink'
 import { supabase } from 'services/supabase'
 import { BsUnlockFill } from 'react-icons/bs'
+import { ButtonTheme } from 'components/ButtonTheme'
 
 // Types
 export type HeaderProps = {}
@@ -143,9 +144,12 @@ export const Header = (props: HeaderProps) => {
         py={4}
       >
         {nav}
+
         <Stack direction="row" spacing={4}>
           {buttonLogin}
           {buttonLanguage}
+
+          <ButtonTheme />
         </Stack>
       </Flex>
     </Limiter>

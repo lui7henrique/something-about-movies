@@ -1,5 +1,11 @@
 import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react'
 
+export const defaultTheme = {}
+
+export const darkTheme = extendTheme({})
+
+export const lightTheme = extendTheme({})
+
 export const theme = extendTheme(
   {
     colors: {
@@ -38,7 +44,6 @@ export const theme = extendTheme(
         body: {
           background: '#08070b',
           color: '#9ca5ad'
-          // color: '#ededed',
         },
         html: {
           scrollBehavior: 'smooth',
@@ -63,8 +68,8 @@ export const theme = extendTheme(
       }
     },
     fonts: {
-      body: 'Space Grotesk, sans-serif',
-      heading: 'Space Grotesk, sans-serif'
+      body: 'Josefin Sans, sans-serif',
+      heading: 'Josefin Sans, sans-serif'
     }
   },
   withDefaultColorScheme({ colorScheme: 'primary' })
