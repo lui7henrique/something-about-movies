@@ -23,7 +23,7 @@
 ### Movie 
 | Name | Description | Status | PR | 
 | ---- | ----------- | ------ | -- | 
-| Banner | Banner with backdrop and informations like title, score and etc. | ✅  | (✨ Setup pixel)[https://github.com/lui7henrique/blog/pull/4] | 
+| Banner | Banner with backdrop and informations like title, score and etc. | ✅  | [✨ Setup pixel](https://github.com/lui7henrique/blog/pull/4) | 
 | Trailer | Show media player with trailer | ✅  | https://github.com/melonjs | 
 | Details | Some details about movies, like overview, description, budget, revenue, etc. | ✅  | https://github.com/melonjs | 
 | Similar | Get a list of similar movies. This is not the same as the "Recommendation" system you see on the website. These items are assembled by looking at keywords and genres. | ⚠  | https://github.com/melonjs | 
